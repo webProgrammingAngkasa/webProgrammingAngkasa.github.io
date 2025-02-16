@@ -371,7 +371,7 @@ originalStatusRoom();
     </div>
 
     <footer>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis necessitatibus qui, repellat distinctio reprehenderit rem, eveniet soluta excepturi nostrum tenetur cumque consequuntur vel nulla dicta illo obcaecati aperiam! Deserunt, ducimus.</p>
+      <p>Formulir Pendaftaran Tamu Hotel ini digunakan untuk mencatat informasi penting terkait reservasi dan identitas tamu selama menginap. Formulir ini mencakup data pribadi seperti nama lengkap, nomor identitas (KTP/Paspor), alamat, nomor telepon, serta informasi terkait pemesanan kamar, seperti tipe kamar, durasi menginap, metode pembayaran, dan permintaan khusus</p>
     </footer>
       
 </body>
