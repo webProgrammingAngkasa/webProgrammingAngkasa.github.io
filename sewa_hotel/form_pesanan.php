@@ -318,7 +318,7 @@ originalStatusRoom();
 
 <body>
   <section class="info" id="info">
-    <input type="color" style="background-color: white;" name="" id="" class="color-mode">
+    <input type="color" style="background-color: black; color: white;" name="" id="" class="color-mode">
     <div class="heading">
       <h3>Form Pesanan</h3>
     </div>
