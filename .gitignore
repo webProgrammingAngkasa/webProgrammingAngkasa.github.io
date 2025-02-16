@@ -1,0 +1,40 @@
+# Folder/vendor dari Composer (jika menggunakan Composer)
+vendor/
+
+# File Composer yang tidak perlu di-track
+composer.lock
+
+# Cache dan file sementara
+*.log
+*.cache
+*.tmp
+
+# File konfigurasi lingkungan (misalnya, database credentials)
+.env
+.env.local
+.env.*.local
+
+# Folder penyimpanan sesi atau upload (jika ada)
+storage/
+sessions/
+uploads/
+
+# File yang dihasilkan editor/IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# File sistem yang tidak perlu di-track
+.DS_Store
+Thumbs.db
+
+# Hasil build atau output sementara
+node_modules/
+dist/
+
+# File & Folder yang tidak perlu di-track
+*.txt
+.prettierrc
+ajax/
+.vscode/
