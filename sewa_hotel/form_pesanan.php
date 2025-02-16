@@ -319,7 +319,7 @@ originalStatusRoom();
 <body>
   <section class="info" id="info">
     <div class="heading">
-      <h1>Form Pesanan</h1>
+      <h2>Form Pesanan</h2>
     </div>
     <div class="shop-container">
       <div class="box">
