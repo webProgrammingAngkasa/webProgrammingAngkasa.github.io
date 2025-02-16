@@ -370,9 +370,10 @@ originalStatusRoom();
       </div>
     </div>
 
-    <footer>
+    <p>
       <p>Formulir Pendaftaran Tamu Hotel ini digunakan untuk mencatat informasi penting terkait reservasi dan identitas tamu selama menginap. Formulir ini mencakup data pribadi seperti nama lengkap, nomor identitas (KTP/Paspor), alamat, nomor telepon, serta informasi terkait pemesanan kamar, seperti tipe kamar, durasi menginap, metode pembayaran, dan permintaan khusus</p>
-    </footer>
+      <p>Dengan mengisi formulir ini, tamu menyetujui syarat dan ketentuan hotel terkait kebijakan check-in, check-out, serta fasilitas yang disediakan. Semua informasi yang diberikan akan dijaga kerahasiaannya sesuai dengan kebijakan privasi hotel.</p>
+    </p>
       
 </body>
 
