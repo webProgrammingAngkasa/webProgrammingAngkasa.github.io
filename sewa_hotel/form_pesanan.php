@@ -370,6 +370,10 @@ originalStatusRoom();
       </div>
     </div>
 
+    <footer>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis necessitatibus qui, repellat distinctio reprehenderit rem, eveniet soluta excepturi nostrum tenetur cumque consequuntur vel nulla dicta illo obcaecati aperiam! Deserunt, ducimus.</p>
+    </footer>
+      
 </body>
 
 </html>
