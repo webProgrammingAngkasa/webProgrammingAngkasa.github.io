@@ -304,6 +304,8 @@
         <img src="img/logo.png" alt="logo" />
       </a>
 
+      <p> coba menambah dan menghapus di beda akun collaborators </p>
+
       <ul class="navbar">
             <li><a href="#home">Beranda</a></li>
             <li><a href="#info">Info kamar</a></li>
