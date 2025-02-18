@@ -320,6 +320,7 @@ originalStatusRoom();
   <section class="info" id="info">
     <div class="heading">
       <h1>Form Pesanan</h1>
+      <h3>PEMESANAN HOTEL</h3>
     </div>
     <div class="shop-container">
       <div class="box">

@@ -6,7 +6,7 @@ $data = [];
 while ($row = $query->fetch_assoc()) {
     $data[] = $row;
 }
-var_dump($data);
+// var_dump($data);
 ?>
 
 <!DOCTYPE html>
