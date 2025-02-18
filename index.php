@@ -164,7 +164,6 @@
         color: #362e2e;
         background: var(--second-color);
       }
-      /* Part 2 */
       .heading {
         text-align: center;
       }
@@ -300,7 +299,7 @@
   <body>
     <!-- Navbar -->
     <header>
-      <a href="#home" class="logo">
+      <a href="index.php" class="logo">
         <img src="img/logo.png" alt="logo" />
       </a>
 
@@ -327,7 +326,6 @@
       </div>
     </section>
 
-    <!-- Part 2 -->
     <!-- SHOP -->
     <section class="info" id="info">
       <div class="heading">
