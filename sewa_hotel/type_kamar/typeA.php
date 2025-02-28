@@ -6,7 +6,7 @@ $data = [];
 while ($row = $query->fetch_assoc()) {
     $data[] = $row;
 }
-// var_dump($data);
+var_dump($data);
 ?>
 
 <!DOCTYPE html>
@@ -108,6 +108,7 @@ while ($row = $query->fetch_assoc()) {
 </head>
 
 <body>
+    <p><?= $data[0]['type_kamar']?></p>
     <div class="wrapper">
         <?php include 'element/header.php'; ?>
     </div><br><br><br>

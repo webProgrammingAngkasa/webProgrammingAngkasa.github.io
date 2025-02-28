@@ -38,7 +38,7 @@ if (
 } else {
     echo '
     <script> 
-        alert("Mohon isi semua data dengan lengkap."); 
+        alert("Mohon pilih kamar."); 
         document.location.href = "form_pesanan.php";
     </script>
 ';

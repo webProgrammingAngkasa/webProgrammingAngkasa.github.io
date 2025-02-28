@@ -1,22 +1,33 @@
 <!-- ! -->
 <?php
 include '../connect/conn.php';
-function showNoKamar()
-{
-  global $dbConnect;
+//TODO: *** number room ***
 
-  $query = ["SELECT list_no_kamar.id AS id_no_room, list_no_kamar.no_kamar AS no_kamar FROM list_no_kamar WHERE status = 'Available' ORDER BY list_no_kamar.id ASC"];
-  $result = $dbConnect->query($query[0]);
+if (isset($_POST['room_type'])) {
+  $roomType = $_POST['room_type'];
 
-  $ids = [];
-  $no_rooms = [];
-  while ($value = $result->fetch_assoc()) {
-    $ids[] = $value['id_no_room'];
-    $no_rooms[] = $value['no_kamar'];
+  // Query berdasarkan tipe kamar yang dipilih
+  $query = [
+    "standard" => "SELECT id, no_kamar FROM list_no_kamar WHERE status = 'Available' AND id <= 10 ORDER BY id ASC",
+    "superior" => "SELECT id, no_kamar FROM list_no_kamar WHERE status = 'Available' AND id > 10 AND id <= 20 ORDER BY id ASC",
+    "duluxe" => "SELECT id, no_kamar FROM list_no_kamar WHERE status = 'Available' AND id > 20 AND id <= 30 ORDER BY id ASC",
+    "suite" => "SELECT id, no_kamar FROM list_no_kamar WHERE status = 'Available' AND id > 30 AND id <= 40 ORDER BY id ASC"
+  ];
+
+
+  if (array_key_exists($roomType, $query)) {
+    $result = $dbConnect->query($query[$roomType]);
+    var_dump($result);
+    if ($result->num_rows > 0) {
+      echo '<option value="" selected disabled>pilih kamar ' . $roomType . '</option>';
+      while ($row = $result->fetch_assoc()) {
+        echo '<option value="' . $row['id'] . '">' . $row['no_kamar'] . '</option>';
+      }
+    }
   }
-  return [$ids, $no_rooms];
 }
-$result = showNoKamar();
+
+//TODO: *** return number room after checkout ***
 
 function originalStatusRoom()
 {
@@ -42,238 +53,269 @@ originalStatusRoom();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+    #reload-overlay {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      font-weight: bold;
+      gap: 2px;
+      font-size: 3rem;
+    }
+
+    #reload-overlay span:nth-child(2),
+    span:nth-child(3),
+    span:nth-child(4) {
+      color: transparent;
+      animation: point .3s forwards;
+    }
+
+    #reload-overlay span:nth-child(2) {
+      animation-delay: .1s;
+    }
+
+    #reload-overlay span:nth-child(3) {
+      animation-delay: .2s;
+    }
+
+    #reload-overlay span:nth-child(4) {
+      animation-delay: .3s;
+    }
+
+    @keyframes point {
+      100% {
+        color: black;
+      }
+    }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-      scroll-padding-top: 2rem;
-      scroll-behavior: smooth;
-      text-decoration: none;
-      list-style: none;
-      font-size: 18px;
-    }
-
-    body::-webkit-scrollbar {
-      display: none;
     }
 
     :root {
       --main-color: #ffffff;
       --second-color: #ffffff;
-      --third-color: #1e3a8a;
-    }
-
-    *::selection {
-      color: #fff;
-      background: var(--main-color);
+      --bg-global-color: #1e3a8a;
+      --bg-button-hover: #637dc5;
     }
 
     section {
-      padding: 50px 20%;
-    }
-
-    img {
-      width: 100%;
-    }
-
-    p {
-      font-size: 18px;
-      line-height: 2rem;
-      color: #ffffff;
-    }
-
-    .heading {
-      text-align: center;
-    }
-
-    .heading span {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #1e3a8a;
-    }
-
-    .heading h1 {
-      font-size: 2rem;
-      text-transform: uppercase;
-      color: #1e3a8a;
-    }
-
-    /* .shop-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .shop-container .box {
-      flex: 1 1 10rem;
-      background: #1e3a8a;
-      width: 50px;
-      padding: 40px;
       display: flex;
       flex-direction: column;
-      text-align: center;
-      align-items: center;
-      margin-top: 1rem;
-      border-radius: 0.5rem;
-    }
-
-
-    .shop-container .box h2 {
-      font-size: 1.2rem;
-      margin: 0.2rem 0 0.2rem;
-      color: #ffffff;
-    }
-
-    .shop-container .box span {
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 500;
-      margin: 0.2rem 0 0.5rem;
-    }
-
-    .tombol {
-      padding: 7px 16px;
-      border: 2px solid var(--second-color);
-      border-radius: 40px;
-      background-color: transparent;
-      color: #1e3a8a;
-      font-weight: 500;
-      transition: 100ms;
-    }
-
-    .tombol:hover {
-      color: #362e2e;
-      background: var(--second-color);
-    }
-
-    .box .tombol {
-      border: 2px solid whitesmoke;
-      color: #ffffff;
-    }
-
-    .box .tombol:hover {
-      background: #637dc5;
-      color: #fff;
-      scale: 110%;
-    }
-
-    fieldset {
-      display: block;
-    }
-
-    fieldset>option {
-      width: 30px;
-    } */
-
-    /* Style umum untuk container */
-    .shop-container {
-      display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background-color: transparent;
-      margin-top: 7rem;
+      width: 100%;
+      min-height: 100vh;
+      background: transparent;
+      box-shadow: 0px 25px 20px -20px rgba(0, 0, 0, 0.45) inset;
     }
 
-    /* Box untuk form */
-    .box {
-      background-color: #1e3a8a;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      font-family: Arial, sans-serif;
+    .title {
+      display: flex;
+      flex-direction: row;
+      font-size: 2rem;
+      text-transform: uppercase;
+      text-align: center;
+      margin-block: 20px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 
-    /* Heading atau judul form */
-    .box p {
+    .title h1 {
+      color: transparent;
+      animation: title 1.5s forwards;
+    }
+
+    .title h1:nth-child(5),
+    h1:nth-child(7) {
+      animation-delay: 0s;
+    }
+
+    .title h1:nth-child(4),
+    h1:nth-child(8) {
+      animation-delay: .2s;
+    }
+
+    .title h1:nth-child(3),
+    h1:nth-child(9) {
+      animation-delay: .4s;
+    }
+
+    .title h1:nth-child(2),
+    h1:nth-child(10) {
+      animation-delay: .6s;
+    }
+
+    .title h1:nth-child(1),
+    h1:nth-child(11) {
+      animation-delay: .8s;
+    }
+
+    @keyframes title {
+      100% {
+        color: var(--bg-global-color);
+      }
+    }
+
+    .container {
+      max-width: 55%;
+      width: 100%;
+      background: var(--bg-global-color);
+      padding: 2.5%;
+      border-radius: 15px;
+      box-shadow: 0 0px 8px rgba(0, 0, 0, 0);
+    }
+
+    h3 {
+      font-size: x-large;
+      line-height: 2rem;
+      color: #ffffff;
+      text-align: center;
+      text-transform: capitalize;
+      margin-block: 8px;
+      animation: h3 2s forwards;
+    }
+
+    @keyframes h3 {
+      0% {
+        color: transparent;
+      }
+    }
+
+    .container p {
       font-size: 18px;
       font-weight: bold;
       margin-bottom: 10px;
     }
 
-    /* Style untuk label */
     label {
       display: block;
-      font-size: 14px;
+      font-size: 15px;
       margin-bottom: 6px;
       color: #ffffff;
+      font-weight: bold;
+      letter-spacing: .5px;
+      animation: label 2s forwards;
     }
 
-    /* Style untuk input field */
+    @keyframes label {
+      0% {
+        color: transparent
+      }
+    }
+
     input[type="text"],
-    input[type="date"],
     input[type="tel"],
+    input[type="datetime-local"],
     select,
     textarea {
+      display: flex;
+      justify-content: center;
       width: 100%;
       padding: 10px;
       margin-bottom: 15px;
-      border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 14px;
       background-color: #fafafa;
       color: #333;
+      border: none;
+      border: 2px solid var(--bg-global-color);
+      transform-origin: center;
+      animation: input 2s forwards;
+    }
+
+    @keyframes input {
+      0% {
+        background: transparent;
+      }
     }
 
     input[type="text"]:focus,
-    input[type="date"]:focus,
+    input[type="datetime-local"]:focus,
+    input[type="tel"]:focus,
     select:focus,
     textarea:focus {
-      border-color: #3498db;
+      border: 2px solid #ccc;
       outline: none;
     }
 
-    /* Style untuk textarea */
     textarea {
       resize: vertical;
     }
 
-    /* Style untuk fieldset */
-    fieldset {
-      border: none;
-      padding: 0;
-      margin-bottom: 15px;
-    }
-
-    /* Style untuk button */
-    .tombol {
+    .container .tombol {
       padding: 7px 16px;
-      border: 2px solid var(--second-color);
       border-radius: 40px;
-      background-color: transparent;
-      color: #1e3a8a;
+      border: 2px solid whitesmoke;
+      background-color: var(--bg-global-color);
+      color: #ffffff;
       font-weight: 500;
       width: 100%;
       transition: 100ms;
       cursor: pointer;
+      font-weight: 800;
+      animation: button 2.5s forwards;
+      transition: .2s;
     }
 
-    .tombol:hover {
-      color: #362e2e;
-      background: var(--second-color);
+    .container .tombol:hover {
+      background: var(--bg-button-hover);
+      color: var(--second-color);
+      letter-spacing: 1px;
+      font-weight: 900;
     }
 
-    .box .tombol {
-      border: 2px solid whitesmoke;
-      color: #ffffff;
+    @keyframes button {
+      0% {
+        background: transparent;
+        color: transparent;
+        border-color: transparent;
+      }
     }
 
-    .box .tombol:hover {
-      background: #637dc5;
-      color: #fff;
-      scale: 110%;
+    .select-room {
+      display: none;
+      animation: select-room 3s forwards;
     }
 
-    /* Range time layout */
+    @keyframes select-room {
+      0% {
+        background: transparent;
+        color: transparent;
+      }
+
+      100% {
+        width: 100%;
+      }
+    }
+
     .rangeTime {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-evenly;
       margin-bottom: 15px;
+      height: 100px;
+    }
+
+    .rangeTime span {
+      line-height: 145px;
+      font-size: 80px;
+      color: transparent;
+      animation: arrow 2s forwards;
+    }
+
+    @keyframes arrow {
+      100% {
+        color: var(--second-color);
+      }
     }
 
     .rangeTime label {
@@ -284,92 +326,330 @@ originalStatusRoom();
       text-transform: capitalize;
     }
 
-    .rangeTime>.check {
-      flex-direction: column;
+
+    .input-room button:nth-child(1),
+    .input-room button:nth-child(2) {
+      margin: 20px;
+      width: 120px;
+      height: 45px;
+      border-top-right-radius: 50%;
+      border-bottom-left-radius: 50%;
+      border-top-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      background: blueviolet;
+      color: #fafafa;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 200ms;
+      animation: checked 2s forwards;
     }
 
-    /* Responsive */
+    .input-room button:nth-child(3),
+    .input-room button:nth-child(4) {
+      margin: 20px;
+      width: 120px;
+      height: 45px;
+      border-top-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+      border-top-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      background: blueviolet;
+      color: #fafafa;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 200ms;
+      animation: checked 2s forwards;
+    }
+
+    .input-room button:hover {
+      transform: scale(110%);
+      background: var(--bg-button-hover);
+      color: white;
+    }
+
+    @keyframes checked {
+      0% {
+        background: transparent;
+        color: transparent;
+      }
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+
+    .container-modal {
+      position: fixed;
+      display: none;
+      justify-content: space-between;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 100%;
+      border-radius: 1px;
+      background-color: #1e3a8a;
+      color: white;
+      padding-inline: 10px;
+      padding-block: 40px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      z-index: 1001;
+      transition: .9s;
+    }
+
+    .container-modal:hover {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2)
+    }
+
+    .text-modal {
+      max-width: 30%;
+      margin: 0;
+    }
+
+    .text-modal p {
+      font-size: 15px;
+    }
+
+    .img-features {
+      display: flex;
+      justify-content: space-between;
+      max-width: 65%;
+      width: 55%;
+    }
+
+    .img-features img {
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+      transition: 150ms;
+    }
+
+    .img-features img:hover {
+      transform: scale(110%);
+    }
+
+    .footer {
+      position: relative;
+      font-weight: 600;
+      width: 100%;
+      padding-block: 10px;
+      background-color: var(--bg-global-color);
+      color: whitesmoke;
+      display: flex;
+      justify-content: center;
+      /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, 
+                  rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset, 
+                  rgba(0, 0, 0, 0.56) 0px -2px -2px 4px; */
+      letter-spacing: 2;
+      bottom: 0;
+    }
+
+    footer span {
+      letter-spacing: 1px;
+    }
+
+    .boundary-line {
+      width: 50px;
+      height: 2px;
+      background-color: whitesmoke;
+      border: none;
+      margin: 20px auto;
+      animation: expand 1s forwards;
+    }
+
+    @keyframes expand {
+      0% {
+        width: 0%;
+        background: transparent;
+      }
+
+      100% {
+        width: 100%;
+      }
+    }
+
+
     @media screen and (max-width: 480px) {
-      .box {
-        width: 90%;
-        padding: 20px;
+      .container {
+        display: flex;
+        justify-content: space-evenly;
+        background: transparent;
       }
     }
   </style>
 
   <script>
     function reloadWindow() {
-      let count = sessionStorage.getItem("reloadCount") || 0;
+      let count = sessionStorage.getItem("reloadCount") || 0
+      count = parseInt(count)
 
       if (count < 2) {
-        sessionStorage.setItem("reloadCount", ++count);
+        sessionStorage.setItem("reloadCount", count + 1)
         setTimeout(() => {
-          window.location.reload();
-        }, 500); // Refresh kedua setelah 3 detik
+          window.location.reload()
+        }, 500)
       } else {
-        sessionStorage.removeItem("reloadCount");
+        sessionStorage.removeItem("reloadCount")
+      }
+
+      window.onload = function() {
+        let count = sessionStorage.getItem("reloadCount") || 0;
+        if (count == 0) {
+          document.getElementById("reload-overlay").style.display = "none";
+        }
       }
     }
+    reloadWindow()
 
-    reloadWindow();
+    function roomDescription(choice) {
+      let descriptions = {
+        "standard": "Nikmati kenyamanan tidur yang luar biasa di kamar kami dengan kasur queen size yang luas. Dirancang untuk memberikan pengalaman menginap yang relaks dan menyegarkan, kamar ini menawarkan ruang yang cukup untuk dua orang. Dilengkapi dengan fasilitas modern dan suasana yang hangat, kamar ini cocok untuk pasangan atau tamu yang menginginkan kenyamanan ekstra selama menginap.",
+        "superior": "Kamar ini menawarkan dua tempat tidur single yang dapat menjadi pilihan ideal bagi teman perjalanan atau keluarga yang ingin tidur terpisah namun tetap dekat. Dengan ruang yang luas dan desain yang nyaman, kamar ini dilengkapi dengan berbagai fasilitas untuk memastikan kenyamanan Anda selama menginap. Solusi sempurna untuk pengalaman menginap yang praktis dan nyaman.",
+        "duluxe": "Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Dilengkapi dengan tempat tidur single yang nyaman, kamar ini menawarkan ruang yang efisien dan tenang untuk beristirahat. Ideal untuk perjalanan solo atau tamu yang membutuhkan akomodasi yang sederhana namun nyaman, dengan fasilitas lengkap untuk memenuhi kebutuhan Anda.",
+        "suite": "Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Dilengkapi dengan tempat tidur single yang nyaman, kamar ini menawarkan ruang yang efisien dan tenang untuk beristirahat. Ideal untuk perjalanan solo atau tamu yang membutuhkan akomodasi yang sederhana namun nyaman, dengan fasilitas lengkap untuk memenuhi kebutuhan Anda."
+      }
+      document.getElementById("descriptionText").innerText = descriptions[choice];
+
+      document.getElementById("descriptionModal").style.display = "flex";
+      document.getElementById("descriptionModal").style.transition = "100ms";
+      document.querySelector(".overlay").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("descriptionModal").style.display = "none";
+      document.querySelector(".overlay").style.display = "none";
+    }
+
+
+    function roomType(roomType) {
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", "", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          document.getElementById("num_room").innerHTML = xhr.responseText;
+          let title_number = document.getElementById("title_num_room")
+          title_number.style.cssText = "display: block; text-align: center;"
+          document.querySelector("#num_room").style.display = "flex"
+        }
+      };
+
+      xhr.send("room_type=" + roomType);
+    }
+
+    function roomTypeDescription(choice) {
+      roomDescription(choice);
+      roomType(choice);
+    }
   </script>
 
 </head>
 
 <body>
-  <section class="info" id="info">
-    <div class="heading">
-      <h1>Form Pesanan</h1>
-      <h3>PEMESANAN HOTEL</h3>
+  <div class="global-container-page">
+
+    <div id="reload-overlay">
+      <span>Memuat Halaman</span>
+      <span>.</span>
+      <span>.</span>
+      <span>.</span>
     </div>
-    <div class="shop-container">
-      <div class="box">
-        <form action="proses_simpan_pengunjung.php" method="post">
-          <!-- data pengunjung -->
-          <p style="text-align: center;">Isi Data Diri Anda!</p>
-          <p>
-            <label for="">Nama:</label>
-            <input type="text" name="nama" autocomplete="off"><br>
-
-            <label for="">Alamat</label>
-            <input type="text" name="alamat" autocomplete="off"><br>
-
-            <label for="">No tlp:</label>
-            <input type="tel" name="no_tlp" autocomplete="off"><br>
-          </p>
-
-          <hr>
-          <!-- pesan kamar -->
-          <p style="text-align: center;">Pesan Kamar</p>
-          <fieldset>
-            <select name="no_kamar" id="nk">
-              <option value="" selected disabled hidden>Pilih No Kamar</option>
-              <?php foreach ($result[0] as $key => $value) : ?>
-                <option value="<?php echo $value; ?>">
-                  <?php echo $result[1][$key]; ?>
-                </option>
-              <?php endforeach; ?>
-            </select>
-          </fieldset>
-
-          <div class="rangeTime">
-            <div class="check">
-              <label for="in">check in</label>
-              <input type="datetime-local" name="check_in" id="in">
-            </div>
-            <div class="check">
-              <label for="out">check out</label>
-              <input type="datetime-local" name="check_out" id="out">
-            </div>
-          </div>
-
-          <label for="note">Catatan</label>
-          <textarea name="note" id="note" cols="60" rows="2"></textarea><br>
-
-          <button type="submit" name="submit" class="tombol">Kirim</button>
-        </form>
+    <section class="global-container">
+      <div class="title">
+        <h1>P</h1>
+        <h1>e</h1>
+        <h1>s</h1>
+        <h1>a</h1>
+        <h1>n</h1>
+        <h1>&ThickSpace;</h1>
+        <h1>K</h1>
+        <h1>a</h1>
+        <h1>m</h1>
+        <h1>a</h1>
+        <h1>r</h1>
       </div>
+      <div class="container">
+        <div class="box">
+          <form action="proses_simpan_pengunjung.php" method="post">
+            <!--//* data pengunjung -->
+            <div class="input-user">
+              <h3>Isi Data Diri Anda!</h3>
+
+              <label for="">Nama:</label>
+              <input type="text" name="nama" autocomplete="off" required><br>
+              <label for="">Alamat</label>
+              <input type="text" name="alamat" autocomplete="off" required><br>
+              <label for="">No tlp:</label>
+              <input type="tel" name="no_tlp" autocomplete="off" required><br>
+            </div>
+
+            <hr class="boundary-line">
+
+            <!--//* pesan kamar -->
+            <div class="form-room">
+
+              <h3>Tipe Kamar</h3>
+              <div class="input-room">
+                <button type="button" value="standard" id="choice-1" onclick="roomTypeDescription('standard')">Standard</button>
+                <button type="button" value="superior" id="choice-2" onclick="roomTypeDescription('superior')">Superior</button>
+                <button type="button" value="duluxe" id="choice-3" onclick="roomTypeDescription('duluxe')">Duluxe</button>
+                <button type="button" value="suite" id="choice-4" onclick="roomTypeDescription('suite')">Suite</button>
+              </div>
+
+              <h3 id="title_num_room" class="select-room"">Nomor Kamar</h3>
+              <select name=" no_kamar" id="num_room" class="select-room">
+                <!--//? perulangan no kamar sesuai type -->
+                </select>
+
+                <div class="rangeTime">
+                  <div class="check">
+                    <h3 for="in">check in</h3>
+                    <input type="datetime-local" name="check_in" id="in" required>
+                  </div>
+                  <span>&#10174;</span>
+                  <div class="check">
+                    <h3 for="out">check out</h3>
+                    <input type="datetime-local" name="check_out" id="out" required>
+                  </div>
+                </div>
+
+                <label for="note">Catatan</label>
+                <textarea name="note" id="note" cols="60" rows="2" required></textarea><br>
+
+                <button type="submit" name="submit" class="tombol">PESAN</button>
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+
+
+  <div class="overlay" onclick="closeModal()"></div>
+  <div id="descriptionModal" class="container-modal">
+    <div class="text-modal">
+      <p id="descriptionText"></p>
     </div>
+    <div class="img-features">
+      <img src="../img/tipea.jpg" alt="a">
+      <!-- <img src="../img/tipeb.jpg" alt="b"> -->
+      <img src="../img/icebear.jpg" alt="icebear">
+      <img src="../img/tipec.jpg" alt="c">
+    </div>
+    <span class="close" onclick="closeModal()" style=" cursor: pointer; font-size: 50px; font-weight: bold;">&times;</span>
+  </div>
+  <br><br>
 
 </body>
 

@@ -15,8 +15,8 @@ while ($resultMaxId = $queryMaxId[0]->fetch_assoc()) {
 while ($resultMaxId = $queryMaxId[1]->fetch_assoc()) {
     $arrMaxId[] = $resultMaxId;
 }
-var_dump($arrMaxId[0]['max_id_visitor']);
-var_dump($arrMaxId[1]['max_id_order']);
+//TODO var_dump(value: $arrMaxId[0]['max_id_visitor']);
+//TODO var_dump(value: $arrMaxId[1]['max_id_order']);
 
 $maxIdVisitor = $arrMaxId[0]['max_id_visitor'];
 $maxIdOrder = $arrMaxId[1]['max_id_order'];
@@ -60,27 +60,9 @@ $parseInt = [
     'detik' => (int)($rows[2]['detik'])
 ];
 
-// var_dump($parseInt);
-//TODO die;
-
-//// if ($results[3] == true) {
-////     echo '
-////             <script> 
-////                 alert("kamar kembali tersedia..."); 
-////                 </script>
-////         ';
-//// } else {
-////     echo '
-////             <script> 
-////                 alert("kamar diisi..."); 
-////                 </script>
-////         ';
-//// }
-
 $now = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
 $dateArray = ['date' => $now->format('Y-m-d H:i:s')];
 $date = json_encode($dateArray['date']);
-echo $date;
 ?>
 
 <html lang="en">
@@ -204,10 +186,8 @@ echo $date;
     <p><span>nama:</span> <?= $rows[0]['nama'] ?></p>
     <p><span>alamat:</span> <?= $rows[0]['alamat'] ?></p>
 
-    <!-- perbaikan -->
     <p><span>no kamar:</span> <?= $rows[1]['no_kamar'] . ' ➡️ ' . $rows[1]['type_kamar'] ?></p>
-    <!-- perbaikan -->
-
+    
     <p><span>check in:</span> <?= $rows[1]['check_in'] ?></p>
     <p><span>check out:</span> <?= $rows[1]['check_out'] ?></p>
 
@@ -215,8 +195,7 @@ echo $date;
 
     <p><span>catatan:</span> <?= $rows[1]['note'] ?></p>
 
-    <!-- <script type="script/javascript" src="app.js"></script> -->
-    <script>
+     <script>
         function updateCountdown(targetTime) {
             let countdownElement = document.getElementById('endPointCheckOut');
 
@@ -245,7 +224,6 @@ echo $date;
             let storedTimestamp = localStorage.getItem("checkoutTimestamp");
 
             if (!storedTimestamp || parseInt(storedTimestamp) !== phpCheckoutTimestamp) {
-                // Perbarui nilai di localStorage jika berbeda
                 localStorage.setItem("checkoutTimestamp", phpCheckoutTimestamp);
                 storedTimestamp = phpCheckoutTimestamp;
             } else {
@@ -254,7 +232,7 @@ echo $date;
 
             updateCountdown(storedTimestamp);
         };
-    </script>
+    </script> 
 </body>
 
 </html>
