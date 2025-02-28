@@ -306,7 +306,7 @@
       <ul class="navbar">
             <li><a href="#home">Beranda</a></li>
             <li><a href="#info">Info kamar</a></li>
-            <li><a href="#pesan">Pesan kamar</a></li>
+            <li><a href="sewa_hotel/form_pesanan.php">Pesan kamar</a></li>
             <li><a href="#pesanan">Pesanan anda</a></li>
             <li><a href="login/index.php">Masuk</a></li>
       </ul>
