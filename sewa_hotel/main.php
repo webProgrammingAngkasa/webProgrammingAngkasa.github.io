@@ -33,7 +33,8 @@
 
         public function dataPemesanan($data): string
         {
-
+            $checkIn = date(format: 'Y-m-d H:i:s', timestamp: strtotime(datetime: $data['check_in'] . " 14:00:00"));
+            $checkOut = date(format: 'Y-m-d H:i:s', timestamp: strtotime(datetime: $data['check_out'] . " 12:00:00"));
             $query = ("INSERT INTO tb_pemesanan (
                                         no_kamar, 
                                             check_in, 
@@ -44,8 +45,8 @@
             $stmt->bind_param(
                 "isss",
                 $data['no_kamar'],
-                $data['check_in'],
-                $data['check_out'],
+                $checkIn,
+                $checkOut,
                 $data['note']
             );
             return $stmt->execute();

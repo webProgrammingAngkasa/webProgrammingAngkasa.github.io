@@ -17,7 +17,6 @@ if (isset($_POST['room_type'])) {
 
   if (array_key_exists($roomType, $query)) {
     $result = $dbConnect->query($query[$roomType]);
-    var_dump($result);
     if ($result->num_rows > 0) {
       echo '<option value="" selected disabled>pilih kamar ' . $roomType . '</option>';
       while ($row = $result->fetch_assoc()) {
@@ -215,7 +214,7 @@ originalStatusRoom();
 
     input[type="text"],
     input[type="tel"],
-    input[type="datetime-local"],
+    input[type="date"],
     select,
     textarea {
       display: flex;
@@ -240,8 +239,8 @@ originalStatusRoom();
     }
 
     input[type="text"]:focus,
-    input[type="datetime-local"]:focus,
     input[type="tel"]:focus,
+    input[type="date"]:focus,
     select:focus,
     textarea:focus {
       border: 2px solid #ccc;
@@ -284,7 +283,7 @@ originalStatusRoom();
 
     .select-room {
       display: none;
-      animation: select-room 3s forwards;
+      animation: select-room 2s forwards;
     }
 
     @keyframes select-room {
@@ -553,7 +552,8 @@ originalStatusRoom();
       roomDescription(choice);
       roomType(choice);
     }
-  </script>
+
+    </script>
 
 </head>
 
@@ -616,12 +616,12 @@ originalStatusRoom();
                 <div class="rangeTime">
                   <div class="check">
                     <h3 for="in">check in</h3>
-                    <input type="datetime-local" name="check_in" id="in" required>
+                    <input type="date" name="check_in" id="in" required>
                   </div>
                   <span>&#10174;</span>
-                  <div class="check">
+                  <div class="check_out">
                     <h3 for="out">check out</h3>
-                    <input type="datetime-local" name="check_out" id="out" required>
+                    <input type="date" name="check_out" id="out" required disabled>
                   </div>
                 </div>
 
@@ -651,6 +651,24 @@ originalStatusRoom();
   </div>
   <br><br>
 
+  <script>
+    let today = new Date();
+    let todayFormatted = today.toISOString().split('T')[0];
+    document.getElementById('in').setAttribute('min', todayFormatted);
+
+    document.getElementById('in').addEventListener('change', function () {
+      let checkInDate = new Date(this.value);
+      let checkOutDate = new Date(checkInDate);
+      checkOutDate.setDate(checkOutDate.getDate() + 1); 
+      
+      let checkOutFormatted = checkOutDate.toISOString().split('T')[0];
+      let checkOutInput = document.getElementById("out")
+      
+      checkOutInput.removeAttribute('disabled')
+      checkOutInput.setAttribute('min', checkOutFormatted);
+      checkOutInput.value = ''; 
+    });
+  </script>
 </body>
 
 </html>
