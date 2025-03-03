@@ -3,7 +3,6 @@ vendor/
 
 # File Composer yang tidak perlu di-track
 composer.lock
-composer.json
 
 # Cache dan file sementara
 *.log
@@ -42,5 +41,3 @@ ajax/
 
 # File yang sementara tidak perlu di-track
 sewa_hotel/app.js 
-login/
-logout.php

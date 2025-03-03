@@ -191,7 +191,7 @@ $date = json_encode($dateArray['date']);
     <p><span>check in:</span> <?= $rows[1]['check_in'] ?></p>
     <p><span>check out:</span> <?= $rows[1]['check_out'] ?></p>
 
-    <p><span>waktu check out:</span> <span id="endPointCheckOut"><?= $rows[2]['hari'] ?> hari | <?= $rows[2]['jam'] ?> jam • <?= $rows[2]['menit'] ?> menit • <?= $rows[2]['detik'] ?> detik</span></p>
+    <p><span>range time out:</span> <span id="endPointCheckOut"><?= $rows[2]['hari'] ?> hari | <?= $rows[2]['jam'] ?> jam • <?= $rows[2]['menit'] ?> menit • <?= $rows[2]['detik'] ?> detik</span></p>
 
     <p><span>catatan:</span> <?= $rows[1]['note'] ?></p>
 

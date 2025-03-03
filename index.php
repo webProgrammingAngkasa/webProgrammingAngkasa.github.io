@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,15 +5,6 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hotel 599</title>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        var sayHello = document.getElementById('user');
-        let email = "<?php echo $_SESSION['email'] ?? ''; ?>";
-        if (email === "") {
-          sayHello.style.display = "none"
-        }
-      })
-    </script>
     <!-- <link rel="stylesheet" href="style.css" /> -->
      <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
@@ -319,15 +307,12 @@ session_start();
             <li><a href="#home">Beranda</a></li>
             <li><a href="#info">Info kamar</a></li>
             <li><a href="sewa_hotel/form_pesanan.php">Pesan kamar</a></li>
-            <li><a href="logout.php">destroy session</a></li>
+            <li><a href="#pesanan">Pesanan anda</a></li>
             <li><a href="login/index.php">Masuk</a></li>
       </ul>
     </header>
     <!-- Home -->
     <section class="home" id="home">
-      <button id="user" disabled>
-        <h1  style="color: yellow; letter-spacing: 2px;">Email yang terhubung : <?= $_SESSION['email']?> </h1>
-      </button>
       <div class="home-text">
         <span>Welcome To</span>
         <h1>Hotel 599</h1>
