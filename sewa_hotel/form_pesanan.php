@@ -558,7 +558,7 @@ originalStatusRoom();
 </head>
 
 <body>
-  <h1> FITUR KAMAR </h1>
+  <!-- <h1> FITUR KAMAR </h1> -->
   <div class="global-container-page">
 
     <div id="reload-overlay">

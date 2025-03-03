@@ -10,10 +10,19 @@ session_start();
     <title>Hotel 599</title>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        var sayHello = document.getElementById('user');
-        let email = "<?php echo $_SESSION['email'] ?? ''; ?>";
-        if (email === "") {
-          sayHello.style.display = "none"
+        var buttonOut = document.getElementById("button-logout")
+        var userIcon = document.getElementById("user-icon")
+        var buttonLog =document.getElementById("button-login")
+        let email = "<?php echo $_SESSION['email'] ?? ''; ?>"
+
+        if (email) {
+          buttonLog.style.display = "flex"
+          buttonLog.style.display = "none"
+          userIcon.style.display = "flex"
+        } else {
+          buttonOut.style.display = "none"
+          buttonLog.style.display = "block"
+          userIcon.style.display = "none"
         }
       })
     </script>
@@ -64,7 +73,8 @@ session_start();
         align-items: center;
         background: #f8f9fa;
         box-shadow: 0 4px 41px rgba(14, 55, 54, 0.15);
-        padding: 5px 3%;
+        padding: 15px 3%;
+        height: 80px;
         transition: 0.2s;
       }
       .logo {
@@ -76,25 +86,32 @@ session_start();
       }
       .navbar {
         display: flex;
-        gap: 5px;
+        gap: 10px;
+        line-height: 80px;
       }
       .navbar a {
         font-size: 1rem;
-        padding: 11px 20px;
+        padding: 10px 11px;
         color: #1e3a8a;
         text-transform: uppercase;
         font-weight: 600;
         transition: .3s;
         background: transparent;
         border-radius: 40px;
+        line-height: 80px;
       }
       .navbar a:hover {
         position: relative;
         color: var(--main-color);
-        width: 50px;
-        height: 30px;
+        /* width: 50px; */
+        /* height: 30px; */
         background-color: #1e3a8a;
         border-radius: 40px;
+      }
+      .navbar i {
+        display: flex;
+        margin-top: 10px;
+        font-size: 40px;
       }
       .home {
         width: 100%;
@@ -319,15 +336,13 @@ session_start();
             <li><a href="#home">Beranda</a></li>
             <li><a href="#info">Info kamar</a></li>
             <li><a href="sewa_hotel/form_pesanan.php">Pesan kamar</a></li>
-            <li><a href="logout.php">destroy session</a></li>
-            <li><a href="login/index.php">Masuk</a></li>
+            <li id="button-logout"><a href="logout.php">Logout</a></li>
+            <li id="button-login"><a href="login/index.php">Masuk</a></li>
+            <li id="user-icon"><a href=""><i class="fa-solid fa-user-secret"></i></a></li>
       </ul>
     </header>
     <!-- Home -->
     <section class="home" id="home">
-      <button id="user" disabled>
-        <h1  style="color: yellow; letter-spacing: 2px;">Email yang terhubung : <?= $_SESSION['email']?> </h1>
-      </button>
       <div class="home-text">
         <span>Welcome To</span>
         <h1>Hotel 599</h1>
