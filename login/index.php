@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -77,9 +77,9 @@ body{
 .container form{
     background-color: #fff;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     padding: 0 40px;
     height: 100%;
 }
@@ -107,6 +107,8 @@ body{
     left: 0;
     width: 50%;
     z-index: 2;
+    /* display: flex;
+    flex-direction: column; */
 }
 
 .container.active .sign-in{
@@ -161,7 +163,7 @@ body{
     height: 100%;
     overflow: hidden;
     transition: all 0.6s ease-in-out;
-    border-radius: 150px 0 0 100px;
+    border-radius: 100px 0 0 100px;
     z-index: 1000;
 }
 
@@ -229,11 +231,10 @@ body{
 </head>
 
 <body>
-
     <div class="container" id="container">
         <div class="form-container sign-up">
             <form>
-                <h1>Create Account</h1>
+                <h1>Register</h1>
                 <span>use your angkasa student card details for registration</span>
                 <input type="text" placeholder="Name">
                 <input type="email" placeholder="Email">
@@ -248,16 +249,15 @@ body{
                 <input type="text" placeholder="Username">
                 <input type="password" placeholder="Password">
                 <div class="form-group">
-    <div class="custom-control custom-checkbox small">
-        <input type="checkbox" class="custom-control-input" id="customCheck">
-        <label class="custom-control-label" for="customCheck">Remember
-            Me</label>
-    </div>
-</div>
-                <a href="#">Forget Your Password?</a>
+                <div class="custom-control custom-checkbox small">
+                    <input type="checkbox" class="custom-control-input" id="customCheck">
+                    <label class="custom-control-label" for="customCheck" style="user-select: none;">Remember Me</label>
+                </div>
+                <a href="#">Forget Your Password?</a><br>
                 <button>Login</button>
             </form>
         </div>
+    </div>
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
@@ -277,4 +277,22 @@ body{
     <script src="script.js"></script>
 </body>
 
+</html> -->
+<?php
+// session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<body>
+    <form method="POST" action="send_otp.php">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email"><br><br>
+        <button type="submit">lanjutkan dengan email</button>
+    </form>
+</body>
 </html>
