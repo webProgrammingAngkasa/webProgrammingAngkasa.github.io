@@ -42,6 +42,3 @@ ajax/
 
 # File yang sementara tidak perlu di-track
 sewa_hotel/app.js 
-login/
-logout.php
-asd
