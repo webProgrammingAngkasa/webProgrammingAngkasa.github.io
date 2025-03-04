@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         window.location.href = 'index.php'
         </script>";
     }
-    $otp = $_POST['otp'];
+    $_SESSION['otp'] = $_POST['otp'];
     $email = $_SESSION['email'];
 
     $stmt = $dbConnect->prepare('SELECT u.otp, u.otp_expiry FROM users u WHERE u.email = ? AND u.uid IN (SELECT MAX(uid) FROM users GROUP BY email)');
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 window.location.href = 'verify_otp.php'
             </script>";
             exit;
-        } elseif ($user['otp'] === $otp) {
+        } elseif ($user['otp'] === $_SESSION['otp']) {
             echo "<script>
                 alert('Login Berhasil');
                 window.location.href = '../index.php'
