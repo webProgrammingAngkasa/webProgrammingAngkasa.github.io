@@ -75,11 +75,6 @@ session_start();
       width: 100%;
     }
 
-    p {
-      font-size: 18px;
-      line-height: 2rem;
-    }
-
     header {
       position: fixed;
       width: 100%;
@@ -102,7 +97,7 @@ session_start();
     }
 
     .logo img {
-      width: 60px;
+      width: 65px;
     }
     
     .navbar {
@@ -113,7 +108,7 @@ session_start();
 
     .navbar a {
       font-size: 1rem;
-      padding: 10px 11px;
+      padding: 10px 15px;
       color: #1e3a8a;
       text-transform: uppercase;
       font-weight: bold;
@@ -192,6 +187,7 @@ session_start();
 
     .home-text {
       flex: 1 1 17rem;
+      letter-spacing: .5px;
     }
 
     .home-img {
@@ -455,7 +451,7 @@ session_start();
   <!-- Home -->
   <section class="home" id="home">
     <div class="home-text">
-      <span>Welcome To</span>
+      <span>Welcome  <sup style="font-size: 16px;">To</sup> The World <sub style="font-size: 16px;">Of</sub></span>
       <h1>Hotel 599</h1>
       <h2>Hotel nyaman dan elegan!</h2>
       <a href="#pesan" class="btn">Pesan Kamar</a>
