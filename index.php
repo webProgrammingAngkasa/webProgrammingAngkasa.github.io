@@ -11,29 +11,24 @@ session_start();
   <title>Hotel 599</title>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      var buttonOut = document.getElementById("button-logout")
-      var userIcon = document.getElementById("user-icon")
-      var buttonLog = document.getElementById("button-login")
-      let email = "<?php echo $_SESSION['otp'] ?? ''; ?>"
+      function dynamicNavbar() {
+        var buttonOut = document.getElementById("button-logout")
+        var userIcon = document.getElementById("user-icon")
+        var buttonLog = document.getElementById("button-login")
+        let email = "<?php echo $_SESSION['otp'] ?? ''; ?>"
 
-      if (email) {
-        buttonLog.style.display = "flex"
-        buttonLog.style.display = "none"
-        userIcon.style.display = "flex"
-      } else {
-        buttonOut.style.display = "none"
-        buttonLog.style.display = "block"
-        userIcon.style.display = "none"
+        if (email === '') {
+          buttonLog.style.display = "flex"
+          buttonOut.style.display = "none"
+          userIcon.style.display = "none"
+        } else {
+          buttonOut.style.display = "flex"
+          userIcon.style.display = "flex"
+          buttonLog.style.display = "none"
+        }
       }
+      dynamicNavbar()
 
-      // const hoverParent = document.querySelectorAll('header:has(> .navbar #user-icon:hover)')
-      // var actionNav = document.getElementById("action")
-
-      // document.addEventListener('mouseover', () => {
-      //   if (event.target.mathes(hoverParent)) { 
-      //     event.target.parentElement.style.color = white;
-      //   }
-      // })
     })
   </script>
   <!-- <link rel="stylesheet" href="style.css" /> -->
@@ -99,7 +94,7 @@ session_start();
     .logo img {
       width: 65px;
     }
-    
+
     .navbar {
       display: flex;
       gap: 10px;
@@ -127,29 +122,36 @@ session_start();
 
     .container-login {
       display: flex;
+      align-items: center;
+      background: transparent;
+      gap: 20px;
     }
 
-    .container-login .login {
+    .container-login #button-login,
+    #button-logout,
+    #user-icon {
+      display: none;
+    }
+
+    .container-login li:not(#user-icon) a {
       font-size: 1rem;
       padding: 8px 10px;
       text-transform: uppercase;
-      font-weight: bold;
+      font-weight: bolder;
       background: white;
       letter-spacing: .8px;
-      border: 2px solid;
+      border: 2px solid var(--third-color);
       border-radius: 50px;
-      border-color: var(--third-color)
-    }
-    .container-login .login:hover {
-      background: whitesmoke;
       cursor: pointer;
-    }
-    .container-login .login a {
       color: var(--third-color);
     }
 
+    .container-login li:not(#user-icon) a:hover {
+      background-color: transparent;
+    }
+
     .container-login li i {
-      font-size: 40px;
+      font-size: 42px;
       color: #1e3a8a;
       text-transform: uppercase;
       font-weight: bold;
@@ -165,6 +167,12 @@ session_start();
       background: transparent;
     }
 
+    header:has(> .container-login #user-icon i:hover) .container-login li:not(#user-icon) a {
+      border: 2px solid var(--main-color);
+      background: transparent;
+      color: var(--main-color);
+    }
+    
     header:has(> .container-login #user-icon i:hover) .navbar .action {
       color: var(--main-color);
       font-weight: bold;
@@ -440,18 +448,18 @@ session_start();
       <li><a href="#home" class="action">Beranda</a></li>
       <li><a href="#info" class="action">Info kamar</a></li>
       <li><a href="sewa_hotel/form_pesanan.php" class="action">Pesan kamar</a></li>
-      <li id="button-logout"><a href="logout.php" class="action">Logout</a></li>
     </ul>
 
     <ul class="container-login">
-      <li id="button-login" class="login"><a href="login/index.php">Masuk</a></li>
+      <li id="button-login"><a href="login/index.php">Masuk</a></li>
+      <li id="button-logout"><a href="logout.php">Logout</a></li>
       <li id="user-icon"><a href="" class="user-icon"><i class="fa-solid fa-user-secret"></i></a></li>
     </ul>
   </header>
   <!-- Home -->
   <section class="home" id="home">
     <div class="home-text">
-      <span>Welcome  <sup style="font-size: 16px;">To</sup> The World <sub style="font-size: 16px;">Of</sub></span>
+      <span>Welcome <sup style="font-size: 16px;">To</sup> The World <sub style="font-size: 16px;">Of</sub></span>
       <h1>Hotel 599</h1>
       <h2>Hotel nyaman dan elegan!</h2>
       <a href="#pesan" class="btn">Pesan Kamar</a>

@@ -48,6 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </script>";
     } catch (Exception $e) {
         echo "Gagal mengirim email. Error: {$mail->ErrorInfo}";
+        echo "<br>";
+        echo "<i style='letter-spacing: 1px;'> kemungkinan email atau password salah! </i>";
     }
     $dbConnect->close();
 } else {
