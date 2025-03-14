@@ -568,6 +568,7 @@ originalStatusRoom();
               <input type="text" name="alamat" id="address" autocomplete="off" required><br>
               <label for="tlp">No tlp:</label>
               <input type="tel" name="no_tlp" id="tlp" autocomplete="off" required><br>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem esse eligendi dolor sapiente quasi perferendis voluptate cum sint quos reprehenderit, aliquid labore dolores pariatur voluptatum debitis, aliquam, laboriosam quae! Quibusdam.</p>
             </div>
 
             <hr class="boundary-line">
