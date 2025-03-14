@@ -325,6 +325,10 @@ originalStatusRoom();
       text-transform: capitalize;
     }
 
+    .input-room {
+      display: flex;
+      flex-direction: row;
+    }
 
     .input-room button:nth-child(1),
     .input-room button:nth-child(2) {
@@ -613,9 +617,9 @@ originalStatusRoom();
       <p id="descriptionText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, reprehenderit eum! Ea maxime exercitationem sequi? Vel, a. Iusto, corrupti itaque nihil quisquam odio illo nam accusamus recusandae quo ullam amet?</p>
     </div>
     <div class="img-features">
-      <img src="../img/tipea.jpg" alt="a">
-      <img src="../img/icebear.jpg" alt="icebear">
-      <img src="../img/tipec.jpg" alt="c">
+      <img src="../img/icebear_cute.jpg" alt="a">
+      <img src="../img/grizzly_cute.jpg" alt="icebear">
+      <img src="../img/panda_cute.jpg" alt="c">
     </div>
     <span class="slideShow">&#10236;</span>
   </div>
