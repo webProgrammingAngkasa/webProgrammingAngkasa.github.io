@@ -39,6 +39,7 @@ dist/
 .prettierrc
 ajax/
 .vscode/
+img/
 
 # File yang sementara tidak perlu di-track
 sewa_hotel/app.js 

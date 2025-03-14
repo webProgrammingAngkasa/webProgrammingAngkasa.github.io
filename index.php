@@ -181,6 +181,7 @@ session_start();
     header:has(> .container-login #user-icon i:hover) {
       background: var(--third-color);
       box-shadow: none;
+      z-index: 1;
     }
 
     .home {
@@ -191,8 +192,183 @@ session_start();
       align-items: center;
       background: var(--third-color);
       gap: 1rem;
+      overflow: hidden;
+      z-index: 3;
     }
 
+
+    .bubles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .buble {
+      position: absolute;
+      bottom: -50px; 
+      background: rgba(255, 255, 255, 0.3); 
+      border-radius: 50%;
+      animation: bubleUp linear infinite;
+      z-index: 2;
+    }
+
+
+    @keyframes bubleUp {
+      0% {
+        transform: translateY(0);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+
+
+    .buble:nth-child(1) {
+      width: 8px;
+      height: 8px;
+      left: 3%;
+      animation-duration: 4s;
+      animation-delay: 0s;
+    }
+    .buble:nth-child(2) {
+      width: 12px;
+      height: 12px;
+      left: 12%;
+      animation-duration: 5.5s;
+      animation-delay: 1s;
+    }
+    .buble:nth-child(3) {
+      width: 16px;
+      height: 16px;
+      left: 22%;
+      animation-duration: 6.2s;
+      animation-delay: 0.5s;
+    }
+    .buble:nth-child(4) {
+      width: 10px;
+      height: 10px;
+      left: 35%;
+      animation-duration: 7s;
+      animation-delay: 2s;
+    }
+    .buble:nth-child(5) {
+      width: 20px;
+      height: 20px;
+      left: 48%;
+      animation-duration: 5s;
+      animation-delay: 1.8s;
+    }
+    .buble:nth-child(6) {
+      width: 14px;
+      height: 14px;
+      left: 58%;
+      animation-duration: 7.5s;
+      animation-delay: 0.7s;
+    }
+    .buble:nth-child(7) {
+      width: 18px;
+      height: 18px;
+      left: 67%;
+      animation-duration: 6.8s;
+      animation-delay: 1.2s;
+    }
+    .buble:nth-child(8) {
+      width: 22px;
+      height: 22px;
+      left: 76%;
+      animation-duration: 8s;
+      animation-delay: 1.5s;
+    }
+    .buble:nth-child(9) {
+      width: 9px;
+      height: 9px;
+      left: 85%;
+      animation-duration: 4.8s;
+      animation-delay: 0.3s;
+    }
+    .buble:nth-child(10) {
+      width: 13px;
+      height: 13px;
+      left: 93%;
+      animation-duration: 5.2s;
+      animation-delay: 1.7s;
+    }
+    .buble:nth-child(11) {
+      width: 17px;
+      height: 17px;
+      left: 6%;
+      animation-duration: 6s;
+      animation-delay: 0.4s;
+    }
+    .buble:nth-child(12) {
+      width: 11px;
+      height: 11px;
+      left: 15%;
+      animation-duration: 7.3s;
+      animation-delay: 1.1s;
+    }
+    .buble:nth-child(13) {
+      width: 19px;
+      height: 19px;
+      left: 25%;
+      animation-duration: 5.7s;
+      animation-delay: 1.9s;
+    }
+    .buble:nth-child(14) {
+      width: 10px;
+      height: 10px;
+      left: 37%;
+      animation-duration: 6.4s;
+      animation-delay: 0.8s;
+    }
+    .buble:nth-child(15) {
+      width: 21px;
+      height: 21px;
+      left: 49%;
+      animation-duration: 7.6s;
+      animation-delay: 1.3s;
+    }
+    .buble:nth-child(16) {
+      width: 12px;
+      height: 12px;
+      left: 59%;
+      animation-duration: 5.9s;
+      animation-delay: 1.6s;
+    }
+    .buble:nth-child(17) {
+      width: 23px;
+      height: 23px;
+      left: 68%;
+      animation-duration: 8.2s;
+      animation-delay: 0.6s;
+    }
+    .buble:nth-child(18) {
+      width: 15px;
+      height: 15px;
+      left: 77%;
+      animation-duration: 5.3s;
+      animation-delay: 2.1s;
+    }
+    .buble:nth-child(19) {
+      width: 20px;
+      height: 20px;
+      left: 88%;
+      animation-duration: 6.5s;
+      animation-delay: 1s;
+    }
+    .buble:nth-child(20) {
+      width: 9px;
+      height: 9px;
+      left: 96%;
+      animation-duration: 4.5s;
+      animation-delay: 0.9s;
+    }
     .home-text {
       flex: 1 1 17rem;
       letter-spacing: .5px;
@@ -209,27 +385,27 @@ session_start();
     @keyframes animate {
       0% {
         transform: translate(0, 0);
-        /* Titik awal */
+        
       }
 
       25% {
         transform: translate(-10px, 10px);
-        /* Bergerak ke kiri bawah */
+        
       }
 
       50% {
         transform: translate(0, 20px);
-        /* Titik bawah tengah */
+        
       }
 
       75% {
         transform: translate(10px, 10px);
-        /* Bergerak ke kanan bawah */
+        
       }
 
       100% {
         transform: translate(0, 0);
-        /* Kembali ke titik awal */
+        
       }
     }
 
@@ -440,35 +616,39 @@ session_start();
 <body>
   <!-- Navbar -->
   <header>
-    <a href="index.php" class="logo">
+    <a href="index.php" class="logo" id="logo">
       <img src="img/logo.png" alt="logo" />
     </a>
-
+  
     <ul class="navbar">
       <li><a href="#home" class="action">Beranda</a></li>
       <li><a href="#info" class="action">Info kamar</a></li>
       <li><a href="sewa_hotel/form_pesanan.php" class="action">Pesan kamar</a></li>
     </ul>
-
+  
     <ul class="container-login">
       <li id="button-login"><a href="login/index.php">Masuk</a></li>
       <li id="button-logout"><a href="logout.php">Logout</a></li>
-      <li id="user-icon"><a href="" class="user-icon"><i class="fa-solid fa-user-secret"></i></a></li>
+      <li id="user-icon"><a href="" class="user-icon"><i class="fa-solid fa-user-secret" title="<?= $_SESSION['email'];?>"></i></a></li>
     </ul>
   </header>
+
   <!-- Home -->
   <section class="home" id="home">
-    <div class="home-text">
+    <div class="home-text" style="z-index: 3;">
       <span>Welcome <sup style="font-size: 16px;">To</sup> The World <sub style="font-size: 16px;">Of</sub></span>
       <h1>Hotel 599</h1>
       <h2>Hotel nyaman dan elegan!</h2>
       <a href="#pesan" class="btn">Pesan Kamar</a>
     </div>
-    <div class="home-img">
-      <img src="img/hotel.png" alt="home-img" />
+    <div class="home-img" style="z-index: 3;">
+        <img src="img/hotel.png" alt="home-img" />
+    </div>
+    <div class="bubles">
+      <span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span>
     </div>
   </section>
-
+  
   <!-- SHOP -->
   <section class="info" id="info">
     <div class="heading">
@@ -523,6 +703,7 @@ session_start();
         </form>
       </div>
   </section>
+  
   <!-- SHOP -->
   <section class="pesan" id="pesan">
     <div class="heading">
@@ -564,9 +745,8 @@ session_start();
         <a href="sewa_hotel/form_pesanan.php" class="btn">Pesan</a>
       </div>
   </section>
-  <!-- ABOUT -->
 
-  </section>
+<!-- ABOUT -->
   <section class="contact" id="contact">
     <ul class="social">
       <li>
@@ -588,6 +768,7 @@ session_start();
         <a href=""><i class="fa-brands fa-twitter"></i></a>
       </li>
     </ul>
+  </section>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"
