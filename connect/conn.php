@@ -1,4 +1,3 @@
-<!-- pemberi harapan palsu -->
  <?php
  $hostname = 'localhost';
  $username  = 'root';
