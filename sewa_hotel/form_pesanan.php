@@ -1,29 +1,23 @@
-<!-- ! -->
 <?php
 include '../connect/conn.php';
 //TODO: *** number room ***
 
-if (isset($_POST['room_type'])) {
-  $roomType = $_POST['room_type'];
-
-  // Query berdasarkan tipe kamar yang dipilih
+if (isset($_POST['type'])) {
+  $type = $_POST['type'];
   $query = [
     "standard" => "SELECT id, no_kamar FROM list_no_kamar WHERE status = 'Available' AND id <= 10 ORDER BY id ASC",
     "superior" => "SELECT id, no_kamar FROM list_no_kamar WHERE status = 'Available' AND id > 10 AND id <= 20 ORDER BY id ASC",
     "duluxe" => "SELECT id, no_kamar FROM list_no_kamar WHERE status = 'Available' AND id > 20 AND id <= 30 ORDER BY id ASC",
     "suite" => "SELECT id, no_kamar FROM list_no_kamar WHERE status = 'Available' AND id > 30 AND id <= 40 ORDER BY id ASC"
   ];
-
-
-  if (array_key_exists($roomType, $query)) {
-    $result = $dbConnect->query($query[$roomType]);
-    if ($result->num_rows > 0) {
-      echo '<option value="" selected disabled>pilih kamar ' . $roomType . '</option>';
-      while ($row = $result->fetch_assoc()) {
-        echo '<option value="' . $row['id'] . '">' . $row['no_kamar'] . '</option>';
-      }
-    }
+  $run = $dbConnect->query($query[$type]);
+  $data = [];
+  while ($row = $run->fetch_assoc()) {
+    $data[] = $row;
   }
+  $encode = json_encode($data);
+  echo $encode;
+  exit;
 }
 
 //TODO: *** return number room after checkout ***
@@ -64,15 +58,20 @@ originalStatusRoom();
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      font-size: 30px;
       font-weight: bold;
       gap: 2px;
       font-size: 3rem;
     }
 
+    #reload-overlay span:nth-child(1) {
+      font-size: 50px;
+      color: black;
+    }
+
     #reload-overlay span:nth-child(2),
     span:nth-child(3),
     span:nth-child(4) {
+      font-size: 50px;
       color: transparent;
       animation: point .3s forwards;
     }
@@ -304,11 +303,12 @@ originalStatusRoom();
       height: 100px;
     }
 
-    .rangeTime span {
-      line-height: 145px;
-      font-size: 80px;
-      color: transparent;
-      animation: arrow 2s forwards;
+    #descriptionModal span:nth-child(1) {
+      display: none;
+    }
+
+    #descriptionModal span:nth-child(2) {
+      display: flex;
     }
 
     @keyframes arrow {
@@ -375,7 +375,7 @@ originalStatusRoom();
       }
     }
 
-    .overlay {
+    #overlay {
       display: none;
       position: fixed;
       top: 0;
@@ -384,30 +384,30 @@ originalStatusRoom();
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(10px);
-      z-index: 1000;
+      cursor: pointer;
     }
 
-    .container-modal {
-      position: fixed;
+    #descriptionModal {
       display: none;
+      position: fixed;
       justify-content: space-between;
+      align-items: center;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 100%;
       max-width: 100%;
+      max-height: 40%;
+      height: 60%;
       border-radius: 1px;
       background-color: #1e3a8a;
       color: white;
-      padding-inline: 10px;
-      padding-block: 40px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       text-align: center;
-      z-index: 1001;
       transition: .9s;
     }
 
-    .container-modal:hover {
+    #descriptionModal:hover {
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2)
     }
 
@@ -418,6 +418,10 @@ originalStatusRoom();
 
     .text-modal p {
       font-size: 15px;
+    }
+
+    #descriptionModal div:nth-child(3) {
+      display: none;
     }
 
     .img-features {
@@ -436,6 +440,16 @@ originalStatusRoom();
 
     .img-features img:hover {
       transform: scale(110%);
+    }
+
+    span {
+      font-size: 5rem;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      color: transparent;
+      font-weight: bold;
     }
 
     .footer {
@@ -510,51 +524,7 @@ originalStatusRoom();
       }
     }
     reloadWindow()
-
-    function roomDescription(choice) {
-      let descriptions = {
-        "standard": "Nikmati kenyamanan tidur yang luar biasa di kamar kami dengan kasur queen size yang luas. Dirancang untuk memberikan pengalaman menginap yang relaks dan menyegarkan, kamar ini menawarkan ruang yang cukup untuk dua orang. Dilengkapi dengan fasilitas modern dan suasana yang hangat, kamar ini cocok untuk pasangan atau tamu yang menginginkan kenyamanan ekstra selama menginap.",
-        "superior": "Kamar ini menawarkan dua tempat tidur single yang dapat menjadi pilihan ideal bagi teman perjalanan atau keluarga yang ingin tidur terpisah namun tetap dekat. Dengan ruang yang luas dan desain yang nyaman, kamar ini dilengkapi dengan berbagai fasilitas untuk memastikan kenyamanan Anda selama menginap. Solusi sempurna untuk pengalaman menginap yang praktis dan nyaman.",
-        "duluxe": "Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Dilengkapi dengan tempat tidur single yang nyaman, kamar ini menawarkan ruang yang efisien dan tenang untuk beristirahat. Ideal untuk perjalanan solo atau tamu yang membutuhkan akomodasi yang sederhana namun nyaman, dengan fasilitas lengkap untuk memenuhi kebutuhan Anda.",
-        "suite": "Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Dilengkapi dengan tempat tidur single yang nyaman, kamar ini menawarkan ruang yang efisien dan tenang untuk beristirahat. Ideal untuk perjalanan solo atau tamu yang membutuhkan akomodasi yang sederhana namun nyaman, dengan fasilitas lengkap untuk memenuhi kebutuhan Anda."
-      }
-      document.getElementById("descriptionText").innerText = descriptions[choice];
-
-      document.getElementById("descriptionModal").style.display = "flex";
-      document.getElementById("descriptionModal").style.transition = "100ms";
-      document.querySelector(".overlay").style.display = "block";
-    }
-
-    function closeModal() {
-      document.getElementById("descriptionModal").style.display = "none";
-      document.querySelector(".overlay").style.display = "none";
-    }
-
-
-    function roomType(roomType) {
-      let xhr = new XMLHttpRequest();
-      xhr.open("POST", "", true);
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          document.getElementById("num_room").innerHTML = xhr.responseText;
-          let title_number = document.getElementById("title_num_room")
-          title_number.style.cssText = "display: block; text-align: center;"
-          document.querySelector("#num_room").style.display = "flex"
-        }
-      };
-
-      xhr.send("room_type=" + roomType);
-    }
-
-    function roomTypeDescription(choice) {
-      roomDescription(choice);
-      roomType(choice);
-    }
-
-    </script>
-
+  </script>
 </head>
 
 <body>
@@ -588,12 +558,12 @@ originalStatusRoom();
             <div class="input-user">
               <h3>Isi Data Diri Anda!</h3>
 
-              <label for="">Nama:</label>
-              <input type="text" name="nama" autocomplete="off" required><br>
-              <label for="">Alamat</label>
-              <input type="text" name="alamat" autocomplete="off" required><br>
-              <label for="">No tlp:</label>
-              <input type="tel" name="no_tlp" autocomplete="off" required><br>
+              <label for="name">Nama:</label>
+              <input type="text" name="nama" id="name" autocomplete="off" required><br>
+              <label for="address">Alamat</label>
+              <input type="text" name="alamat" id="address" autocomplete="off" required><br>
+              <label for="tlp">No tlp:</label>
+              <input type="tel" name="no_tlp" id="tlp" autocomplete="off" required><br>
             </div>
 
             <hr class="boundary-line">
@@ -603,33 +573,33 @@ originalStatusRoom();
 
               <h3>Tipe Kamar</h3>
               <div class="input-room">
-                <button type="button" value="standard" id="choice-1" onclick="roomTypeDescription('standard')">Standard</button>
-                <button type="button" value="superior" id="choice-2" onclick="roomTypeDescription('superior')">Superior</button>
-                <button type="button" value="duluxe" id="choice-3" onclick="roomTypeDescription('duluxe')">Duluxe</button>
-                <button type="button" value="suite" id="choice-4" onclick="roomTypeDescription('suite')">Suite</button>
+                <button type="button" value="standard" onclick="roomType('standard')">Standard</button>
+                <button type="button" value="superior" onclick="roomType('superior')">Superior</button>
+                <button type="button" value="duluxe" onclick="roomType('duluxe')">Duluxe</button>
+                <button type="button" value="suite" onclick="roomType('suite')">Suite</button>
               </div>
 
-              <h3 id="title_num_room" class="select-room"">Nomor Kamar</h3>
-              <select name=" no_kamar" id="num_room" class="select-room">
-                <!--//? perulangan no kamar sesuai type -->
-                </select>
+              <h3 id="title_num_room" class="select-room">Nomor Kamar</h3>
+              <select name="no_kamar" id="numberRoom" class="select-room">
+                <!--//* perulangan no kamar sesuai type -->
+              </select>
 
-                <div class="rangeTime">
-                  <div class="check">
-                    <h3 for="in">check in</h3>
-                    <input type="date" name="check_in" id="in" required>
-                  </div>
-                  <span>&#10174;</span>
-                  <div class="check_out">
-                    <h3 for="out">check out</h3>
-                    <input type="date" name="check_out" id="out" required disabled>
-                  </div>
+              <div class="rangeTime">
+                <div class="check">
+                  <h3 for="in">check in</h3>
+                  <input type="date" name="check_in" id="in" required>
                 </div>
+                <span>&#10174;</span>
+                <div class="check_out">
+                  <h3 for="out">check out</h3>
+                  <input type="date" name="check_out" id="out" required disabled>
+                </div>
+              </div>
 
-                <label for="note">Catatan</label>
-                <textarea name="note" id="note" cols="60" rows="2" required></textarea><br>
+              <label for="note">Catatan</label>
+              <textarea name="note" id="note" cols="60" rows="2" required></textarea><br>
 
-                <button type="submit" name="submit" class="tombol">PESAN</button>
+              <button type="submit" name="submit" class="tombol">PESAN</button>
             </div>
           </form>
         </div>
@@ -637,37 +607,69 @@ originalStatusRoom();
   </div>
 
 
-  <div class="overlay" onclick="closeModal()"></div>
-  <div id="descriptionModal" class="container-modal">
+  <div id="overlay" onclick="closeOverlay()"></div>
+  <div id="descriptionModal">
     <div class="text-modal">
-      <p id="descriptionText"></p>
+      <p id="descriptionText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, reprehenderit eum! Ea maxime exercitationem sequi? Vel, a. Iusto, corrupti itaque nihil quisquam odio illo nam accusamus recusandae quo ullam amet?</p>
     </div>
     <div class="img-features">
       <img src="../img/tipea.jpg" alt="a">
-      <!-- <img src="../img/tipeb.jpg" alt="b"> -->
       <img src="../img/icebear.jpg" alt="icebear">
       <img src="../img/tipec.jpg" alt="c">
     </div>
-    <span class="close" onclick="closeModal()" style=" cursor: pointer; font-size: 50px; font-weight: bold;">&times;</span>
+    <span class="slideShow">&#10236;</span>
   </div>
   <br><br>
 
   <script>
-    let today = new Date();
-    let todayFormatted = today.toISOString().split('T')[0];
-    document.getElementById('in').setAttribute('min', todayFormatted);
+    function roomType(choice) {
+      const xhr = new XMLHttpRequest()
+      xhr.open("POST", "", true)
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 
-    document.getElementById('in').addEventListener('change', function () {
+      xhr.onreadystatechange = () => {
+        if (xhr.status === 200 && xhr.readyState === 4) {
+          const getData = xhr.responseText
+          const datas = JSON.parse(getData)
+          console.log(datas);
+          
+          let contentChoices = document.getElementById("numberRoom")
+          contentChoices.innerHTML = `<option value="" disabled selected style="text-transform: capitalize;">kilih kamar ${choice}</option>`
+          contentChoices.style.textTransform = "capitalize"
+          datas.forEach(data => {
+            let option = document.createElement("option")
+            option.value = data.id
+            option.textContent = data.no_kamar
+            contentChoices.appendChild(option)
+          })
+        }
+      }
+      xhr.send("type=" + choice)
+
+      document.getElementById("numberRoom").style.display = "flex";
+      document.querySelector("#overlay").style.display = "block";
+      document.querySelector("#descriptionModal").style.display = "flex";
+    }
+
+    function closeOverlay() {
+      document.querySelector("#overlay").style.display = "none";
+      document.querySelector("#descriptionModal").style.display = "none";
+    }
+
+    document.getElementById('in').addEventListener('change', function() {
+      let today = new Date();
+      let todayFormatted = today.toISOString().split('T')[0];
+      document.getElementById('in').setAttribute('min', todayFormatted);
       let checkInDate = new Date(this.value);
       let checkOutDate = new Date(checkInDate);
-      checkOutDate.setDate(checkOutDate.getDate() + 1); 
-      
+      checkOutDate.setDate(checkOutDate.getDate() + 1);
+
       let checkOutFormatted = checkOutDate.toISOString().split('T')[0];
       let checkOutInput = document.getElementById("out")
-      
+
       checkOutInput.removeAttribute('disabled')
       checkOutInput.setAttribute('min', checkOutFormatted);
-      checkOutInput.value = ''; 
+      checkOutInput.value = '';
     });
   </script>
 </body>
