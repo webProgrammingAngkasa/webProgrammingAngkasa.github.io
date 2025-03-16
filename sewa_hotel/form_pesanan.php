@@ -5,10 +5,10 @@ include '../connect/conn.php';
 if (isset($_POST['type'])) {
   $type = $_POST['type'];
   $query = [
-    "standard" => "SELECT id, no_kamar FROM list_no_kamar WHERE status = 'Available' AND id <= 10 ORDER BY id ASC",
-    "superior" => "SELECT id, no_kamar FROM list_no_kamar WHERE status = 'Available' AND id > 10 AND id <= 20 ORDER BY id ASC",
-    "duluxe" => "SELECT id, no_kamar FROM list_no_kamar WHERE status = 'Available' AND id > 20 AND id <= 30 ORDER BY id ASC",
-    "suite" => "SELECT id, no_kamar FROM list_no_kamar WHERE status = 'Available' AND id > 30 AND id <= 40 ORDER BY id ASC"
+    "standard" => "SELECT id, no_kamar, mv_type.harga AS harga FROM list_no_kamar INNER JOIN mv_type ON mv_type.id_type = list_no_kamar.fk_type WHERE status = 'Available' AND id <= 10 GROUP BY no_kamar ORDER BY id ASC",
+    "superior" => "SELECT id, no_kamar, mv_type.harga AS harga FROM list_no_kamar INNER JOIN mv_type ON mv_type.id_type = list_no_kamar.fk_type WHERE status = 'Available' AND id > 10 AND id <= 20 GROUP BY no_kamar ORDER BY id ASC",
+    "duluxe" => "SELECT id, no_kamar, mv_type.harga AS harga FROM list_no_kamar INNER JOIN mv_type ON mv_type.id_type = list_no_kamar.fk_type WHERE status = 'Available' AND id > 20 AND id <= 30 GROUP BY no_kamar ORDER BY id ASC",
+    "suite" => "SELECT id, no_kamar, mv_type.harga AS harga FROM list_no_kamar INNER JOIN mv_type ON mv_type.id_type = list_no_kamar.fk_type WHERE status = 'Available' AND id > 30 AND id <= 40 GROUP BY no_kamar ORDER BY id ASC"
   ];
   $run = $dbConnect->query($query[$type]);
   $data = [];
@@ -446,16 +446,6 @@ originalStatusRoom();
       transform: scale(110%);
     }
 
-    span {
-      font-size: 5rem;
-      line-height: 1;
-      display: inline-block;
-      vertical-align: middle;
-      cursor: pointer;
-      color: transparent;
-      font-weight: bold;
-    }
-
     .footer {
       position: relative;
       font-weight: 600;
@@ -470,10 +460,6 @@ originalStatusRoom();
                   rgba(0, 0, 0, 0.56) 0px -2px -2px 4px; */
       letter-spacing: 2;
       bottom: 0;
-    }
-
-    footer span {
-      letter-spacing: 1px;
     }
 
     .boundary-line {
@@ -575,16 +561,17 @@ originalStatusRoom();
             <!--//* pesan kamar -->
             <div class="form-room">
 
+            <div class="container-type">
               <h3>Tipe Kamar</h3>
               <div class="input-room">
-                <button type="button" value="standard" onclick="roomType('standard')">Standard</button>
-                <button type="button" value="superior" onclick="roomType('superior')">Superior</button>
-                <button type="button" value="duluxe" onclick="roomType('duluxe')">Duluxe</button>
-                <button type="button" value="suite" onclick="roomType('suite')">Suite</button>
+                <button type="button" value="standard" onclick="roomType('standard')" disabled>Standard</button>
+                <button type="button" value="superior" onclick="roomType('superior')" disabled>Superior</button>
+                <button type="button" value="duluxe" onclick="roomType('duluxe')" disabled>Duluxe</button>
+                <button type="button" value="suite" onclick="roomType('suite')" disabled>Suite</button>
+              </div>
               </div>
 
-              <h3 id="title_num_room" class="select-room">Nomor Kamar</h3>
-              <select name="no_kamar" id="numberRoom" class="select-room">
+              <select name="no_kamar" id="numberRoom" class="select-room" required>
                 <!--//* perulangan no kamar sesuai type -->
               </select>
 
@@ -594,9 +581,9 @@ originalStatusRoom();
                   <input type="date" name="check_in" id="in" required>
                 </div>
                 <span>&#10174;</span>
-                <div class="check_out">
+                <div class="check">
                   <h3 for="out">check out</h3>
-                  <input type="date" name="check_out" id="out" required disabled>
+                  <input type="date" name="check_out" id="out" required disabled required>
                 </div>
               </div>
 
@@ -635,15 +622,13 @@ originalStatusRoom();
         if (xhr.status === 200 && xhr.readyState === 4) {
           const getData = xhr.responseText
           const datas = JSON.parse(getData)
-          console.log(datas);
-          
           let contentChoices = document.getElementById("numberRoom")
           contentChoices.innerHTML = `<option value="" disabled selected style="text-transform: capitalize;">kilih kamar ${choice}</option>`
           contentChoices.style.textTransform = "capitalize"
           datas.forEach(data => {
             let option = document.createElement("option")
             option.value = data.id
-            option.textContent = data.no_kamar
+            option.innerText = `room: ${data.no_kamar}\t` + `|` + `\tharga: rp.${data.harga}`
             contentChoices.appendChild(option)
           })
         }
@@ -674,7 +659,21 @@ originalStatusRoom();
       checkOutInput.removeAttribute('disabled')
       checkOutInput.setAttribute('min', checkOutFormatted);
       checkOutInput.value = '';
-    });
+
+      let arrowAnimate = document.querySelectorAll(".rangeTime span")
+      arrowAnimate.forEach((arrow) => {
+        arrow.style.opacity = "1"
+        arrow.style.zIndex = "100"
+      })
+    })
+
+    document.getElementById('out').addEventListener('change', function() {
+      let buttons = document.querySelectorAll(".input-room button")
+      buttons.forEach(button => {
+        button.removeAttribute("disabled")
+      })
+      document.querySelector(".container-type").style.display = "flex"
+    })
   </script>
 </body>
 
