@@ -167,7 +167,7 @@ originalStatusRoom();
     .container {
       max-width: 55%;
       width: 100%;
-      background: var(--bg-global-color);
+      background: linear-gradient(160deg, rgb(2, 28, 122) 0.00%, rgb(36, 83, 255) 100.00%);
       padding: 2.5%;
       border-radius: 15px;
       box-shadow: 0 0px 8px rgba(0, 0, 0, 0);
@@ -233,6 +233,7 @@ originalStatusRoom();
 
     @keyframes input {
       0% {
+        outline: none;
         background: transparent;
       }
     }
@@ -279,16 +280,18 @@ originalStatusRoom();
         border-color: transparent;
       }
     }
-
+    
     .select-room {
       display: none;
       animation: select-room 2s forwards;
+      margin: auto;
     }
 
     @keyframes select-room {
       0% {
         background: transparent;
         color: transparent;
+        width: 10px;
       }
 
       100% {
@@ -299,8 +302,50 @@ originalStatusRoom();
     .rangeTime {
       display: flex;
       justify-content: space-evenly;
-      margin-bottom: 15px;
       height: 100px;
+      align-items: center;
+      margin-block: 20px;
+    }
+
+    
+    .rangeTime .check {
+      width: 35%;
+    }
+
+    .check input[type= "date"] {
+      letter-spacing: 2px;
+      font-size: 15px;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-weight: bold;
+    }
+    
+    .rangeTime span {
+      font-size: 5rem;
+      align-items: end;
+      font-weight: bold;
+      cursor: default;
+      bottom: 0;
+      line-height: 100px;
+      z-index: -1;
+      opacity: 0;
+      color: transparent;
+      animation: arrow 2s forwards;
+      transition: 1s;
+    }
+
+    @keyframes arrow {
+        100% {
+        z-index: 1;
+        color: var(--second-color);
+      }
+    }
+
+    .rangeTime h3 {
+      font-size: 18.5px;
+      color: #ffffff;
+      font-weight: bold;
+      text-align: center;
+      text-transform: capitalize;
     }
 
     #descriptionModal span:nth-child(1) {
@@ -311,28 +356,36 @@ originalStatusRoom();
       display: flex;
     }
 
-    @keyframes arrow {
-      100% {
-        color: var(--second-color);
-      }
+    .container-type {
+      display: none;
+      flex-direction: column;
+      animation: type-room-button 2s forwards;
+      margin-block: 5px;
+      margin-bottom: 10px;
     }
 
-    .rangeTime label {
-      font-size: 14px;
-      color: #ffffff;
-      font-weight: bold;
-      text-align: center;
-      text-transform: capitalize;
+    @keyframes type-room-button {
+      0% {
+        background: transparent;
+        color: transparent;
+      }
+
+      100% {
+        width: 100%;
+      }
     }
 
     .input-room {
       display: flex;
+      justify-content: space-around;
       flex-direction: row;
+      margin-block: 5px;
+      margin-top: 15px;
+      margin-bottom: 10px;
     }
 
     .input-room button:nth-child(1),
     .input-room button:nth-child(2) {
-      margin: 20px;
       width: 120px;
       height: 45px;
       border-top-right-radius: 50%;
@@ -350,7 +403,6 @@ originalStatusRoom();
 
     .input-room button:nth-child(3),
     .input-room button:nth-child(4) {
-      margin: 20px;
       width: 120px;
       height: 45px;
       border-top-left-radius: 50%;
@@ -388,7 +440,8 @@ originalStatusRoom();
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(10px);
-      cursor: pointer;
+      cursor: zoom-out;
+      z-index: 99
     }
 
     #descriptionModal {
@@ -409,6 +462,7 @@ originalStatusRoom();
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       text-align: center;
       transition: .9s;
+      z-index: 100;
     }
 
     #descriptionModal:hover {
@@ -569,7 +623,7 @@ originalStatusRoom();
                 <button type="button" value="duluxe" onclick="roomType('duluxe')" disabled>Duluxe</button>
                 <button type="button" value="suite" onclick="roomType('suite')" disabled>Suite</button>
               </div>
-              </div>
+            </div>
 
               <select name="no_kamar" id="numberRoom" class="select-room" required>
                 <!--//* perulangan no kamar sesuai type -->
