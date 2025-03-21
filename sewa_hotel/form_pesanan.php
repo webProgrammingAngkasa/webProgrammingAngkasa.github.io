@@ -616,7 +616,7 @@ originalStatusRoom();
             <div class="form-room">
 
             <div class="container-type">
-              <h3>Tipe Kamar</h3>
+              <h3>Pilih Tipe Kamar</h3>
               <div class="input-room">
                 <button type="button" value="standard" onclick="roomType('standard')" disabled>Standard</button>
                 <button type="button" value="superior" onclick="roomType('superior')" disabled>Superior</button>
@@ -672,12 +672,17 @@ originalStatusRoom();
       xhr.open("POST", "", true)
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 
-      xhr.onreadystatechange = () => {
-        if (xhr.status === 200 && xhr.readyState === 4) {
-          const getData = xhr.responseText
+      xhr.onreadystatechange = function () {
+        if (this.status === 200 && this.readyState === 4) {
+          const getData = this.responseText
           const datas = JSON.parse(getData)
           let contentChoices = document.getElementById("numberRoom")
-          contentChoices.innerHTML = `<option value="" disabled selected style="text-transform: capitalize;">kilih kamar ${choice}</option>`
+          if(datas.length === 0) {
+            conditionRoom = `kamar ${choice} tidak tersedia`
+          } else {
+            conditionRoom = `pilih kamar ${choice}`
+          }
+          contentChoices.innerHTML = `<option value="" disabled selected style="text-transform: capitalize;">${conditionRoom}</option>`
           contentChoices.style.textTransform = "capitalize"
           datas.forEach(data => {
             let option = document.createElement("option")
@@ -700,8 +705,8 @@ originalStatusRoom();
     }
 
     document.getElementById('in').addEventListener('change', function() {
-      let today = new Date();
-      let todayFormatted = today.toISOString().split('T')[0];
+      const today = new Date();
+      const todayFormatted = today.toISOString().split('T')[0];
       document.getElementById('in').setAttribute('min', todayFormatted);
       let checkInDate = new Date(this.value);
       let checkOutDate = new Date(checkInDate);
@@ -714,7 +719,7 @@ originalStatusRoom();
       checkOutInput.setAttribute('min', checkOutFormatted);
       checkOutInput.value = '';
 
-      let arrowAnimate = document.querySelectorAll(".rangeTime span")
+      const arrowAnimate = document.querySelectorAll(".rangeTime span")
       arrowAnimate.forEach((arrow) => {
         arrow.style.opacity = "1"
         arrow.style.zIndex = "100"
