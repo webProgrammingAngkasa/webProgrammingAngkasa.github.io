@@ -40,7 +40,7 @@ session_start();
       padding: 0;
       box-sizing: border-box;
       font-family: "Poppins", sans-serif;
-      scroll-padding-top: 2rem;
+      scroll-padding-top: 4.4rem;
       scroll-behavior: smooth;
       text-decoration: none;
       list-style: none;
@@ -57,9 +57,10 @@ session_start();
       --third-color: #1e3a8a;
     }
 
-    *::selection {
-      color: #fff;
-      background: var(--main-color);
+    .global-container-page {
+      width: 100%;
+      overflow-x: hidden;
+
     }
 
     section {
@@ -207,7 +208,7 @@ session_start();
     .buble {
       position: absolute;
       bottom: -50px; 
-      background: rgba(255, 255, 255, 0.3); 
+      background: rgba(255, 255, 255, 0.13); 
       border-radius: 50%;
       animation: bubleUp linear infinite;
       z-index: 2;
@@ -614,7 +615,8 @@ session_start();
 </head>
 
 <body>
-  <!-- Navbar -->
+  <div class="global-container-page">
+
   <header>
     <a href="index.php" class="logo" id="logo">
       <img src="img/logo.png" alt="logo" />
@@ -769,7 +771,7 @@ session_start();
       </li>
     </ul>
   </section>
-
+</div>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"
       integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ=="
