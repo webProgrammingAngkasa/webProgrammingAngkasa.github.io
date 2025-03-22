@@ -637,7 +637,7 @@ originalStatusRoom();
                 <span>&#10174;</span>
                 <div class="check">
                   <h3 for="out">check out</h3>
-                  <input type="date" name="check_out" id="out" required disabled required>
+                  <input type="date" name="check_out" id="out" required disabled>
                 </div>
               </div>
 
