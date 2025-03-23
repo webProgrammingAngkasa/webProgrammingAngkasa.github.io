@@ -16,7 +16,6 @@ $dataPemesanan = [
     'no_kamar' => $_POST['no_kamar'],
     'check_in' => $_POST['check_in'],
     'check_out' => $_POST['check_out'],
-    'note' => $_POST['note']
 ];
 
 if (

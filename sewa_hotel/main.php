@@ -5,7 +5,7 @@ class Hotel
 {
     private $conn;
     public function __construct($localhost, $username, $password, $database)
-    { {
+    {   {
             global $dbConnect;
             $this->conn = $dbConnect;
         }
@@ -35,21 +35,37 @@ class Hotel
     {
         $in = $data['check_in'];
         $out = $data['check_out'];
-        $dateTime_in = "$in 14:00:00";
-        $dateTime_out = "$out 12:00:00";
+        $idRoom = $data['no_kamar'];
+
+        $restArrDate = [
+            new DateTime("$in 14:00:00"),
+            "$in 14:00:00",
+            new DateTime("$out 12:00:00"),
+            "$out 12:00:00",
+        ];
+
+        $qry = $this->conn->query("SELECT typ.harga as price FROM mv_type typ INNER JOIN list_no_kamar lnk ON typ.id_type = lnk.fk_type WHERE lnk.id = $idRoom");
+        $selPrice = $qry->fetch_assoc()['price'];
+        function rangeDays($in, $out, $price) {
+            $difference = $in->diff($out);
+            $resRange = $difference->days + 1;
+            return $resRange * $price;
+        }
+        $rangeDay = rangeDays($restArrDate['0'], $restArrDate['2'], $selPrice);
+
         $query = ("INSERT INTO tb_pemesanan (
                                         no_kamar, 
                                             check_in, 
                                                 check_out,
-                                                    note)
+                                                    total_harga)
                                         VALUES (?, ?, ?, ?)");
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param(
             "isss",
             $data['no_kamar'],
-            $dateTime_in,
-            $dateTime_out,
-            $data['note']
+            $restArrDate[1],
+            $restArrDate[3],
+            $rangeDay
         );
         return $stmt->execute();
     }
