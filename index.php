@@ -139,7 +139,7 @@ session_start();
       padding: 8px 10px;
       text-transform: uppercase;
       font-weight: bolder;
-      background: white;
+      background: transparent;
       letter-spacing: .8px;
       border: 2px solid var(--third-color);
       border-radius: 50px;
@@ -148,7 +148,7 @@ session_start();
     }
 
     .container-login li:not(#user-icon) a:hover {
-      background-color: transparent;
+      background-color: var(--main-color);
     }
 
     .container-login li i {
@@ -630,7 +630,7 @@ session_start();
   
     <ul class="container-login">
       <li id="button-login"><a href="login/index.php">Masuk</a></li>
-      <li id="button-logout"><a href="logout.php">Logout</a></li>
+      <li id="button-logout"><a href="logout.php" onclick="return confirm('are you sure want to log out of this account?\n\n Email: <?= $_SESSION['email']?>')">Logout</a></li>
       <li id="user-icon"><a href="" class="user-icon"><i class="fa-solid fa-user-secret" title="<?= $_SESSION['email'];?>"></i></a></li>
     </ul>
   </header>
