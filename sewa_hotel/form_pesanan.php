@@ -641,9 +641,6 @@ originalStatusRoom();
                 </div>
               </div>
 
-              <label for="note">Catatan</label>
-              <textarea name="note" id="note" cols="60" rows="2" required></textarea><br>
-
               <button type="submit" name="submit" class="tombol">PESAN</button>
             </div>
           </form>

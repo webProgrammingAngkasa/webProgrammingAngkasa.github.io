@@ -23,7 +23,7 @@ $maxIdOrder = $arrMaxId[1]['max_id_order'];
 
 $queryResult = [
     'pengunjung' => "SELECT * FROM tb_pengunjung WHERE id_pengunjung = $maxIdVisitor",
-    'pemesanan' => "SELECT id_pemesanan, list_no_kamar.no_kamar, mv_type.type_kamar, check_in, check_out, note
+    'pemesanan' => "SELECT id_pemesanan, list_no_kamar.no_kamar, mv_type.type_kamar, check_in, check_out, total_harga
                             FROM tb_pemesanan
                             INNER JOIN list_no_kamar
                             ON list_no_kamar.id = tb_pemesanan.no_kamar
@@ -41,9 +41,9 @@ $queryResult = [
 
 
 $results = [
-    $dbConnect->query($queryResult['pengunjung']), //0
-    $dbConnect->query($queryResult['pemesanan']), //1
-    $dbConnect->query($queryResult['rangeTimeOut']), //2
+    $dbConnect->query($queryResult['pengunjung']),      //* 0
+    $dbConnect->query($queryResult['pemesanan']),       //* 1
+    $dbConnect->query($queryResult['rangeTimeOut']),    //* 2
 ];
 
 
@@ -187,15 +187,15 @@ $date = json_encode($dateArray['date']);
     <p><span>alamat:</span> <?= $rows[0]['alamat'] ?></p>
 
     <p><span>no kamar:</span> <?= $rows[1]['no_kamar'] . ' ➡️ ' . $rows[1]['type_kamar'] ?></p>
-    
+
     <p><span>check in:</span> <?= $rows[1]['check_in'] ?></p>
     <p><span>check out:</span> <?= $rows[1]['check_out'] ?></p>
 
     <p><span>waktu check out:</span> <span id="endPointCheckOut"><?= $rows[2]['hari'] ?> hari | <?= $rows[2]['jam'] ?> jam • <?= $rows[2]['menit'] ?> menit • <?= $rows[2]['detik'] ?> detik</span></p>
 
-    <p><span>catatan:</span> <?= $rows[1]['note'] ?></p>
+    <p><span>total harga:</span> <?= $rows[1]['total_harga'] ?></p>
 
-     <script>
+    <script>
         function updateCountdown(targetTime) {
             let countdownElement = document.getElementById('endPointCheckOut');
 
@@ -232,7 +232,7 @@ $date = json_encode($dateArray['date']);
 
             updateCountdown(storedTimestamp);
         };
-    </script> 
+    </script>
 </body>
 
 </html>
