@@ -4,7 +4,7 @@ session_start();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../vendor/autoload.php'; // Pastikan PHPMailer terinstall dengan Composer
+require '../vendor/autoload.php';
 
 include "../connect/conn.php";
 
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['email'] = $email;
 
     $otp = rand(100000, 999999);
-    $otp_expiry = date("Y-m-d H:i:s", strtotime("+2 minutes")); // OTP berlaku 10 menit
+    $otp_expiry = date("Y-m-d H:i:s", strtotime("+2 minutes"));
 
     $query = "INSERT INTO users (email, otp, otp_expiry) VALUES (?, ?, ?) 
             ON DUPLICATE KEY UPDATE otp = ?, otp_expiry = ?";

@@ -46,8 +46,9 @@ session_start();
       list-style: none;
       font-size: 18px;
     }
-
+    
     body::-webkit-scrollbar {
+      overflow-x: hidden;
       display: none;
     }
 
@@ -58,8 +59,8 @@ session_start();
     }
 
     .global-container-page {
+      max-width: 100%;
       width: 100%;
-      overflow-x: hidden;
 
     }
 

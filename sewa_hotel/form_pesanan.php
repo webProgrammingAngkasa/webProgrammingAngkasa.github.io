@@ -280,7 +280,7 @@ originalStatusRoom();
         border-color: transparent;
       }
     }
-    
+
     .select-room {
       display: none;
       animation: select-room 2s forwards;
@@ -307,18 +307,18 @@ originalStatusRoom();
       margin-block: 20px;
     }
 
-    
+
     .rangeTime .check {
       width: 35%;
     }
 
-    .check input[type= "date"] {
+    .check input[type="date"] {
       letter-spacing: 2px;
       font-size: 15px;
       font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
       font-weight: bold;
     }
-    
+
     .rangeTime span {
       font-size: 5rem;
       align-items: end;
@@ -334,7 +334,7 @@ originalStatusRoom();
     }
 
     @keyframes arrow {
-        100% {
+      100% {
         z-index: 1;
         color: var(--second-color);
       }
@@ -357,11 +357,11 @@ originalStatusRoom();
     }
 
     .container-type {
-      display: none;
+      display: flex;
       flex-direction: column;
-      animation: type-room-button 2s forwards;
       margin-block: 5px;
       margin-bottom: 10px;
+      animation: type-room-button 2s forwards;
     }
 
     @keyframes type-room-button {
@@ -441,28 +441,62 @@ originalStatusRoom();
       background-color: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(10px);
       cursor: zoom-out;
-      z-index: 99
+      z-index: 99;
     }
 
-    #descriptionModal {
-      display: none;
+    .container-modal {
       position: fixed;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      top: 0%;
+      left: 0%;
+      background: transparent; 
+      width: 100%;
+      height: 100vh;
+      z-index: 100;
+    }
+    
+    #descriptionModal {
+      position: relative;
+      display: flex;
       justify-content: space-between;
       align-items: center;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      max-width: 100%;
+      max-width: 80%;
       max-height: 40%;
+      width: 100%;
       height: 60%;
-      border-radius: 1px;
+      padding-inline: 20px;
+      border-radius: 10px;
       background-color: #1e3a8a;
       color: white;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       text-align: center;
       transition: .9s;
       z-index: 100;
+      animation: modal-pop-up .2s ease;
+    }
+
+    @keyframes modal-pop-up {
+      0% {
+        z-index: -1;
+        opacity: 0;
+        width: 50%;
+        height: 20%;
+      }
+
+      75% {
+        z-index: 100;
+        opacity: 1;
+        width: 100%;
+        height: 60%;
+        scale: 110%;
+      }
+
+      100% {
+        z-index: 100;
+        scale: 100%;
+      }
     }
 
     #descriptionModal:hover {
@@ -484,9 +518,7 @@ originalStatusRoom();
 
     .img-features {
       display: flex;
-      justify-content: space-between;
-      max-width: 65%;
-      width: 55%;
+      gap: 20px;
     }
 
     .img-features img {
@@ -615,15 +647,15 @@ originalStatusRoom();
             <!--//* pesan kamar -->
             <div class="form-room">
 
-            <div class="container-type">
-              <h3>Pilih Tipe Kamar</h3>
-              <div class="input-room">
-                <button type="button" value="standard" onclick="roomType('standard')" disabled>Standard</button>
-                <button type="button" value="superior" onclick="roomType('superior')" disabled>Superior</button>
-                <button type="button" value="duluxe" onclick="roomType('duluxe')" disabled>Duluxe</button>
-                <button type="button" value="suite" onclick="roomType('suite')" disabled>Suite</button>
+              <div class="container-type">
+                <h3>Pilih Tipe Kamar</h3>
+                <div class="input-room">
+                  <button type="button" value="standard" onclick="roomType('standard')">Standard</button>
+                  <button type="button" value="superior" onclick="roomType('superior')">Superior</button>
+                  <button type="button" value="duluxe" onclick="roomType('duluxe')">Duluxe</button>
+                  <button type="button" value="suite" onclick="roomType('suite')">Suite</button>
+                </div>
               </div>
-            </div>
 
               <select name="no_kamar" id="numberRoom" class="select-room" required>
                 <!--//* perulangan no kamar sesuai type -->
@@ -637,7 +669,7 @@ originalStatusRoom();
                 <span>&#10174;</span>
                 <div class="check">
                   <h3 for="out">check out</h3>
-                  <input type="date" name="check_out" id="out" required disabled>
+                  <input type="date" name="check_out" id="out" required>
                 </div>
               </div>
 
@@ -649,19 +681,19 @@ originalStatusRoom();
   </div>
 
 
-  <div id="overlay" onclick="closeOverlay()"></div>
-  <div id="descriptionModal">
-    <div class="text-modal">
-      <p id="descriptionText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, reprehenderit eum! Ea maxime exercitationem sequi? Vel, a. Iusto, corrupti itaque nihil quisquam odio illo nam accusamus recusandae quo ullam amet?</p>
+  <div class="container-modal">
+    <div id="overlay" onclick="closeOverlay()"></div>
+    <div id="descriptionModal">
+      <div class="text-modal">
+        <p id="descriptionText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, reprehenderit eum! Ea maxime exercitationem sequi? Vel, a. Iusto, corrupti itaque nihil quisquam odio illo nam accusamus recusandae quo ullam amet?</p>
+      </div>
+      <div class="img-features">
+        <img src="../img/icebear_cute.jpg" alt="a">
+        <img src="../img/grizzly_cute.jpg" alt="icebear">
+        <img src="../img/panda_cute.jpg" alt="c">
+      </div>
     </div>
-    <div class="img-features">
-      <img src="../img/icebear_cute.jpg" alt="a">
-      <img src="../img/grizzly_cute.jpg" alt="icebear">
-      <img src="../img/panda_cute.jpg" alt="c">
-    </div>
-    <span class="slideShow">&#10236;</span>
   </div>
-  <br><br>
 
   <script>
     function roomType(choice) {
@@ -669,12 +701,12 @@ originalStatusRoom();
       xhr.open("POST", "", true)
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 
-      xhr.onreadystatechange = function () {
+      xhr.onreadystatechange = function() {
         if (this.status === 200 && this.readyState === 4) {
           const getData = this.responseText
           const datas = JSON.parse(getData)
           let contentChoices = document.getElementById("numberRoom")
-          if(datas.length === 0) {
+          if (datas.length === 0) {
             conditionRoom = `kamar ${choice} tidak tersedia`
           } else {
             conditionRoom = `pilih kamar ${choice}`
@@ -693,41 +725,40 @@ originalStatusRoom();
 
       document.getElementById("numberRoom").style.display = "flex";
       document.querySelector("#overlay").style.display = "block";
-      document.querySelector("#descriptionModal").style.display = "flex";
+      document.querySelector(".container-modal").style.display = "flex";
     }
 
     function closeOverlay() {
       document.querySelector("#overlay").style.display = "none";
-      document.querySelector("#descriptionModal").style.display = "none";
+      document.querySelector(".container-modal").style.display = "none";
     }
 
-    document.getElementById('in').addEventListener('change', function() {
-      const today = new Date();
-      const todayFormatted = today.toISOString().split('T')[0];
+    document.addEventListener("DOMContentLoaded", () => {
+      const todayFormatted = new Date().toLocaleDateString('en-CA');
       document.getElementById('in').setAttribute('min', todayFormatted);
-      let checkInDate = new Date(this.value);
-      let checkOutDate = new Date(checkInDate);
-      checkOutDate.setDate(checkOutDate.getDate() + 1);
+      document.getElementById('in').addEventListener('change', function() {
+        let checkInDate = new Date(this.value);
+        let checkOutDate = new Date(checkInDate);
+        checkOutDate.setDate(checkOutDate.getDate() + 1);
+        let checkOutFormatted = checkOutDate.toISOString().split('T')[0];
 
-      let checkOutFormatted = checkOutDate.toISOString().split('T')[0];
-      let checkOutInput = document.getElementById("out")
+        let checkOutInput = document.getElementById("out")
+        checkOutInput.removeAttribute('disabled')
+        checkOutInput.setAttribute('min', checkOutFormatted);
+        checkOutInput.value = '';
 
-      checkOutInput.removeAttribute('disabled')
-      checkOutInput.setAttribute('min', checkOutFormatted);
-      checkOutInput.value = '';
-
-      const arrowAnimate = document.querySelectorAll(".rangeTime span")
-      arrowAnimate.forEach((arrow) => {
-        arrow.style.opacity = "1"
-        arrow.style.zIndex = "100"
+        const arrowAnimate = document.querySelectorAll(".rangeTime span")
+        arrowAnimate.forEach((arrow) => {
+          arrow.style.opacity = "1"
+          arrow.style.zIndex = "100"
+        })
       })
     })
 
+
     document.getElementById('out').addEventListener('change', function() {
       let buttons = document.querySelectorAll(".input-room button")
-      buttons.forEach(button => {
-        button.removeAttribute("disabled")
-      })
+      buttons.forEach(button => button.removeAttribute("disabled"))
       document.querySelector(".container-type").style.display = "flex"
     })
   </script>
