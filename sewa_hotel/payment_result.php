@@ -193,7 +193,7 @@ $date = json_encode($dateArray['date']);
 
     <p><span>waktu check out:</span> <span id="endPointCheckOut"><?= $rows[2]['hari'] ?> hari | <?= $rows[2]['jam'] ?> jam • <?= $rows[2]['menit'] ?> menit • <?= $rows[2]['detik'] ?> detik</span></p>
 
-    <p><span>total harga:</span> <?= $rows[1]['total_harga'] ?></p>
+    <p><span>total harga:</span> <?= 'Rp. ' . number_format((int) $rows[1]['total_harga'], 0, '.', ','); ?></p>
 
     <script>
         function updateCountdown(targetTime) {
