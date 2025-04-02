@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,7 +44,7 @@ session_start();
       list-style: none;
       font-size: 18px;
     }
-    
+
     body::-webkit-scrollbar {
       overflow-x: hidden;
       display: none;
@@ -174,14 +172,15 @@ session_start();
       background: transparent;
       color: var(--main-color);
     }
-    
+
     header:has(> .container-login #user-icon i:hover) .navbar .action {
       color: var(--main-color);
       font-weight: bold;
     }
 
     header:has(> .container-login #user-icon i:hover) {
-      background: var(--third-color);
+      background: rgba(30, 58, 138, .7);
+      backdrop-filter: blur(10px);
       box-shadow: none;
       z-index: 1;
     }
@@ -208,8 +207,8 @@ session_start();
 
     .buble {
       position: absolute;
-      bottom: -50px; 
-      background: rgba(255, 255, 255, 0.13); 
+      bottom: -50px;
+      background: rgba(255, 255, 255, 0.13);
       border-radius: 50%;
       animation: bubleUp linear infinite;
       z-index: 2;
@@ -221,9 +220,11 @@ session_start();
         transform: translateY(0);
         opacity: 0;
       }
+
       20% {
         opacity: 1;
       }
+
       100% {
         transform: translateY(-100vh);
         opacity: 0;
@@ -238,6 +239,7 @@ session_start();
       animation-duration: 4s;
       animation-delay: 0s;
     }
+
     .buble:nth-child(2) {
       width: 12px;
       height: 12px;
@@ -245,6 +247,7 @@ session_start();
       animation-duration: 5.5s;
       animation-delay: 1s;
     }
+
     .buble:nth-child(3) {
       width: 16px;
       height: 16px;
@@ -252,6 +255,7 @@ session_start();
       animation-duration: 6.2s;
       animation-delay: 0.5s;
     }
+
     .buble:nth-child(4) {
       width: 10px;
       height: 10px;
@@ -259,6 +263,7 @@ session_start();
       animation-duration: 7s;
       animation-delay: 2s;
     }
+
     .buble:nth-child(5) {
       width: 20px;
       height: 20px;
@@ -266,6 +271,7 @@ session_start();
       animation-duration: 5s;
       animation-delay: 1.8s;
     }
+
     .buble:nth-child(6) {
       width: 14px;
       height: 14px;
@@ -273,6 +279,7 @@ session_start();
       animation-duration: 7.5s;
       animation-delay: 0.7s;
     }
+
     .buble:nth-child(7) {
       width: 18px;
       height: 18px;
@@ -280,6 +287,7 @@ session_start();
       animation-duration: 6.8s;
       animation-delay: 1.2s;
     }
+
     .buble:nth-child(8) {
       width: 22px;
       height: 22px;
@@ -287,6 +295,7 @@ session_start();
       animation-duration: 8s;
       animation-delay: 1.5s;
     }
+
     .buble:nth-child(9) {
       width: 9px;
       height: 9px;
@@ -294,6 +303,7 @@ session_start();
       animation-duration: 4.8s;
       animation-delay: 0.3s;
     }
+
     .buble:nth-child(10) {
       width: 13px;
       height: 13px;
@@ -301,6 +311,7 @@ session_start();
       animation-duration: 5.2s;
       animation-delay: 1.7s;
     }
+
     .buble:nth-child(11) {
       width: 17px;
       height: 17px;
@@ -308,6 +319,7 @@ session_start();
       animation-duration: 6s;
       animation-delay: 0.4s;
     }
+
     .buble:nth-child(12) {
       width: 11px;
       height: 11px;
@@ -315,6 +327,7 @@ session_start();
       animation-duration: 7.3s;
       animation-delay: 1.1s;
     }
+
     .buble:nth-child(13) {
       width: 19px;
       height: 19px;
@@ -322,6 +335,7 @@ session_start();
       animation-duration: 5.7s;
       animation-delay: 1.9s;
     }
+
     .buble:nth-child(14) {
       width: 10px;
       height: 10px;
@@ -329,6 +343,7 @@ session_start();
       animation-duration: 6.4s;
       animation-delay: 0.8s;
     }
+
     .buble:nth-child(15) {
       width: 21px;
       height: 21px;
@@ -336,6 +351,7 @@ session_start();
       animation-duration: 7.6s;
       animation-delay: 1.3s;
     }
+
     .buble:nth-child(16) {
       width: 12px;
       height: 12px;
@@ -343,6 +359,7 @@ session_start();
       animation-duration: 5.9s;
       animation-delay: 1.6s;
     }
+
     .buble:nth-child(17) {
       width: 23px;
       height: 23px;
@@ -350,6 +367,7 @@ session_start();
       animation-duration: 8.2s;
       animation-delay: 0.6s;
     }
+
     .buble:nth-child(18) {
       width: 15px;
       height: 15px;
@@ -357,6 +375,7 @@ session_start();
       animation-duration: 5.3s;
       animation-delay: 2.1s;
     }
+
     .buble:nth-child(19) {
       width: 20px;
       height: 20px;
@@ -364,6 +383,7 @@ session_start();
       animation-duration: 6.5s;
       animation-delay: 1s;
     }
+
     .buble:nth-child(20) {
       width: 9px;
       height: 9px;
@@ -371,6 +391,7 @@ session_start();
       animation-duration: 4.5s;
       animation-delay: 0.9s;
     }
+
     .home-text {
       flex: 1 1 17rem;
       letter-spacing: .5px;
@@ -387,27 +408,27 @@ session_start();
     @keyframes animate {
       0% {
         transform: translate(0, 0);
-        
+
       }
 
       25% {
         transform: translate(-10px, 10px);
-        
+
       }
 
       50% {
         transform: translate(0, 20px);
-        
+
       }
 
       75% {
         transform: translate(10px, 10px);
-        
+
       }
 
       100% {
         transform: translate(0, 0);
-        
+
       }
     }
 
@@ -617,167 +638,172 @@ session_start();
 
 <body>
   <div class="global-container-page">
+    <header>
+      <a href="index.php" class="logo" id="logo">
+        <img src="img/logo.png" alt="logo" />
+      </a>
 
-  <header>
-    <a href="index.php" class="logo" id="logo">
-      <img src="img/logo.png" alt="logo" />
-    </a>
-  
-    <ul class="navbar">
-      <li><a href="#home" class="action">Beranda</a></li>
-      <li><a href="#info" class="action">Info kamar</a></li>
-      <li><a href="sewa_hotel/form_pesanan.php" class="action">Pesan kamar</a></li>
-    </ul>
-  
-    <ul class="container-login">
-      <li id="button-login"><a href="login/index.php">Masuk</a></li>
-      <li id="button-logout"><a href="logout.php" onclick="return confirm('are you sure want to log out of this account?\n\n Email: <?= $_SESSION['email']?>')">Logout</a></li>
-      <li id="user-icon"><a href="" class="user-icon"><i class="fa-solid fa-user-secret" title="<?= $_SESSION['email'];?>"></i></a></li>
-    </ul>
-  </header>
+      <ul class="navbar">
+        <li><a href="#home" class="action">Beranda</a></li>
+        <li><a href="#info" class="action">Info kamar</a></li>
+        <li><a href="sewa_hotel/form_pesanan.php" class="action">Pesan kamar</a></li>
+      </ul>
 
-  <!-- Home -->
-  <section class="home" id="home">
-    <div class="home-text" style="z-index: 3;">
-      <span>Welcome <sup style="font-size: 16px;">To</sup> The World <sub style="font-size: 16px;">Of</sub></span>
-      <h1>Hotel 599</h1>
-      <h2>Hotel nyaman dan elegan!</h2>
-      <a href="#pesan" class="btn">Pesan Kamar</a>
-    </div>
-    <div class="home-img" style="z-index: 3;">
+      <ul class="container-login">
+        <li id="button-login"><a href="login/index.php">Masuk</a></li>
+        <li id="button-logout"><a href="logout.php" onclick="return confirm('are you sure want to log out of this account?\n\n Email: <?= $_SESSION['email'] ?>')">Logout</a></li>
+        <li id="user-icon"><a href="" class="user-icon"><i class="fa-solid fa-user-secret" title="<?= $_SESSION['email']; ?>"></i></a></li>
+      </ul>
+    </header>
+
+    <!-- Home -->
+    <section class="home" id="home">
+      <div class="home-text" style="z-index: 3;">
+        <span>Welcome <sup style="font-size: 16px;">To</sup> The World <sub style="font-size: 16px;">Of</sub></span>
+        <h1>Hotel 599</h1>
+        <h2>Hotel nyaman dan elegan!</h2>
+        <a href="#pesan" class="btn">Pesan Kamar</a>
+      </div>
+      <div class="home-img" style="z-index: 3;">
         <img src="img/hotel.png" alt="home-img" />
-    </div>
-    <div class="bubles">
-      <span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span>
-    </div>
-  </section>
-  
-  <!-- SHOP -->
-  <section class="info" id="info">
-    <div class="heading">
-      <span>Kamar Tersedia</span>
-      <h1>Tentukan Jenis Kamar</h1>
-    </div>
-    <div class="shop-container">
-      <div class="box">
-        <div class="box-img">
-          <img src="img/tipea.jpg" alt="shop1" />
-        </div>
+      </div>
+      <div class="bubles">
+        <span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span>
+      </div>
+    </section>
 
-        <!-- detail room -->
-        <h2>Tipe A<br /></h2>
-        <span>Nikmati kenyamanan tidur yang luar biasa di kamar kami dengan kasur queen size yang luas. Dirancang untuk memberikan pengalaman menginap yang relaks dan menyegarkan, kamar ini menawarkan ruang yang cukup untuk dua orang. Dilengkapi dengan fasilitas modern dan suasana yang hangat, kamar ini cocok untuk pasangan atau tamu yang menginginkan kenyamanan ekstra selama menginap.</span>
-        <span>Kamar Tersedia : </span>
-        <form action="sewa_hotel/type_kamar/main_description.php" method="get">
-          <button type="submit" name="typeA" class="tombol">Lihat Detail</button>
-        </form>
+    <!-- SHOP -->
+    <section class="info" id="info">
+      <div class="heading">
+        <span>Kamar Tersedia</span>
+        <h1>Tentukan Jenis Kamar</h1>
       </div>
-      <div class="box">
-        <div class="box-img">
-          <img src="img/tipeb.jpg" alt="shop1" />
-        </div>
-        <h2>Tipe B</h2>
-        <span>Kamar ini menawarkan dua tempat tidur single yang dapat menjadi pilihan ideal bagi teman perjalanan atau keluarga yang ingin tidur terpisah namun tetap dekat. Dengan ruang yang luas dan desain yang nyaman, kamar ini dilengkapi dengan berbagai fasilitas untuk memastikan kenyamanan Anda selama menginap. Solusi sempurna untuk pengalaman menginap yang praktis dan nyaman.</span>
-        <span>Kamar Tersedia : </span>
-        <form action="sewa_hotel/type_kamar/main_description.php" method="get">
-          <button type="submit" name="typeB" class="tombol">Lihat Detail</button>
-        </form>
-      </div>
-      <div class="box">
-        <div class="box-img">
-          <img src="img/tipec.jpg" alt="shop1" />
-        </div>
-        <h2>Tipe C</h2>
-        <span>Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Dilengkapi dengan tempat tidur single yang nyaman, kamar ini menawarkan ruang yang efisien dan tenang untuk beristirahat. Ideal untuk perjalanan solo atau tamu yang membutuhkan akomodasi yang sederhana namun nyaman, dengan fasilitas lengkap untuk memenuhi kebutuhan Anda.</span>
-        <span>Kamar Tersedia : </span>
-        <form action="sewa_hotel/type_kamar/main_description.php" method="get">
-          <button type="submit" name="typeC" class="tombol">Lihat Detail</button>
-        </form>
-      </div>
-      <div class="box">
-        <div class="box-img">
-          <img src="img/tipec.jpg" alt="shop1" />
-        </div>
-        <h2>Tipe D</h2>
-        <span>Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Dilengkapi dengan tempat tidur single yang nyaman, kamar ini menawarkan ruang yang efisien dan tenang untuk beristirahat. Ideal untuk perjalanan solo atau tamu yang membutuhkan akomodasi yang sederhana namun nyaman, dengan fasilitas lengkap untuk memenuhi kebutuhan Anda.</span>
-        <span>Kamar Tersedia : </span>
-        <form action="sewa_hotel/type_kamar/main_description.php" method="get">
-          <button type="submit" name="typeD" class="tombol">Lihat Detail</button>
-        </form>
-      </div>
-  </section>
-  
-  <!-- SHOP -->
-  <section class="pesan" id="pesan">
-    <div class="heading">
-      <span>Pesan Sekarang!</span>
-      <h1>Tentukan Jenis Kamar</h1>
-    </div>
-    <div class="shop-container">
-      <div class="box">
-        <div class="box-img">
-          <img src="img/tipea.jpg" alt="shop1" />
-        </div>
+      <div class="shop-container">
+        <div class="box">
+          <div class="box-img">
+            <img src="img/tipea.jpg" alt="shop1" />
+          </div>
 
-        <h2>Tipe A<br /></h2>
-        <span>Mulai dari harga Rp.3.000.000 - Rp.10.000.000</span>
-        <a href="sewa_hotel/form_pesanan.php" class="btn">Pesan</a>
-      </div>
-      <div class="box">
-        <div class="box-img">
-          <img src="img/tipeb.jpg" alt="shop1" />
+          <!-- detail room -->
+          <h2>Tipe A<br /></h2>
+          <span>Nikmati kenyamanan tidur yang luar biasa di kamar kami dengan kasur queen size yang luas. Dirancang untuk memberikan pengalaman menginap yang relaks dan menyegarkan, kamar ini menawarkan ruang yang cukup untuk dua orang. Dilengkapi dengan fasilitas modern dan suasana yang hangat, kamar ini cocok untuk pasangan atau tamu yang menginginkan kenyamanan ekstra selama menginap.</span>
+          <span>Kamar Tersedia : </span>
+          <form action="sewa_hotel/type_kamar/main_description.php" method="get">
+            <button type="submit" name="typeA" class="tombol">Lihat Detail</button>
+          </form>
         </div>
-        <h2>Tipe B</h2>
-        <span>Mulai dari harga Rp.2.000.000 - Rp.8.000.000</span>
-        <a href="sewa_hotel/form_pesanan.php" class="btn">Pesan</a>
-      </div>
-      <div class="box">
-        <div class="box-img">
-          <img src="img/tipec.jpg" alt="shop1" />
+        <div class="box">
+          <div class="box-img">
+            <img src="img/tipeb.jpg" alt="shop1" />
+          </div>
+          <h2>Tipe B</h2>
+          <span>Kamar ini menawarkan dua tempat tidur single yang dapat menjadi pilihan ideal bagi teman perjalanan atau keluarga yang ingin tidur terpisah namun tetap dekat. Dengan ruang yang luas dan desain yang nyaman, kamar ini dilengkapi dengan berbagai fasilitas untuk memastikan kenyamanan Anda selama menginap. Solusi sempurna untuk pengalaman menginap yang praktis dan nyaman.</span>
+          <span>Kamar Tersedia : </span>
+          <form action="sewa_hotel/type_kamar/main_description.php" method="get">
+            <button type="submit" name="typeB" class="tombol">Lihat Detail</button>
+          </form>
         </div>
-        <h2>Tipe C</h2>
-        <span>Mulai dari harga Rp.1.500.000 - Rp.5.000.000</span>
-        <a href="sewa_hotel/form_pesanan.php" class="btn">Pesan</a>
-      </div>
-      <div class="box">
-        <div class="box-img">
-          <img src="img/tipec.jpg" alt="shop1" />
+        <div class="box">
+          <div class="box-img">
+            <img src="img/tipec.jpg" alt="shop1" />
+          </div>
+          <h2>Tipe C</h2>
+          <span>Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Dilengkapi dengan tempat tidur single yang nyaman, kamar ini menawarkan ruang yang efisien dan tenang untuk beristirahat. Ideal untuk perjalanan solo atau tamu yang membutuhkan akomodasi yang sederhana namun nyaman, dengan fasilitas lengkap untuk memenuhi kebutuhan Anda.</span>
+          <span>Kamar Tersedia : </span>
+          <form action="sewa_hotel/type_kamar/main_description.php" method="get">
+            <button type="submit" name="typeC" class="tombol">Lihat Detail</button>
+          </form>
         </div>
-        <h2>Tipe D</h2>
-        <span>Mulai dari harga Rp.4.000.000 - Rp.10.000.000</span>
-        <a href="sewa_hotel/form_pesanan.php" class="btn">Pesan</a>
-      </div>
-  </section>
+        <div class="box">
+          <div class="box-img">
+            <img src="img/tipec.jpg" alt="shop1" />
+          </div>
+          <h2>Tipe D</h2>
+          <span>Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Dilengkapi dengan tempat tidur single yang nyaman, kamar ini menawarkan ruang yang efisien dan tenang untuk beristirahat. Ideal untuk perjalanan solo atau tamu yang membutuhkan akomodasi yang sederhana namun nyaman, dengan fasilitas lengkap untuk memenuhi kebutuhan Anda.</span>
+          <span>Kamar Tersedia : </span>
+          <form action="sewa_hotel/type_kamar/main_description.php" method="get">
+            <button type="submit" name="typeD" class="tombol">Lihat Detail</button>
+          </form>
+        </div>
+    </section>
 
-<!-- ABOUT -->
-  <section class="contact" id="contact">
-    <ul class="social">
-      <li>
-        <a href=""><i class="fa-brands fa-whatsapp"></i></a>
-      </li>
-      <li>
-        <a href=""><i class="fa-brands fa-instagram"></i></a>
-      </li>
-      <li>
-        <a href=""><i class="fa-brands fa-facebook"></i></a>
-      </li>
-      <li>
-        <a href=""><i class="fa-brands fa-youtube"></i></a>
-      </li>
-      <li>
-        <a href=""><i class="fa-brands fa-tiktok"></i></a>
-      </li>
-      <li>
-        <a href=""><i class="fa-brands fa-twitter"></i></a>
-      </li>
-    </ul>
-  </section>
-</div>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"
-      integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"></script>
+    <!-- SHOP -->
+    <section class="pesan" id="pesan">
+      <div class="heading">
+        <span>Pesan Sekarang!</span>
+        <h1>Tentukan Jenis Kamar</h1>
+      </div>
+      <div class="shop-container">
+        <div class="box">
+          <div class="box-img">
+            <img src="img/tipea.jpg" alt="shop1" />
+          </div>
+
+          <h2>Tipe A<br /></h2>
+          <span>Mulai dari harga Rp.3.000.000 - Rp.10.000.000</span>
+          <a href="sewa_hotel/form_pesanan.php" class="btn">Pesan</a>
+        </div>
+        <div class="box">
+          <div class="box-img">
+            <img src="img/tipeb.jpg" alt="shop1" />
+          </div>
+          <h2>Tipe B</h2>
+          <span>Mulai dari harga Rp.2.000.000 - Rp.8.000.000</span>
+          <a href="sewa_hotel/form_pesanan.php" class="btn">Pesan</a>
+        </div>
+        <div class="box">
+          <div class="box-img">
+            <img src="img/tipec.jpg" alt="shop1" />
+          </div>
+          <h2>Tipe C</h2>
+          <span>Mulai dari harga Rp.1.500.000 - Rp.5.000.000</span>
+          <a href="sewa_hotel/form_pesanan.php" class="btn">Pesan</a>
+        </div>
+        <div class="box">
+          <div class="box-img">
+            <img src="img/tipec.jpg" alt="shop1" />
+          </div>
+          <h2>Tipe D</h2>
+          <span>Mulai dari harga Rp.4.000.000 - Rp.10.000.000</span>
+          <a href="sewa_hotel/form_pesanan.php" class="btn">Pesan</a>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="contact" id="contact">
+      <ul class="social">
+        <li>
+          <a href=""><i class="fa-brands fa-whatsapp"></i></a>
+        </li>
+        <li>
+          <a href=""><i class="fa-brands fa-instagram"></i></a>
+        </li>
+        <li>
+          <a href=""><i class="fa-brands fa-facebook"></i></a>
+        </li>
+        <li>
+          <a href=""><i class="fa-brands fa-youtube"></i></a>
+        </li>
+        <li>
+          <a href=""><i class="fa-brands fa-tiktok"></i></a>
+        </li>
+        <li>
+          <a href=""><i class="fa-brands fa-twitter"></i></a>
+        </li>
+      </ul>
+    </section>
+  </div>
+  <script>
+    let query = "SELECT * FROM mv_type";
+    conn.query(query, (err, result) => {
+      console.log(result);
+    })
+  </script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"
+    integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
 </body>
 
 </html>

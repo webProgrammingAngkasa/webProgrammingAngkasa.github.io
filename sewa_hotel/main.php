@@ -41,7 +41,7 @@ class Hotel
             new DateTime("$in 14:00:00"),
             "$in 14:00:00",
             new DateTime("$out 12:00:00"),
-            "$out 12:00:00",
+            "$out 12:15:00",
         ];
 
         $qry = $this->conn->query("SELECT typ.harga as price FROM mv_type typ INNER JOIN list_no_kamar lnk ON typ.id_type = lnk.fk_type WHERE lnk.id = $idRoom");
