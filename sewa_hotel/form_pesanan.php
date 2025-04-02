@@ -46,54 +46,6 @@ originalStatusRoom();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    #reload-overlay {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      gap: 2px;
-      font-size: 3rem;
-    }
-
-    #reload-overlay span:nth-child(1) {
-      font-size: 50px;
-      color: black;
-    }
-
-    #reload-overlay span:nth-child(2),
-    span:nth-child(3),
-    span:nth-child(4) {
-      font-size: 50px;
-      color: transparent;
-      animation: point .3s forwards;
-    }
-
-    #reload-overlay span:nth-child(2) {
-      animation-delay: .1s;
-    }
-
-    #reload-overlay span:nth-child(3) {
-      animation-delay: .2s;
-    }
-
-    #reload-overlay span:nth-child(4) {
-      animation-delay: .3s;
-    }
-
-    @keyframes point {
-      100% {
-        color: black;
-      }
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -615,41 +567,9 @@ originalStatusRoom();
     }
   </style>
 
-  <script>
-    function reloadWindow() {
-      let count = sessionStorage.getItem("reloadCount") || 0
-      count = parseInt(count)
-
-      if (count < 2) {
-        sessionStorage.setItem("reloadCount", count + 1)
-        setTimeout(() => {
-          window.location.reload()
-        }, 500)
-      } else {
-        sessionStorage.removeItem("reloadCount")
-      }
-
-      window.onload = function() {
-        let count = sessionStorage.getItem("reloadCount") || 0;
-        if (count == 0) {
-          document.getElementById("reload-overlay").style.display = "none";
-        }
-      }
-    }
-    reloadWindow()
-  </script>
-</head>
-
 <body>
   <!-- <h1> FITUR KAMAR </h1> -->
   <div class="global-container-page">
-
-    <div id="reload-overlay">
-      <span>Memuat Halaman</span>
-      <span>.</span>
-      <span>.</span>
-      <span>.</span>
-    </div>
     <section class="global-container">
       <div class="title">
         <h1>P</h1>
@@ -669,7 +589,7 @@ originalStatusRoom();
           <form action="proses_simpan_pengunjung.php" method="post">
             <!--//* data pengunjung -->
             <div class="input-user">
-              <h3>Isi Data Diri Anda!</h3>
+              <h3>Isi Data Diri Anda</h3>
 
               <label for="name">Nama:</label>
               <input type="text" name="nama" id="name" autocomplete="off" required><br>
