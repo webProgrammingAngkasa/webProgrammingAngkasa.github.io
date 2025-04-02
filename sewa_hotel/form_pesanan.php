@@ -227,7 +227,6 @@ originalStatusRoom();
       color: #333;
       border: none;
       border: 2px solid var(--bg-global-color);
-      transform-origin: center;
       animation: input 2s forwards;
     }
 
@@ -281,7 +280,7 @@ originalStatusRoom();
       }
     }
 
-    .select-room {
+    #numberRoom {
       display: none;
       animation: select-room 2s forwards;
       margin: auto;
@@ -348,16 +347,8 @@ originalStatusRoom();
       text-transform: capitalize;
     }
 
-    #descriptionModal span:nth-child(1) {
-      display: none;
-    }
-
-    #descriptionModal span:nth-child(2) {
-      display: flex;
-    }
-
     .container-type {
-      display: flex;
+      display: none;
       flex-direction: column;
       margin-block: 5px;
       margin-bottom: 10px;
@@ -398,7 +389,7 @@ originalStatusRoom();
       border: none;
       cursor: pointer;
       transition: 200ms;
-      animation: checked 2s forwards;
+      animation: checked 1s forwards;
     }
 
     .input-room button:nth-child(3),
@@ -415,13 +406,14 @@ originalStatusRoom();
       border: none;
       cursor: pointer;
       transition: 200ms;
-      animation: checked 2s forwards;
+      animation: checked 1s forwards;
     }
 
     .input-room button:hover {
-      transform: scale(110%);
       background: var(--bg-button-hover);
       color: white;
+      letter-spacing: .5px;
+      scale: 110%;
     }
 
     @keyframes checked {
@@ -431,19 +423,6 @@ originalStatusRoom();
       }
     }
 
-    #overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
-      cursor: zoom-out;
-      z-index: 99;
-    }
-
     .container-modal {
       position: fixed;
       display: none;
@@ -451,69 +430,127 @@ originalStatusRoom();
       align-items: center;
       top: 0%;
       left: 0%;
-      background: transparent; 
+      background: transparent;
       width: 100%;
       height: 100vh;
+      z-index: 99;
+    }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(16, 15, 15, .5);
+      backdrop-filter: blur(20px);
+      cursor: zoom-out;
       z-index: 100;
     }
-    
+
+    @keyframes showOverlay {
+      0% {
+        position: absolute;
+        width: 0%;
+        height: 0%;
+        background: transparent;
+        transform: translateY(50px);
+        opacity: 0;
+      }
+
+      50% {
+        background: rgba(125, 125, 125, .35);
+      }
+
+      75% {
+        border-radius: 10%;
+        opacity: 1;
+      }
+
+      100% {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: none;
+        background: rgba(16, 15, 15, .5);
+      }
+    }
+
+    @keyframes hideOverlay {
+      100% {
+        opacity: 0;
+      }
+    }
+
     #descriptionModal {
       position: relative;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-evenly;
       align-items: center;
-      max-width: 80%;
-      max-height: 40%;
-      width: 100%;
-      height: 60%;
-      padding-inline: 20px;
-      border-radius: 10px;
+      width: 80%;
+      height: 45%;
+      padding-inline: 10px;
+      border-radius: 20px;
       background-color: #1e3a8a;
       color: white;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       text-align: center;
-      transition: .9s;
+      transition: .5s;
+      scale: 0;
       z-index: 100;
-      animation: modal-pop-up .2s ease;
-    }
-
-    @keyframes modal-pop-up {
-      0% {
-        z-index: -1;
-        opacity: 0;
-        width: 50%;
-        height: 20%;
-      }
-
-      75% {
-        z-index: 100;
-        opacity: 1;
-        width: 100%;
-        height: 60%;
-        scale: 110%;
-      }
-
-      100% {
-        z-index: 100;
-        scale: 100%;
-      }
     }
 
     #descriptionModal:hover {
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2)
     }
 
+    @keyframes hideModal {
+      0% {
+        opacity: 1;
+        scale: 100%;
+      }
+
+      50% {
+        transform: translateY(10px);
+        scale: 100%;
+      }
+
+      75% {
+        scale: 110%;
+        transform: translateY(-50px);
+      }
+
+      100% {
+        position: absolute;
+        transform: translateY(390px);
+      }
+    }
+
+    .title-modal {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 500px;
+      height: 55px;
+      background: #1e3a8a;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 50px 36px -40px inset;
+      border-radius: 15px;
+      color: var(--main-color);
+      font-size: 30px;
+      font-weight: 700;
+      text-transform: capitalize;
+      top: 0;
+      transform: translateY(-40px);
+    }
+
     .text-modal {
       max-width: 30%;
       margin: 0;
+      overflow: hidden;
     }
 
     .text-modal p {
       font-size: 15px;
-    }
-
-    #descriptionModal div:nth-child(3) {
-      display: none;
     }
 
     .img-features {
@@ -646,19 +683,19 @@ originalStatusRoom();
 
             <!--//* pesan kamar -->
             <div class="form-room">
-
+              <h3>Pilih Waktu Booking</h3>
               <div class="container-type">
                 <h3>Pilih Tipe Kamar</h3>
                 <div class="input-room">
-                  <button type="button" value="standard" onclick="roomType('standard')">Standard</button>
-                  <button type="button" value="superior" onclick="roomType('superior')">Superior</button>
-                  <button type="button" value="duluxe" onclick="roomType('duluxe')">Duluxe</button>
-                  <button type="button" value="suite" onclick="roomType('suite')">Suite</button>
+                  <button type="button" value="standard" onclick="roomType('standard')" disabled>Standard</button>
+                  <button type="button" value="superior" onclick="roomType('superior')" disabled>Superior</button>
+                  <button type="button" value="duluxe" onclick="roomType('duluxe')" disabled>Duluxe</button>
+                  <button type="button" value="suite" onclick="roomType('suite')" disabled>Suite</button>
                 </div>
               </div>
 
-              <select name="no_kamar" id="numberRoom" class="select-room" required>
-                <!--//* perulangan no kamar sesuai type -->
+              <select name="no_kamar" id="numberRoom" required>
+                <!--//* perulangan no kamar sesuai type ... -->
               </select>
 
               <div class="rangeTime">
@@ -669,7 +706,7 @@ originalStatusRoom();
                 <span>&#10174;</span>
                 <div class="check">
                   <h3 for="out">check out</h3>
-                  <input type="date" name="check_out" id="out" required>
+                  <input type="date" name="check_out" id="out" required disabled>
                 </div>
               </div>
 
@@ -684,8 +721,10 @@ originalStatusRoom();
   <div class="container-modal">
     <div id="overlay" onclick="closeOverlay()"></div>
     <div id="descriptionModal">
+      <div class="title-modal"></div>
       <div class="text-modal">
-        <p id="descriptionText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, reprehenderit eum! Ea maxime exercitationem sequi? Vel, a. Iusto, corrupti itaque nihil quisquam odio illo nam accusamus recusandae quo ullam amet?</p>
+        <p id="descriptionText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus deleniti natus dolores. Veritatis repellendus expedita similique iure vitae ex, inventore voluptate nesciunt ipsum esse atque sequi quasi enim debitis quia.
+          Pariatur, ipsam beatae. Ullam ex incidunt, minus ad accusamus dolore aspernatur, odio itaque eos fugit quod! Porro aliquid nemo a accusamus eligendi, excepturi, eveniet blanditiis ratione magni quo, repellendus est?Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, reprehenderit eum! Ea maxime exercitationem sequi? Vel, a. Iusto, corrupti itaque nihil quisquam odio illo nam accusamus recusandae quo ullam amet?</p>
       </div>
       <div class="img-features">
         <img src="../img/icebear_cute.jpg" alt="a">
@@ -723,14 +762,76 @@ originalStatusRoom();
       }
       xhr.send("type=" + choice)
 
-      document.getElementById("numberRoom").style.display = "flex";
-      document.querySelector("#overlay").style.display = "block";
-      document.querySelector(".container-modal").style.display = "flex";
+      document.querySelector(".title-modal").textContent = `description ${choice} room`
+      let modals = document.querySelector(".container-modal").style.display = "flex";
+
+      document.querySelector("#descriptionModal").style.display = "flex";
+      document.querySelector("#descriptionModal").style.animation = "showModal 1.5s ease forwards"
+      document.querySelector("#overlay").style.animation = "showOverlay .6s ease-in-out forwards";
+      setTimeout(() => document.querySelector("#overlay").style.display = "block", 350)
+      setTimeout(() => document.getElementById("numberRoom").style.display = "flex", 650)
+
+      if (modals === "flex") {
+        document.querySelector(".input-room").addEventListener("click", (e) => {
+          if (e.target.tagName === "BUTTON") {
+            let rect = e.target.getBoundingClientRect();
+            let y = rect.top.toFixed()
+
+            const style = document.styleSheets[0];
+            style.insertRule(`
+            @keyframes showModal {
+              0% {
+                position: relative;
+                z-index: 100;
+                transform: translateY(${y * 3}px);
+                opacity: 0;
+                scale: 0;
+              }
+
+              25% {
+                transform: translateY(-40px);
+                scale: 120%;
+              }
+
+              50% {
+                transform: translateY(10px);
+                scale: 100%;
+              }
+
+              75% {
+                transform: translateY(-5px);
+                scale: 100%;
+              }
+
+              90% {
+                opacity: 1;
+              }
+
+              100% {
+                scale: 100%;
+                opacity: 1;
+              }
+            }
+            `, style.cssRules.length)
+          }
+        })
+      }
     }
 
     function closeOverlay() {
-      document.querySelector("#overlay").style.display = "none";
-      document.querySelector(".container-modal").style.display = "none";
+      let modals = document.querySelector(".container-modal"),
+        modal = document.querySelector("#descriptionModal"),
+        overlay = document.querySelector("#overlay")
+
+      overlay.style.animation = "hideOverlay .4s ease forwards"
+      overlay.style.animationDelay = ".7s"
+      modal.style.animation = "hideModal .8s ease forwards"
+      setTimeout(() => {
+        modal.style.animation = "none"
+        modals.style.display = "none"
+        modal.style.display = "none"
+        overlay.style.display = "none"
+      }, 800)
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -748,18 +849,18 @@ originalStatusRoom();
         checkOutInput.value = '';
 
         const arrowAnimate = document.querySelectorAll(".rangeTime span")
-        arrowAnimate.forEach((arrow) => {
+        arrowAnimate.forEach(arrow => {
           arrow.style.opacity = "1"
           arrow.style.zIndex = "100"
         })
       })
     })
 
-
     document.getElementById('out').addEventListener('change', function() {
+      document.querySelector(".form-room h3").style.display = "none"
+      document.querySelector(".container-type").style.display = "flex"
       let buttons = document.querySelectorAll(".input-room button")
       buttons.forEach(button => button.removeAttribute("disabled"))
-      document.querySelector(".container-type").style.display = "flex"
     })
   </script>
 </body>
