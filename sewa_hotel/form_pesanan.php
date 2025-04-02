@@ -46,54 +46,6 @@ originalStatusRoom();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    #reload-overlay {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      gap: 2px;
-      font-size: 3rem;
-    }
-
-    #reload-overlay span:nth-child(1) {
-      font-size: 50px;
-      color: black;
-    }
-
-    #reload-overlay span:nth-child(2),
-    span:nth-child(3),
-    span:nth-child(4) {
-      font-size: 50px;
-      color: transparent;
-      animation: point .3s forwards;
-    }
-
-    #reload-overlay span:nth-child(2) {
-      animation-delay: .1s;
-    }
-
-    #reload-overlay span:nth-child(3) {
-      animation-delay: .2s;
-    }
-
-    #reload-overlay span:nth-child(4) {
-      animation-delay: .3s;
-    }
-
-    @keyframes point {
-      100% {
-        color: black;
-      }
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -280,7 +232,7 @@ originalStatusRoom();
         border-color: transparent;
       }
     }
-    
+
     .select-room {
       display: none;
       animation: select-room 2s forwards;
@@ -307,18 +259,18 @@ originalStatusRoom();
       margin-block: 20px;
     }
 
-    
+
     .rangeTime .check {
       width: 35%;
     }
 
-    .check input[type= "date"] {
+    .check input[type="date"] {
       letter-spacing: 2px;
       font-size: 15px;
       font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
       font-weight: bold;
     }
-    
+
     .rangeTime span {
       font-size: 5rem;
       align-items: end;
@@ -334,7 +286,7 @@ originalStatusRoom();
     }
 
     @keyframes arrow {
-        100% {
+      100% {
         z-index: 1;
         color: var(--second-color);
       }
@@ -545,42 +497,11 @@ originalStatusRoom();
       }
     }
   </style>
-
-  <script>
-    function reloadWindow() {
-      let count = sessionStorage.getItem("reloadCount") || 0
-      count = parseInt(count)
-
-      if (count < 2) {
-        sessionStorage.setItem("reloadCount", count + 1)
-        setTimeout(() => {
-          window.location.reload()
-        }, 500)
-      } else {
-        sessionStorage.removeItem("reloadCount")
-      }
-
-      window.onload = function() {
-        let count = sessionStorage.getItem("reloadCount") || 0;
-        if (count == 0) {
-          document.getElementById("reload-overlay").style.display = "none";
-        }
-      }
-    }
-    reloadWindow()
-  </script>
 </head>
 
 <body>
   <!-- <h1> FITUR KAMAR </h1> -->
   <div class="global-container-page">
-
-    <div id="reload-overlay">
-      <span>Memuat Halaman</span>
-      <span>.</span>
-      <span>.</span>
-      <span>.</span>
-    </div>
     <section class="global-container">
       <div class="title">
         <h1>P</h1>
@@ -615,15 +536,15 @@ originalStatusRoom();
             <!--//* pesan kamar -->
             <div class="form-room">
 
-            <div class="container-type">
-              <h3>Pilih Tipe Kamar</h3>
-              <div class="input-room">
-                <button type="button" value="standard" onclick="roomType('standard')" disabled>Standard</button>
-                <button type="button" value="superior" onclick="roomType('superior')" disabled>Superior</button>
-                <button type="button" value="duluxe" onclick="roomType('duluxe')" disabled>Duluxe</button>
-                <button type="button" value="suite" onclick="roomType('suite')" disabled>Suite</button>
+              <div class="container-type">
+                <h3>Pilih Tipe Kamar</h3>
+                <div class="input-room">
+                  <button type="button" value="standard" onclick="roomType('standard')" disabled>Standard</button>
+                  <button type="button" value="superior" onclick="roomType('superior')" disabled>Superior</button>
+                  <button type="button" value="duluxe" onclick="roomType('duluxe')" disabled>Duluxe</button>
+                  <button type="button" value="suite" onclick="roomType('suite')" disabled>Suite</button>
+                </div>
               </div>
-            </div>
 
               <select name="no_kamar" id="numberRoom" class="select-room" required>
                 <!--//* perulangan no kamar sesuai type -->
@@ -669,12 +590,12 @@ originalStatusRoom();
       xhr.open("POST", "", true)
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 
-      xhr.onreadystatechange = function () {
+      xhr.onreadystatechange = function() {
         if (this.status === 200 && this.readyState === 4) {
           const getData = this.responseText
           const datas = JSON.parse(getData)
           let contentChoices = document.getElementById("numberRoom")
-          if(datas.length === 0) {
+          if (datas.length === 0) {
             conditionRoom = `kamar ${choice} tidak tersedia`
           } else {
             conditionRoom = `pilih kamar ${choice}`
