@@ -689,7 +689,7 @@ originalStatusRoom();
       document.querySelector("#descriptionModal").style.animation = "showModal 1.5s ease forwards"
       document.querySelector("#overlay").style.animation = "showOverlay .6s ease-in-out forwards";
       setTimeout(() => document.querySelector("#overlay").style.display = "block", 350)
-      setTimeout(() => document.getElementById("numberRoom").style.display = "flex", 650)
+      setTimeout(() => document.getElementById("numberRoom").style.display = "flex", 700)
 
       if (modals === "flex") {
         document.querySelector(".input-room").addEventListener("click", (e) => {

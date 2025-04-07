@@ -793,12 +793,6 @@
       </ul>
     </section>
   </div>
-  <script>
-    let query = "SELECT * FROM mv_type";
-    conn.query(query, (err, result) => {
-      console.log(result);
-    })
-  </script>
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"
     integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ=="

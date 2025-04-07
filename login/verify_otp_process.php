@@ -6,7 +6,7 @@ date_default_timezone_set('Asia/Jakarta');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_SESSION['email'])) {
         echo "<script>
-        alert('silahkan masukkan email terlebih dahuluasdasdasd');
+        alert('silahkan masukkan email terlebih dahulu');
         window.location.href = 'index.php'
         </script>";
     }
