@@ -2,47 +2,51 @@
 session_start();
 
 include '../connect/conn.php';
-
-$queryMaxId = [
-    $dbConnect->query("SELECT MAX(id_pengunjung) AS max_id_visitor FROM tb_pengunjung"),
-    $dbConnect->query("SELECT MAX(id_pemesanan) AS max_id_order FROM tb_pemesanan")
+if (!isset($_SESSION['email'])) {
+    header("Location: ../index.php");
+}
+$email = $_SESSION['email'];
+$queryHistory = [
+    $dbConnect->query("SELECT fk_users AS historyVisitor FROM tb_pengunjung visitors INNER JOIN users ON visitors.fk_users = users.userId WHERE users.email = '$email'"),
+    $dbConnect->query("SELECT fk_users AS historyOrder FROM tb_pemesanan orders INNER JOIN users ON orders.fk_users = users.userId WHERE users.email = '$email'")
 ];
 
-$arrMaxId = [];
-while ($resultMaxId = $queryMaxId[0]->fetch_assoc()) {
-    $arrMaxId[] = $resultMaxId;
+if ($queryHistory[0] && $queryHistory[1] -> num_rows === 0) {
+    header('Location: ../index.php');
 }
-while ($resultMaxId = $queryMaxId[1]->fetch_assoc()) {
-    $arrMaxId[] = $resultMaxId;
-}
-//TODO var_dump(value: $arrMaxId[0]['max_id_visitor']);
-//TODO var_dump(value: $arrMaxId[1]['max_id_order']);
 
-$maxIdVisitor = $arrMaxId[0]['max_id_visitor'];
-$maxIdOrder = $arrMaxId[1]['max_id_order'];
+$arrHistoryOrder = [];
+while ($resultHistory = $queryHistory[0]->fetch_assoc()) {
+    $arrHistoryOrder[] = $resultHistory;
+}
+while ($resultHistory = $queryHistory[1]->fetch_assoc()) {
+    $arrHistoryOrder[] = $resultHistory;
+}
+$visitor = $arrHistoryOrder[0]['historyVisitor'];
+$order = $arrHistoryOrder[1]['historyOrder'];
 
 $queryResult = [
-    'pengunjung' => "SELECT * FROM tb_pengunjung WHERE id_pengunjung = $maxIdVisitor",
-    'pemesanan' => "SELECT id_pemesanan, list_no_kamar.no_kamar, mv_type.type_kamar, check_in, check_out, total_harga
+    'pengunjung' => "SELECT * FROM tb_pengunjung WHERE fk_users = $visitor",
+    'pesanan' => "SELECT id_pemesanan, list_no_kamar.no_kamar, mv_type.type_kamar, check_in, check_out, total_harga
                             FROM tb_pemesanan
                             INNER JOIN list_no_kamar
                             ON list_no_kamar.id = tb_pemesanan.no_kamar
                             INNER JOIN mv_type
                             on mv_type.id_type = list_no_kamar.fk_type
-                            WHERE id_pemesanan = $maxIdOrder
+                            WHERE fk_users = $order
                             GROUP BY no_kamar",
     'rangeTimeOut' => "SELECT TIMESTAMPDIFF(DAY, NOW(), tb_pemesanan.check_out) AS hari,
                             HOUR(TIMEDIFF(tb_pemesanan.check_out, NOW())) % 24 AS jam,
                             MINUTE(TIMEDIFF(tb_pemesanan.check_out, NOW())) AS menit,
                             SECOND(TIMEDIFF(tb_pemesanan.check_out, NOW())) AS detik
                             FROM tb_pemesanan
-                            WHERE tb_pemesanan.id_pemesanan = $maxIdOrder",
+                            WHERE tb_pemesanan.fk_users = $order",
 ];
 
 
 $results = [
     $dbConnect->query($queryResult['pengunjung']),      //* 0
-    $dbConnect->query($queryResult['pemesanan']),       //* 1
+    $dbConnect->query($queryResult['pesanan']),       //* 1
     $dbConnect->query($queryResult['rangeTimeOut']),    //* 2
 ];
 
@@ -71,7 +75,7 @@ $date = json_encode($dateArray['date']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Transaksi Anda</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;

@@ -1,7 +1,6 @@
 <?php
 include '../connect/conn.php';
 //TODO: *** number room ***
-
 if (isset($_POST['type'])) {
   $type = $_POST['type'];
   $query = [
@@ -378,6 +377,7 @@ originalStatusRoom();
     .container-modal {
       position: fixed;
       display: none;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       top: 0%;
@@ -434,9 +434,9 @@ originalStatusRoom();
     }
 
     #descriptionModal {
-      position: relative;
+      position: absolute;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
       width: 80%;
       height: 45%;
@@ -477,6 +477,33 @@ originalStatusRoom();
       }
     }
 
+    .box-modal {
+      position: absolute;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+      height: 85%;
+      background: transparent;
+    }
+
+    @keyframes slideUp {
+      100% {
+        transform: translateY(-250px);
+      }
+    }
+
+    @keyframes slideDown {
+      0% {
+        transform: translateY(-250px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
     .title-modal {
       position: absolute;
       display: flex;
@@ -493,6 +520,7 @@ originalStatusRoom();
       text-transform: capitalize;
       top: 0;
       transform: translateY(-40px);
+      /* z-index: 99; */
     }
 
     .text-modal {
@@ -510,6 +538,10 @@ originalStatusRoom();
       gap: 20px;
     }
 
+    .img-features li {
+      list-style-type: none;
+    }
+
     .img-features img {
       width: 200px;
       height: 200px;
@@ -521,20 +553,30 @@ originalStatusRoom();
       transform: scale(110%);
     }
 
-    .footer {
-      position: relative;
-      font-weight: 600;
-      width: 100%;
-      padding-block: 10px;
-      background-color: var(--bg-global-color);
-      color: whitesmoke;
+    .slide-arrow {
+      position: absolute;
       display: flex;
-      justify-content: center;
-      /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, 
-                  rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset, 
-                  rgba(0, 0, 0, 0.56) 0px -2px -2px 4px; */
-      letter-spacing: 2;
-      bottom: 0;
+      align-items: center;
+      gap: 40px;
+      transform: translateY(200px);
+    }
+
+    .slide-arrow button {
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      padding: 10px;
+      transition: .4s;
+    }
+
+    .slide-arrow button:hover {
+      text-shadow: 0px 10px 30px whitesmoke;
+    }
+
+    .slide-arrow span {
+      font-size: 5rem;
+      font-weight: bolder;
+      color: white;
     }
 
     .boundary-line {
@@ -642,14 +684,19 @@ originalStatusRoom();
     <div id="overlay" onclick="closeOverlay()"></div>
     <div id="descriptionModal">
       <div class="title-modal"></div>
-      <div class="text-modal">
-        <p id="descriptionText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus deleniti natus dolores. Veritatis repellendus expedita similique iure vitae ex, inventore voluptate nesciunt ipsum esse atque sequi quasi enim debitis quia.
-          Pariatur, ipsam beatae. Ullam ex incidunt, minus ad accusamus dolore aspernatur, odio itaque eos fugit quod! Porro aliquid nemo a accusamus eligendi, excepturi, eveniet blanditiis ratione magni quo, repellendus est?Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, reprehenderit eum! Ea maxime exercitationem sequi? Vel, a. Iusto, corrupti itaque nihil quisquam odio illo nam accusamus recusandae quo ullam amet?</p>
+      <div class="box-modal">
+        <div class="text-modal">
+          <p id="descriptionText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus deleniti natus dolores. Veritatis repellendus expedita similique iure vitae ex, inventore voluptate nesciunt ipsum esse atque sequi quasi enim debitis quia.</p>
+        </div>
+        <div class="img-features">
+          <li><img src="../img/icebear_cute.jpg" alt="a"></li>
+          <li><img src="../img/grizzly_cute.jpg" alt="icebear"></li>
+          <li><img src="../img/panda_cute.jpg" alt="c"></li>
+        </div>
       </div>
-      <div class="img-features">
-        <img src="../img/icebear_cute.jpg" alt="a">
-        <img src="../img/grizzly_cute.jpg" alt="icebear">
-        <img src="../img/panda_cute.jpg" alt="c">
+      <div class="slide-arrow">
+        <button type="button" class="swipe-down" onclick="swipeDown()" style="display: none;"><span>&DownArrow;</span></button>
+        <button type="button" class="swipe-up" onclick="swipeUP()"><span>&UpArrow;</span></button>
       </div>
     </div>
   </div>
@@ -689,7 +736,7 @@ originalStatusRoom();
       document.querySelector("#descriptionModal").style.animation = "showModal 1.5s ease forwards"
       document.querySelector("#overlay").style.animation = "showOverlay .6s ease-in-out forwards";
       setTimeout(() => document.querySelector("#overlay").style.display = "block", 350)
-      setTimeout(() => document.getElementById("numberRoom").style.display = "flex", 650)
+      setTimeout(() => document.getElementById("numberRoom").style.display = "flex", 700)
 
       if (modals === "flex") {
         document.querySelector(".input-room").addEventListener("click", (e) => {
@@ -736,12 +783,28 @@ originalStatusRoom();
           }
         })
       }
+
+      const mainModal = document.querySelectorAll(".box-modal > div"),
+        arrowClick = document.querySelectorAll(".slide-arrow > button")
+      document.querySelector(".swipe-up").addEventListener("click", () => {
+        mainModal[0].style.animation = "slideUp 1s forwards"
+        mainModal[1].style.animation = "slideUp 1s forwards"
+        arrowClick[0].style.display = "flex"
+      })
+      document.querySelector(".swipe-down").addEventListener("click", () => {
+        mainModal[0].style.animation = "slideDown 1s forwards"
+        mainModal[1].style.animation = "slideDown 1s forwards"
+        arrowClick[0].style.display = "none"
+      })
+
     }
 
     function closeOverlay() {
       let modals = document.querySelector(".container-modal"),
         modal = document.querySelector("#descriptionModal"),
         overlay = document.querySelector("#overlay")
+      mainModals = document.querySelectorAll(".box-modal > div")
+      arrowClick = document.querySelectorAll(".slide-arrow > button")
 
       overlay.style.animation = "hideOverlay .4s ease forwards"
       overlay.style.animationDelay = ".7s"
@@ -752,6 +815,12 @@ originalStatusRoom();
         modal.style.display = "none"
         overlay.style.display = "none"
       }, 800)
+
+      set
+      arrowClick[0].style.display = "none"
+      mainModals.forEach(e => e.removeAttribute("style"));
+      console.log(mainModal);
+
     }
 
     document.addEventListener("DOMContentLoaded", () => {

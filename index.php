@@ -10,19 +10,22 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       function dynamicNavbar() {
-        var buttonOut = document.getElementById("button-logout")
-        var userIcon = document.getElementById("user-icon")
-        var buttonLog = document.getElementById("button-login")
-        let email = "<?php echo $_SESSION['otp'] ?? ''; ?>"
+        let buttonOut = document.getElementById("button-logout"),
+          userIcon = document.getElementById("user-icon"),
+          buttonLog = document.getElementById("button-login"),
+          historyOrder = document.querySelectorAll(".navbar li:nth-of-type(4)"),
+          email = "<?php echo $_SESSION['otp'] ?? ''; ?>"
 
         if (email === '') {
           buttonLog.style.display = "flex"
           buttonOut.style.display = "none"
           userIcon.style.display = "none"
+          historyOrder.forEach(history => history.style.display = "none");
         } else {
+          buttonLog.style.display = "none"
           buttonOut.style.display = "flex"
           userIcon.style.display = "flex"
-          buttonLog.style.display = "none"
+          historyOrder.forEach(history => history.style.opacity = "1");
         }
       }
       dynamicNavbar()
@@ -97,11 +100,16 @@
 
     .navbar {
       display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 10px;
       line-height: 75px;
     }
 
     .navbar a {
+      /* display: flex;
+      align-items: center;
+      justify-content: center; */
       font-size: 1rem;
       padding: 10px 15px;
       color: #1e3a8a;
@@ -110,7 +118,6 @@
       transition: .3s;
       background: transparent;
       border-radius: 40px;
-      line-height: 80px;
       letter-spacing: .8px;
     }
 
@@ -647,6 +654,7 @@
         <li><a href="#home" class="action">Beranda</a></li>
         <li><a href="#info" class="action">Info kamar</a></li>
         <li><a href="sewa_hotel/form_pesanan.php" class="action">Pesan kamar</a></li>
+        <li><a href="sewa_hotel/payment_result.php" id="history" class="action">Pesanan Anda</a></li>
       </ul>
 
       <ul class="container-login">
@@ -793,12 +801,6 @@
       </ul>
     </section>
   </div>
-  <script>
-    let query = "SELECT * FROM mv_type";
-    conn.query(query, (err, result) => {
-      console.log(result);
-    })
-  </script>
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"
     integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ=="
