@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['otp'] = $_POST['otp'];
     $email = $_SESSION['email'];
 
-    $stmt = $dbConnect->prepare('SELECT u.otp, u.otp_expiry FROM users u WHERE u.email = ? AND u.uid IN (SELECT MAX(uid) FROM users GROUP BY email)');
+    $stmt = $dbConnect->prepare('SELECT u.otp, u.otp_expiry FROM users u WHERE u.email = ? AND u.userId IN (SELECT MAX(userId) FROM users GROUP BY email)');
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
