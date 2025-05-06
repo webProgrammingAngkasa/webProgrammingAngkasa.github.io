@@ -290,6 +290,7 @@ body{
         <label for="email">Email</label>
         <input type="email" id="email" name="email"><br><br>
         <button type="submit">lanjutkan dengan email</button>
+        <h1>tes</h1>
     </form>
 </body>
 </html>
