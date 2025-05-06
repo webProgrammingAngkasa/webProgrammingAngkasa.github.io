@@ -82,6 +82,7 @@ body{
     justify-content: center;
     padding: 0 40px;
     height: 100%;
+    jk
 }
 
 .container input{
