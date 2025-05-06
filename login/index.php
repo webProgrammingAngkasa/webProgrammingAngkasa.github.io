@@ -291,6 +291,7 @@ body{
         <input type="email" id="email" name="email"><br><br>
         <button type="submit">lanjutkan dengan email</button>
         <h1>tes</h1>
+        <H2>ASSALAMUALAIKUM</H2>
     </form>
 </body>
 </html>
