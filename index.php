@@ -6,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hotel 599</title>
+  <title>title of name</title>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       function dynamicNavbar() {
@@ -654,7 +654,7 @@
         <li><a href="#home" class="action">Beranda</a></li>
         <li><a href="#info" class="action">Info kamar</a></li>
         <li><a href="sewa_hotel/form_pesanan.php" class="action">Pesan kamar</a></li>
-        <li><a href="sewa_hotel/payment_result.php" id="history" class="action">Pesanan Anda</a></li>
+        <li><a href="sewa_hotel/list_history_page.php" id="history" class="action">Pesanan Anda</a></li>
       </ul>
 
       <ul class="container-login">
@@ -668,7 +668,7 @@
     <section class="home" id="home">
       <div class="home-text" style="z-index: 3;">
         <span>Welcome <sup style="font-size: 16px;">To</sup> The World <sub style="font-size: 16px;">Of</sub></span>
-        <h1>Hotel 599</h1>
+        <h1>Hotel Angkasa</h1>
         <h2>Hotel nyaman dan elegan!</h2>
         <a href="#pesan" class="btn">Pesan Kamar</a>
       </div>
