@@ -95,6 +95,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<br>";
             echo "<i style='letter-spacing: 1px;'> kemungkinan email atau password salah! </i>";
         }
+        echo "
+            <script>
+            alert('Kode OTP telah dikirim ke email Anda.'); 
+            document.location.href = 'verify_otp.php';
+            </script>";
     }
     $dbConnect->close();
 } else {

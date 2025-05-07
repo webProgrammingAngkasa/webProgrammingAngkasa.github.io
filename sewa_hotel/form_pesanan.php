@@ -631,6 +631,19 @@ originalStatusRoom();
             <!--//* pesan kamar -->
             <div class="form-room">
               <h3>Pilih Waktu Booking</h3>
+
+              <div class="rangeTime">
+                <div class="check">
+                  <h3 for="in">check in</h3>
+                  <input type="date" name="check_in" id="in" required>
+                </div>
+                <span>&#10174;</span>
+                <div class="check">
+                  <h3 for="out">check out</h3>
+                  <input type="date" name="check_out" id="out" required disabled>
+                </div>
+              </div>
+
               <div class="container-type">
                 <h3>Pilih Tipe Kamar</h3>
                 <div class="input-room">
@@ -644,18 +657,6 @@ originalStatusRoom();
               <select name="no_kamar" id="numberRoom" required>
                 <!--//* perulangan no kamar sesuai type ... -->
               </select>
-
-              <div class="rangeTime">
-                <div class="check">
-                  <h3 for="in">check in</h3>
-                  <input type="date" name="check_in" id="in" required>
-                </div>
-                <span>&#10174;</span>
-                <div class="check">
-                  <h3 for="out">check out</h3>
-                  <input type="date" name="check_out" id="out" required disabled>
-                </div>
-              </div>
 
               <button type="submit" name="submit" class="tombol">PESAN</button>
             </div>
@@ -691,7 +692,8 @@ originalStatusRoom();
       const xhr = new XMLHttpRequest()
       xhr.open("POST", "", true)
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-
+      console.log(xhr);
+      
       xhr.onreadystatechange = function() {
         if (this.status === 200 && this.readyState === 4) {
           const getData = this.responseText

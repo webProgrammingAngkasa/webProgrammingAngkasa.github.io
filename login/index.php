@@ -285,8 +285,256 @@ body{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
+    <style>
+        * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --main-color: #ffffff;
+      --second-color: #ffffff;
+      --bg-global-color: #1e3a8a;
+      --bg-button-hover: #637dc5;
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 100vh;
+      background: transparent;
+      box-shadow: 0px 25px 20px -20px rgba(0, 0, 0, 0.45) inset;
+    }
+
+    .title {
+      display: flex;
+      flex-direction: row;
+      font-size: 2rem;
+      text-transform: uppercase;
+      text-align: center;
+      margin-block: 20px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .title h1 {
+      color: transparent;
+      animation: title 1.5s forwards;
+    }
+
+    .title h1:nth-child(5),
+    h1:nth-child(7) {
+      animation-delay: 0s;
+    }
+
+    .title h1:nth-child(4),
+    h1:nth-child(8) {
+      animation-delay: .2s;
+    }
+
+    .title h1:nth-child(3),
+    h1:nth-child(9) {
+      animation-delay: .4s;
+    }
+
+    .title h1:nth-child(2),
+    h1:nth-child(10) {
+      animation-delay: .6s;
+    }
+
+    .title h1:nth-child(1),
+    h1:nth-child(11) {
+      animation-delay: .8s;
+    }
+
+    @keyframes title {
+      100% {
+        color: var(--bg-global-color);
+      }
+    }
+
+    h3 {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: x-large;
+      line-height: 2rem;
+      color: #ffffff;
+      text-align: center;
+      text-transform: capitalize;
+      margin-block: 8px;
+      animation: h3 2s forwards;
+    }
+
+    @keyframes h3 {
+      0% {
+        color: transparent;
+      }
+    }
+
+    .container {
+      max-width: 55%;
+      width: 100%;
+      background: linear-gradient(160deg, rgb(2, 28, 122) 0.00%, rgb(36, 83, 255) 100.00%);
+      padding: 2.5%;
+      border-radius: 15px;
+      box-shadow: 0 0px 8px rgba(0, 0, 0, 0);
+    }
+
+    label {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: #ffffff;
+      font-weight: bold;
+      letter-spacing: .5px;
+      animation: label 2s forwards;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    @keyframes label {
+      0% {
+        color: transparent
+      }
+    }
+
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      font-size: 14px;
+      background-color: #fafafa;
+      color: #333;
+      border: none;
+      border: 2px solid var(--bg-global-color);
+      animation: input 2s forwards;
+    }
+
+    @keyframes input {
+      0% {
+        outline: none;
+        background: transparent;
+      }
+    }
+
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    input[type="date"]:focus,
+    select:focus,
+    textarea:focus {
+      border: 2px solid #ccc;
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .container .tombol {
+      padding: 7px 16px;
+      border-radius: 40px;
+      border: 2px solid whitesmoke;
+      background-color: var(--bg-global-color);
+      color: #ffffff;
+      font-weight: 500;
+      width: 100%;
+      transition: 100ms;
+      cursor: pointer;
+      font-weight: 800;
+      animation: button 2.5s forwards;
+      transition: .2s;
+    }
+
+    .container .tombol:hover {
+      background: var(--bg-button-hover);
+      color: var(--second-color);
+      letter-spacing: 1px;
+      font-weight: 900;
+    }
+
+    @keyframes button {
+      0% {
+        background: transparent;
+        color: transparent;
+        border-color: transparent;
+      }
+    }
+
+    .input-room {
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+      margin-block: 5px;
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+
+    .input-room button:nth-child(1),
+    .input-room button:nth-child(2) {
+      width: 120px;
+      height: 45px;
+      border-top-right-radius: 50%;
+      border-bottom-left-radius: 50%;
+      border-top-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      background: blueviolet;
+      color: #fafafa;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 200ms;
+      animation: checked 1s forwards;
+    }
+
+    .input-room button:nth-child(3),
+    .input-room button:nth-child(4) {
+      width: 120px;
+      height: 45px;
+      border-top-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+      border-top-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      background: blueviolet;
+      color: #fafafa;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 200ms;
+      animation: checked 1s forwards;
+    }
+
+    .input-room button:hover {
+      background: var(--bg-button-hover);
+      color: white;
+      letter-spacing: .5px;
+      scale: 110%;
+    }
+    </style>
 </head>
 <body>
+            <div class="input-user">
+              <h3>Masukan Email anda</h3>
+
+              <label for="email">Email:</label>
+              <input type="email" name="email" id="email" autocomplete="on" required><br>
+
+            </div>
+
+              <button type="submit" name="submit" class="tombol">LOGIN</button>
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+  </div>
     <form method="POST" action="send_otp.php">
         <label for="email">Email</label>
         <input type="email" id="email" name="email"><br><br>

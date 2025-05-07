@@ -1,19 +1,16 @@
 <?php
 session_start();
-
 include '../connect/conn.php';
+
 if (!isset($_SESSION['email'])) {
     header("Location: ../index.php");
 }
+$idOrder = (int) $_GET['idOrder'];
 $email = $_SESSION['email'];
 $queryHistory = [
-    $dbConnect->query("SELECT fk_users AS historyVisitor FROM tb_pengunjung visitors INNER JOIN users ON visitors.fk_users = users.userId WHERE users.email = '$email'"),
-    $dbConnect->query("SELECT fk_users AS historyOrder FROM tb_pemesanan orders INNER JOIN users ON orders.fk_users = users.userId WHERE users.email = '$email'")
+    $dbConnect->query("SELECT id_pengunjung AS historyVisitor FROM list_history_order h INNER JOIN tb_pengunjung v ON v.id_pengunjung = h.fk_visitors WHERE h.id_history = $idOrder"),
+    $dbConnect->query("SELECT id_pemesanan AS historyOrder FROM list_history_order h INNER JOIN tb_pemesanan p ON p.id_pemesanan = h.fk_orders WHERE h.id_history = $idOrder")
 ];
-
-if ($queryHistory[0] && $queryHistory[1] -> num_rows === 0) {
-    header('Location: ../index.php');
-}
 
 $arrHistoryOrder = [];
 while ($resultHistory = $queryHistory[0]->fetch_assoc()) {
@@ -22,34 +19,32 @@ while ($resultHistory = $queryHistory[0]->fetch_assoc()) {
 while ($resultHistory = $queryHistory[1]->fetch_assoc()) {
     $arrHistoryOrder[] = $resultHistory;
 }
-$visitor = $arrHistoryOrder[0]['historyVisitor'];
-$order = $arrHistoryOrder[1]['historyOrder'];
+$visitor = (int) $arrHistoryOrder[0]['historyVisitor'];
+$order = (int) $arrHistoryOrder[1]['historyOrder'];
 
 $queryResult = [
-    'pengunjung' => "SELECT * FROM tb_pengunjung WHERE fk_users = $visitor",
+    'pengunjung' => "SELECT * FROM tb_pengunjung WHERE id_pengunjung = $visitor",
     'pesanan' => "SELECT id_pemesanan, list_no_kamar.no_kamar, mv_type.type_kamar, check_in, check_out, total_harga
                             FROM tb_pemesanan
                             INNER JOIN list_no_kamar
                             ON list_no_kamar.id = tb_pemesanan.no_kamar
                             INNER JOIN mv_type
                             on mv_type.id_type = list_no_kamar.fk_type
-                            WHERE fk_users = $order
+                            WHERE id_pemesanan = $order
                             GROUP BY no_kamar",
     'rangeTimeOut' => "SELECT TIMESTAMPDIFF(DAY, NOW(), tb_pemesanan.check_out) AS hari,
                             HOUR(TIMEDIFF(tb_pemesanan.check_out, NOW())) % 24 AS jam,
                             MINUTE(TIMEDIFF(tb_pemesanan.check_out, NOW())) AS menit,
                             SECOND(TIMEDIFF(tb_pemesanan.check_out, NOW())) AS detik
                             FROM tb_pemesanan
-                            WHERE tb_pemesanan.fk_users = $order",
+                            WHERE tb_pemesanan.id_pemesanan = $order",
 ];
-
 
 $results = [
     $dbConnect->query($queryResult['pengunjung']),      //* 0
     $dbConnect->query($queryResult['pesanan']),       //* 1
     $dbConnect->query($queryResult['rangeTimeOut']),    //* 2
 ];
-
 
 $rows = [
     mysqli_fetch_assoc($results[0]),
