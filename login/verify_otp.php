@@ -126,12 +126,12 @@ body {
 	</div>
     <form action="verify_otp_process.php" method="POST">
 	<div class="inputs">
-		<input type="text" name="otp" maxlength="1"/>
-		<input type="text" name="otp" maxlength="1"/>
-		<input type="text" name="otp" maxlength="1"/>
-		<input type="text" name="otp" maxlength="1"/>
-		<input type="text" name="otp" maxlength="1"/>
-		<input type="text" name="otp" maxlength="1"/>
+		<input type="text" name="otp[]" maxlength="1"/>
+		<input type="text" name="otp[]" maxlength="1"/>
+		<input type="text" name="otp[]" maxlength="1"/>
+		<input type="text" name="otp[]" maxlength="1"/>
+		<input type="text" name="otp[]" maxlength="1"/>
+		<input type="text" name="otp[]" maxlength="1"/>
 	</div>
 	<div class="verify-btn">
 		<button type="submit">Verifikasi</button>
