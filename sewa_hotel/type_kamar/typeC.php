@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 require_once 'main_description.php';
 
 $query = $dbConnect->query($sql[2]);
@@ -127,4 +127,130 @@ while ($row = $query->fetch_assoc()) {
     </center>
 </body>
 
+</html> -->
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kamar Tipe C</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --bg: #1e3a8a;
+      --text: #1f2937;
+      --muted: #6b7280;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      max-width: 640px;
+      width: 100%;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .card h1 {
+      font-size: 28px;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .card p.description {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      font-size: 16px;
+    }
+
+    .facilities {
+      margin-bottom: 32px;
+    }
+
+    .facilities h3 {
+      font-size: 18px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .facilities ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .facilities li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 20px;
+      color: var(--text);
+    }
+
+    .facilities li::before {
+      content: '✔';
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+      font-size: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #162d6d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Kamar Tipe C</h1>
+    <p class="description">
+      Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Ideal untuk perjalanan solo dengan ruang yang tenang dan fasilitas dasar yang lengkap.
+    </p>
+
+    <div class="facilities">
+      <h3>Fasilitas:</h3>
+      <ul>
+        <li>Tempat Tidur Single</li>
+        <li>AC</li>
+        <li>Wi-Fi Cepat</li>
+        <li>Meja Kerja</li>
+        <li>Kamar Mandi Dalam</li>
+        <li>Lampu Baca</li>
+      </ul>
+    </div>
+
+    <a href="../form_pesanan.php" class="btn">Pesan Kamar</a>
+  </div>
+
+</body>
 </html>
