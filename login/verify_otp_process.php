@@ -6,12 +6,14 @@ date_default_timezone_set('Asia/Jakarta');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_SESSION['email'])) {
         echo "<script>
-        alert('silahkan masukkan email terlebih dahulu');
+        alert('Silakan masukkan email terlebih dahulu');
         window.location.href = 'index.php'
         </script>";
+        exit;
     }
-    $_SESSION['otp'] = $_POST['otp'];
+
     $email = $_SESSION['email'];
+    $otp = implode('', $_POST['otp']); // Gabungkan array jadi satu string
 
     $stmt = $dbConnect->prepare('SELECT u.otp, u.otp_expiry FROM users u WHERE u.email = ? AND u.userId IN (SELECT MAX(userId) FROM users GROUP BY email)');
     $stmt->bind_param('s', $email);
@@ -22,24 +24,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user) {
         if (strtotime($user['otp_expiry']) <= time()) {
             echo "<script>
-                alert('Kode OTP telah kadaluarsa! silahkan minta lagi');
+                alert('Kode OTP telah kadaluarsa! Silakan minta lagi');
                 window.location.href = 'verify_otp.php'
             </script>";
             exit;
-        } elseif ($user['otp'] === $_SESSION['otp']) {
+        } elseif ($user['otp'] === $otp) {
             echo "<script>
-                alert('Login Berhasil');
+                alert('Login berhasil');
                 window.location.href = '../index.php'
             </script>";
         } else {
             echo "<script>
-                alert('Kode OTP salah! silahkan coba lagi');
+                alert('Kode OTP salah! Silakan coba lagi');
                 window.location.href = 'verify_otp.php'
             </script>";
         }
     } else {
         echo "<script>
-            alert('Email tidak ditemukan! silahkan daftar email terlebih dahulu');
+            alert('Email tidak ditemukan! Silakan daftar terlebih dahulu');
             window.location.href = 'index.php'
         </script>";
     }
