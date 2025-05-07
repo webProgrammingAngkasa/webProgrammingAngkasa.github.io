@@ -736,7 +736,7 @@ a.forgot {
             <h3 class="title">Masukan Email</h3>
             <div class="text-input">
                 <i class="ri-user-fill"></i>
-                <input type="email" placeholder="Email">
+                <input type="email" name="email" placeholder="Email">
             </div>
             <button class="login-btn" type="submit">Verifikasi</button>
             </form>
