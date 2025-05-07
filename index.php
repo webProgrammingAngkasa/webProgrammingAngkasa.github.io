@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +15,7 @@
           userIcon = document.getElementById("user-icon"),
           buttonLog = document.getElementById("button-login"),
           historyOrder = document.querySelectorAll(".navbar li:nth-of-type(4)"),
-          email = "<?php echo $_SESSION['otp'] ?? ''; ?>"
+          email = "<?php echo $_SESSION['email'] ?? ''; ?>"
 
         if (email === '') {
           buttonLog.style.display = "flex"
