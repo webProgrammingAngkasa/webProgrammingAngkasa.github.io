@@ -596,7 +596,7 @@ body {
     bottom: 0;
     left: -40px;
     position: absolute;
-    width: 80px;
+    width: 80px;;
     height: 200px;
     background: #1e3a8a;
     border-radius: 40px;
@@ -629,7 +629,7 @@ body {
     position: absolute;
     height: 300px;
     width: 120px;
-    background: #1e3a8a;
+    background:rgb(58, 91, 181);
     border-radius: 70px;
 }
 
