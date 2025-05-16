@@ -30,6 +30,7 @@ if(!isset($_SESSION["email"])){
     </form>
 </body>
 </html> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,19 +57,18 @@ body {
 	padding:2em;
 	border-radius:10px;
 	box-shadow:0px 2px 5px 10px rgba(0,0,0,0.05);
-	display:flex;
+	display:grid;
 	gap:1.5em;
 	text-align:center;
-    justify-content: center;
-    flex-direction: column;
 }
 .otp-box .img {
-	display:flex;
+	display:inline;
 	width:100px;
 	height:100px;
 	margin:0 auto;
     align-items: center;
-    margin-left: 80px;
+    margin-left: 70px;
+    margin-bottom: 20px;
 }
 .otp-box .content-box h2 {
 	font-size:20px;
