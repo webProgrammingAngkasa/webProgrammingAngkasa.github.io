@@ -1,51 +1,50 @@
 <?php
 session_start();
-
 include '../connect/conn.php';
 
-$queryMaxId = [
-    $dbConnect->query("SELECT MAX(id_pengunjung) AS max_id_visitor FROM tb_pengunjung"),
-    $dbConnect->query("SELECT MAX(id_pemesanan) AS max_id_order FROM tb_pemesanan")
+if (!isset($_SESSION['email'])) {
+    header("Location: ../index.php");
+}
+$idOrder = (int) $_GET['idOrder'];
+$email = $_SESSION['email'];
+$queryHistory = [
+    $dbConnect->query("SELECT id_pengunjung AS historyVisitor FROM list_history_order h INNER JOIN tb_pengunjung v ON v.id_pengunjung = h.fk_visitors WHERE h.id_history = $idOrder"),
+    $dbConnect->query("SELECT id_pemesanan AS historyOrder FROM list_history_order h INNER JOIN tb_pemesanan p ON p.id_pemesanan = h.fk_orders WHERE h.id_history = $idOrder")
 ];
 
-$arrMaxId = [];
-while ($resultMaxId = $queryMaxId[0]->fetch_assoc()) {
-    $arrMaxId[] = $resultMaxId;
+$arrHistoryOrder = [];
+while ($resultHistory = $queryHistory[0]->fetch_assoc()) {
+    $arrHistoryOrder[] = $resultHistory;
 }
-while ($resultMaxId = $queryMaxId[1]->fetch_assoc()) {
-    $arrMaxId[] = $resultMaxId;
+while ($resultHistory = $queryHistory[1]->fetch_assoc()) {
+    $arrHistoryOrder[] = $resultHistory;
 }
-//TODO var_dump(value: $arrMaxId[0]['max_id_visitor']);
-//TODO var_dump(value: $arrMaxId[1]['max_id_order']);
-
-$maxIdVisitor = $arrMaxId[0]['max_id_visitor'];
-$maxIdOrder = $arrMaxId[1]['max_id_order'];
+$visitor = (int) $arrHistoryOrder[0]['historyVisitor'];
+$order = (int) $arrHistoryOrder[1]['historyOrder'];
 
 $queryResult = [
-    'pengunjung' => "SELECT * FROM tb_pengunjung WHERE id_pengunjung = $maxIdVisitor",
-    'pemesanan' => "SELECT id_pemesanan, list_no_kamar.no_kamar, mv_type.type_kamar, check_in, check_out, total_harga
+    'pengunjung' => "SELECT * FROM tb_pengunjung WHERE id_pengunjung = $visitor",
+    'pesanan' => "SELECT id_pemesanan, list_no_kamar.no_kamar, mv_type.type_kamar, check_in, check_out, total_harga
                             FROM tb_pemesanan
                             INNER JOIN list_no_kamar
                             ON list_no_kamar.id = tb_pemesanan.no_kamar
                             INNER JOIN mv_type
                             on mv_type.id_type = list_no_kamar.fk_type
-                            WHERE id_pemesanan = $maxIdOrder
+                            WHERE id_pemesanan = $order
                             GROUP BY no_kamar",
     'rangeTimeOut' => "SELECT TIMESTAMPDIFF(DAY, NOW(), tb_pemesanan.check_out) AS hari,
                             HOUR(TIMEDIFF(tb_pemesanan.check_out, NOW())) % 24 AS jam,
                             MINUTE(TIMEDIFF(tb_pemesanan.check_out, NOW())) AS menit,
                             SECOND(TIMEDIFF(tb_pemesanan.check_out, NOW())) AS detik
                             FROM tb_pemesanan
-                            WHERE tb_pemesanan.id_pemesanan = $maxIdOrder",
+                            WHERE tb_pemesanan.id_pemesanan = $order",
 ];
-
 
 $results = [
-    $dbConnect->query($queryResult['pengunjung']),      //* 0
-    $dbConnect->query($queryResult['pemesanan']),       //* 1
-    $dbConnect->query($queryResult['rangeTimeOut']),    //* 2
+    $dbConnect->query($queryResult['pengunjung']),
+    $dbConnect->query($queryResult['pesanan']),
+    $dbConnect->query($queryResult['rangeTimeOut']),
 ];
-
 
 $rows = [
     mysqli_fetch_assoc($results[0]),
@@ -65,135 +64,101 @@ $dateArray = ['date' => $now->format('Y-m-d H:i:s')];
 $date = json_encode($dateArray['date']);
 ?>
 
-<html lang="en">
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Struk Transaksi</title>
     <style>
+     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
         body {
-            font-family: 'Arial', sans-serif;
-            background: #f0f4f8;
-            margin: 0;
-            padding: 20px;
+            background: #1e3a8a;
+            font-family: 'Poppins', sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #333;
+            justify-content: center;
+            padding: 30px;
         }
 
-        h1 {
-            color: #2c3e50;
-            font-size: 2.5em;
+        .receipt {
+            background: #fff;
+            /* border: 1px dashed #333; */
+            width: 320px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .receipt h1 {
+            text-align: center;
+            font-size: 1.5em;
             margin-bottom: 10px;
-            text-align: center;
         }
 
-        a {
-            text-decoration: none;
-            background-color: #3498db;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        a:hover {
-            background-color: #2980b9;
-        }
-
-        p {
-            background: white;
-            width: 80%;
-            max-width: 600px;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .receipt hr {
+            border: none;
+            border-top: 1px dashed #999;
             margin: 10px 0;
+        }
+
+        .receipt p {
+            margin: 5px 0;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            word-wrap: break-word;
-            text-align: left;
         }
 
-        p span:first-child {
+        .receipt p span:first-child {
             font-weight: bold;
-            color: #2c3e50;
-            flex: 1;
         }
 
-        p span:last-child {
-            flex: 2;
-            text-align: left;
+        .receipt-footer {
+            text-align: center;
+            font-size: 0.8em;
+            margin-top: 20px;
+            color: #777;
         }
 
         #endPointCheckOut {
-            font-size: 1.2em;
-            color: #e74c3c;
             font-weight: bold;
-            text-align: left;
+            color: #e74c3c;
         }
 
-        @media (max-width: 768px) {
-            p {
-                width: 95%;
-                font-size: 1em;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            p span:last-child {
-                text-align: left;
-                margin-top: 5px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            a {
-                padding: 8px 16px;
-                font-size: 1em;
-            }
+        a.button {
+            display: inline-block;
+            text-align: center;
+            background: #1e3a8a;
+            color: #fff;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+            width: 90%;
         }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8em;
-            }
-
-            a {
-                padding: 6px 12px;
-                font-size: 0.9em;
-            }
-
-            p {
-                font-size: 0.9em;
-            }
+        a.button:hover {
+            background: #2980b9;
         }
     </style>
 </head>
-
 <body>
-    <a href="form_pesanan.php">Isi Form Pemesanan</a>
-
-    <h1>Your Payment Result</h1>
-    <p><span>nama:</span> <?= $rows[0]['nama'] ?></p>
-    <p><span>alamat:</span> <?= $rows[0]['alamat'] ?></p>
-
-    <p><span>no kamar:</span> <?= $rows[1]['no_kamar'] . ' ➡️ ' . $rows[1]['type_kamar'] ?></p>
-
-    <p><span>check in:</span> <?= $rows[1]['check_in'] ?></p>
-    <p><span>check out:</span> <?= $rows[1]['check_out'] ?></p>
-
-    <p><span>waktu check out:</span> <span id="endPointCheckOut"><?= $rows[2]['hari'] ?> hari | <?= $rows[2]['jam'] ?> jam • <?= $rows[2]['menit'] ?> menit • <?= $rows[2]['detik'] ?> detik</span></p>
-
-    <p><span>total harga:</span> <?= 'Rp. ' . number_format((int) $rows[1]['total_harga'], 0, '.', ','); ?></p>
+    <div class="receipt">
+        <h1>STRUK PEMESANAN</h1>
+        <hr>
+        <p><span>Nama</span><span><?= $rows[0]['nama'] ?></span></p>
+        <p><span>Alamat</span><span><?= $rows[0]['alamat'] ?></span></p>
+        <hr>
+        <p><span>Kamar</span><span><?= $rows[1]['no_kamar'] ?> - <?= $rows[1]['type_kamar'] ?></span></p>
+        <p><span>Check-in</span><span><?= $rows[1]['check_in'] ?></span></p>
+        <p><span>Check-out</span><span><?= $rows[1]['check_out'] ?></span></p>
+        <p><span>Sisa waktu</span><span id="endPointCheckOut"><?= $rows[2]['hari'] ?>h <?= $rows[2]['jam'] ?>j <?= $rows[2]['menit'] ?>m <?= $rows[2]['detik'] ?>d</span></p>
+        <hr>
+        <p><span>Total</span><span>Rp <?= number_format((int)$rows[1]['total_harga'], 0, ',', '.') ?></span></p>
+        <hr>
+        <div class="receipt-footer">
+            Dicetak pada:<br><?= $now->format('d-m-Y H:i:s') ?><br>
+            Terima kasih telah memesan!
+        </div>
+        <a href="form_pesanan.php" class="button">Buat Pemesanan Baru</a>
+    </div>
 
     <script>
         function updateCountdown(targetTime) {
@@ -205,8 +170,8 @@ $date = json_encode($dateArray['date']);
 
                 if (remainingTime <= 0) {
                     clearInterval(interval);
-                    alert('Sekarang Anda harus Check Out!');
-                    countdownElement.innerHTML = '-- : -- : --';
+                    alert('Waktu Check Out Telah Tiba!');
+                    countdownElement.innerHTML = 'Selesai';
                     localStorage.removeItem("checkoutTimestamp");
                 } else {
                     let hari = Math.floor(remainingTime / 86400);
@@ -214,7 +179,7 @@ $date = json_encode($dateArray['date']);
                     let menit = Math.floor((remainingTime % 3600) / 60);
                     let detik = remainingTime % 60;
 
-                    countdownElement.innerHTML = hari + " hari | " + jam + " jam • " + menit + " menit • " + detik + " detik...";
+                    countdownElement.innerHTML = `${hari}h ${jam}j ${menit}m ${detik}d`;
                 }
             }, 1000);
         }
@@ -234,5 +199,4 @@ $date = json_encode($dateArray['date']);
         };
     </script>
 </body>
-
 </html>

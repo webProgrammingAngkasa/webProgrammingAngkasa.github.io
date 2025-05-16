@@ -5,14 +5,14 @@ include '../connect/conn.php';
 $hotel = new Hotel('localhost', 'root', '', 'sewa_hotel');
 
 $dataPengunjung = [
-    //! pengunjung
+    //? pengunjung
     'nama' => $_POST['nama'],
     'alamat' => $_POST['alamat'],
     'no_tlp' => $_POST['no_tlp']
 ];
 
 $dataPemesanan = [
-    //! pemesanan
+    //? pemesanan
     'no_kamar' => $_POST['no_kamar'],
     'check_in' => $_POST['check_in'],
     'check_out' => $_POST['check_out'],
@@ -30,7 +30,7 @@ if (
         echo '
             <script> 
                 alert("data berhasil ditambahkan..."); 
-                document.location.href = "payment_result.php";
+                document.location.href = "list_history_page.php";
                 </script>
                 ';
     }

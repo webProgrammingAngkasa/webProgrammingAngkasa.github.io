@@ -39,7 +39,6 @@ dist/
 .prettierrc
 ajax/
 .vscode/
-img/
 test.php
 
 # File yang sementara tidak perlu di-track

@@ -1,7 +1,6 @@
 <?php
 include '../connect/conn.php';
 //TODO: *** number room ***
-
 if (isset($_POST['type'])) {
   $type = $_POST['type'];
   $query = [
@@ -45,7 +44,10 @@ originalStatusRoom();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
   <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
     * {
       margin: 0;
       padding: 0;
@@ -59,6 +61,11 @@ originalStatusRoom();
       --bg-button-hover: #637dc5;
     }
 
+    body {
+      background: #1e3a8a;
+      font-family: 'Poppins', sans-serif;
+    }
+
     section {
       display: flex;
       flex-direction: column;
@@ -70,65 +77,19 @@ originalStatusRoom();
       box-shadow: 0px 25px 20px -20px rgba(0, 0, 0, 0.45) inset;
     }
 
-    .title {
-      display: flex;
-      flex-direction: row;
-      font-size: 2rem;
-      text-transform: uppercase;
-      text-align: center;
-      margin-block: 20px;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
-
-    .title h1 {
-      color: transparent;
-      animation: title 1.5s forwards;
-    }
-
-    .title h1:nth-child(5),
-    h1:nth-child(7) {
-      animation-delay: 0s;
-    }
-
-    .title h1:nth-child(4),
-    h1:nth-child(8) {
-      animation-delay: .2s;
-    }
-
-    .title h1:nth-child(3),
-    h1:nth-child(9) {
-      animation-delay: .4s;
-    }
-
-    .title h1:nth-child(2),
-    h1:nth-child(10) {
-      animation-delay: .6s;
-    }
-
-    .title h1:nth-child(1),
-    h1:nth-child(11) {
-      animation-delay: .8s;
-    }
-
-    @keyframes title {
-      100% {
-        color: var(--bg-global-color);
-      }
-    }
-
     .container {
-      max-width: 55%;
+      max-width: 30%;
       width: 100%;
-      background: linear-gradient(160deg, rgb(2, 28, 122) 0.00%, rgb(36, 83, 255) 100.00%);
+      background:rgb(255, 255, 255);
       padding: 2.5%;
       border-radius: 15px;
-      box-shadow: 0 0px 8px rgba(0, 0, 0, 0);
+      box-shadow: 0 0 17px 10px rgb(0 0 0 / 30%);
     }
 
     h3 {
       font-size: x-large;
       line-height: 2rem;
-      color: #ffffff;
+      color:rgb(0, 0, 0);
       text-align: center;
       text-transform: capitalize;
       margin-block: 8px;
@@ -151,7 +112,7 @@ originalStatusRoom();
       display: block;
       font-size: 15px;
       margin-bottom: 6px;
-      color: #ffffff;
+      color:rgb(0, 0, 0);
       font-weight: bold;
       letter-spacing: .5px;
       animation: label 2s forwards;
@@ -173,12 +134,11 @@ originalStatusRoom();
       width: 100%;
       padding: 10px;
       margin-bottom: 15px;
-      border-radius: 4px;
+      border-radius: 8px;
       font-size: 14px;
-      background-color: #fafafa;
-      color: #333;
+      background-color: #e6e6e6;
+      color:rgb(0, 0, 0);
       border: none;
-      border: 2px solid var(--bg-global-color);
       animation: input 2s forwards;
     }
 
@@ -253,6 +213,7 @@ originalStatusRoom();
     .rangeTime {
       display: flex;
       justify-content: space-evenly;
+      left: 10px;
       height: 100px;
       align-items: center;
       margin-block: 20px;
@@ -260,12 +221,12 @@ originalStatusRoom();
 
 
     .rangeTime .check {
-      width: 35%;
+      width: 40%;
     }
 
     .check input[type="date"] {
-      letter-spacing: 2px;
-      font-size: 15px;
+      letter-spacing: 1px;
+      font-size: 10px;
       font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
       font-weight: bold;
     }
@@ -378,6 +339,7 @@ originalStatusRoom();
     .container-modal {
       position: fixed;
       display: none;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       top: 0%;
@@ -434,9 +396,9 @@ originalStatusRoom();
     }
 
     #descriptionModal {
-      position: relative;
+      position: absolute;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
       width: 80%;
       height: 45%;
@@ -477,6 +439,33 @@ originalStatusRoom();
       }
     }
 
+    .box-modal {
+      position: absolute;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+      height: 85%;
+      background: transparent;
+    }
+
+    @keyframes slideUp {
+      100% {
+        transform: translateY(-250px);
+      }
+    }
+
+    @keyframes slideDown {
+      0% {
+        transform: translateY(-250px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
     .title-modal {
       position: absolute;
       display: flex;
@@ -493,6 +482,7 @@ originalStatusRoom();
       text-transform: capitalize;
       top: 0;
       transform: translateY(-40px);
+      /* z-index: 99; */
     }
 
     .text-modal {
@@ -505,9 +495,39 @@ originalStatusRoom();
       font-size: 15px;
     }
 
+    .input-icon {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-icon i {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+    }
+
+    .input-icon input {
+      width: 100%;
+      padding: 10px 10px 10px 35px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .input-icon input:focus {
+      border-color: #007bff;
+    }
+
     .img-features {
       display: flex;
       gap: 20px;
+    }
+
+    .img-features li {
+      list-style-type: none;
     }
 
     .img-features img {
@@ -521,20 +541,30 @@ originalStatusRoom();
       transform: scale(110%);
     }
 
-    .footer {
-      position: relative;
-      font-weight: 600;
-      width: 100%;
-      padding-block: 10px;
-      background-color: var(--bg-global-color);
-      color: whitesmoke;
+    .slide-arrow {
+      position: absolute;
       display: flex;
-      justify-content: center;
-      /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, 
-                  rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset, 
-                  rgba(0, 0, 0, 0.56) 0px -2px -2px 4px; */
-      letter-spacing: 2;
-      bottom: 0;
+      align-items: center;
+      gap: 40px;
+      transform: translateY(200px);
+    }
+
+    .slide-arrow button {
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      padding: 10px;
+      transition: .4s;
+    }
+
+    .slide-arrow button:hover {
+      text-shadow: 0px 10px 30px whitesmoke;
+    }
+
+    .slide-arrow span {
+      font-size: 5rem;
+      font-weight: bolder;
+      color: white;
     }
 
     .boundary-line {
@@ -571,32 +601,29 @@ originalStatusRoom();
   <!-- <h1> FITUR KAMAR </h1> -->
   <div class="global-container-page">
     <section class="global-container">
-      <div class="title">
-        <h1>P</h1>
-        <h1>e</h1>
-        <h1>s</h1>
-        <h1>a</h1>
-        <h1>n</h1>
-        <h1>&ThickSpace;</h1>
-        <h1>K</h1>
-        <h1>a</h1>
-        <h1>m</h1>
-        <h1>a</h1>
-        <h1>r</h1>
-      </div>
       <div class="container">
         <div class="box">
           <form action="proses_simpan_pengunjung.php" method="post">
             <!--//* data pengunjung -->
             <div class="input-user">
               <h3>Isi Data Diri Anda</h3>
+              <label for="nama">Nama:</label>
+    <div class="input-icon">
+      <i class="fa fa-user"></i>
+      <input type="text" name="nama" id="nama" placeholder="Masukkan nama" required>
+    </div>
 
-              <label for="name">Nama:</label>
-              <input type="text" name="nama" id="name" autocomplete="off" required><br>
-              <label for="address">Alamat</label>
-              <input type="text" name="alamat" id="address" autocomplete="off" required><br>
-              <label for="tlp">No tlp:</label>
-              <input type="tel" name="no_tlp" id="tlp" autocomplete="off" required><br>
+    <label for="alamat">Alamat:</label>
+    <div class="input-icon">
+      <i class="fa fa-map-marker-alt"></i>
+      <input type="text" name="alamat" id="alamat" placeholder="Masukkan alamat" required>
+    </div>
+
+    <label for="no_tlp">No Telepon:</label>
+    <div class="input-icon">
+      <i class="fa fa-phone"></i>
+      <input type="tel" name="no_tlp" id="no_tlp" placeholder="Masukkan no telepon" required>
+    </div>
             </div>
 
             <hr class="boundary-line">
@@ -604,6 +631,19 @@ originalStatusRoom();
             <!--//* pesan kamar -->
             <div class="form-room">
               <h3>Pilih Waktu Booking</h3>
+
+              <div class="rangeTime">
+                <div class="check">
+                  <h3 for="in">check in</h3>
+                  <input type="date" name="check_in" id="in" required>
+                </div>
+                <span>&#10174;</span>
+                <div class="check">
+                  <h3 for="out">check out</h3>
+                  <input type="date" name="check_out" id="out" required disabled>
+                </div>
+              </div>
+
               <div class="container-type">
                 <h3>Pilih Tipe Kamar</h3>
                 <div class="input-room">
@@ -618,18 +658,6 @@ originalStatusRoom();
                 <!--//* perulangan no kamar sesuai type ... -->
               </select>
 
-              <div class="rangeTime">
-                <div class="check">
-                  <h3 for="in">check in</h3>
-                  <input type="date" name="check_in" id="in" required>
-                </div>
-                <span>&#10174;</span>
-                <div class="check">
-                  <h3 for="out">check out</h3>
-                  <input type="date" name="check_out" id="out" required disabled>
-                </div>
-              </div>
-
               <button type="submit" name="submit" class="tombol">PESAN</button>
             </div>
           </form>
@@ -642,14 +670,19 @@ originalStatusRoom();
     <div id="overlay" onclick="closeOverlay()"></div>
     <div id="descriptionModal">
       <div class="title-modal"></div>
-      <div class="text-modal">
-        <p id="descriptionText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus deleniti natus dolores. Veritatis repellendus expedita similique iure vitae ex, inventore voluptate nesciunt ipsum esse atque sequi quasi enim debitis quia.
-          Pariatur, ipsam beatae. Ullam ex incidunt, minus ad accusamus dolore aspernatur, odio itaque eos fugit quod! Porro aliquid nemo a accusamus eligendi, excepturi, eveniet blanditiis ratione magni quo, repellendus est?Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, reprehenderit eum! Ea maxime exercitationem sequi? Vel, a. Iusto, corrupti itaque nihil quisquam odio illo nam accusamus recusandae quo ullam amet?</p>
+      <div class="box-modal">
+        <div class="text-modal">
+          <p id="descriptionText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus deleniti natus dolores. Veritatis repellendus expedita similique iure vitae ex, inventore voluptate nesciunt ipsum esse atque sequi quasi enim debitis quia.</p>
+        </div>
+        <div class="img-features">
+          <li><img src="../img/icebear_cute.jpg" alt="a"></li>
+          <li><img src="../img/grizzly_cute.jpg" alt="icebear"></li>
+          <li><img src="../img/panda_cute.jpg" alt="c"></li>
+        </div>
       </div>
-      <div class="img-features">
-        <img src="../img/icebear_cute.jpg" alt="a">
-        <img src="../img/grizzly_cute.jpg" alt="icebear">
-        <img src="../img/panda_cute.jpg" alt="c">
+      <div class="slide-arrow">
+        <button type="button" class="swipe-down" onclick="swipeDown()" style="display: none;"><span>&DownArrow;</span></button>
+        <button type="button" class="swipe-up" onclick="swipeUP()"><span>&UpArrow;</span></button>
       </div>
     </div>
   </div>
@@ -659,7 +692,8 @@ originalStatusRoom();
       const xhr = new XMLHttpRequest()
       xhr.open("POST", "", true)
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-
+      console.log(xhr);
+      
       xhr.onreadystatechange = function() {
         if (this.status === 200 && this.readyState === 4) {
           const getData = this.responseText
@@ -689,7 +723,7 @@ originalStatusRoom();
       document.querySelector("#descriptionModal").style.animation = "showModal 1.5s ease forwards"
       document.querySelector("#overlay").style.animation = "showOverlay .6s ease-in-out forwards";
       setTimeout(() => document.querySelector("#overlay").style.display = "block", 350)
-      setTimeout(() => document.getElementById("numberRoom").style.display = "flex", 650)
+      setTimeout(() => document.getElementById("numberRoom").style.display = "flex", 700)
 
       if (modals === "flex") {
         document.querySelector(".input-room").addEventListener("click", (e) => {
@@ -736,12 +770,28 @@ originalStatusRoom();
           }
         })
       }
+
+      const mainModal = document.querySelectorAll(".box-modal > div"),
+        arrowClick = document.querySelectorAll(".slide-arrow > button")
+      document.querySelector(".swipe-up").addEventListener("click", () => {
+        mainModal[0].style.animation = "slideUp 1s forwards"
+        mainModal[1].style.animation = "slideUp 1s forwards"
+        arrowClick[0].style.display = "flex"
+      })
+      document.querySelector(".swipe-down").addEventListener("click", () => {
+        mainModal[0].style.animation = "slideDown 1s forwards"
+        mainModal[1].style.animation = "slideDown 1s forwards"
+        arrowClick[0].style.display = "none"
+      })
+
     }
 
     function closeOverlay() {
       let modals = document.querySelector(".container-modal"),
         modal = document.querySelector("#descriptionModal"),
         overlay = document.querySelector("#overlay")
+      mainModals = document.querySelectorAll(".box-modal > div")
+      arrowClick = document.querySelectorAll(".slide-arrow > button")
 
       overlay.style.animation = "hideOverlay .4s ease forwards"
       overlay.style.animationDelay = ".7s"
@@ -752,6 +802,12 @@ originalStatusRoom();
         modal.style.display = "none"
         overlay.style.display = "none"
       }, 800)
+
+      set
+      arrowClick[0].style.display = "none"
+      mainModals.forEach(e => e.removeAttribute("style"));
+      console.log(mainModal);
+
     }
 
     document.addEventListener("DOMContentLoaded", () => {
