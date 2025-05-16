@@ -1,5 +1,4 @@
 # Folder/vendor dari Composer (jika menggunakan Composer)
-vendor/
 
 # File Composer yang tidak perlu di-track
 composer.lock
