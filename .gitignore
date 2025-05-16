@@ -36,7 +36,6 @@ dist/
 # File & Folder yang tidak perlu di-track
 *.txt
 .prettierrc
-ajax/
 .vscode/
 test.php
 
