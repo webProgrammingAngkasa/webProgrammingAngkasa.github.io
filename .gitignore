@@ -1,5 +1,4 @@
 # Folder/vendor dari Composer (jika menggunakan Composer)
-vendor/
 
 # File Composer yang tidak perlu di-track
 composer.lock
@@ -37,7 +36,6 @@ dist/
 # File & Folder yang tidak perlu di-track
 *.txt
 .prettierrc
-ajax/
 .vscode/
 test.php
 
