@@ -113,12 +113,17 @@ body {
 	pointer-events:none;
 	cursor:initial;
 }
+
+.otp-box .new{
+    background-color: transparent;
+    color: #1e3a8a;
+}
     </style>
 </head>
 <body>
 <div class="otp-box">
 	<div class="img">
-		<img src="otp.png" width="200px" alt="Otp image">
+		<img src="../img/otp.png" width="200px" alt="Otp image">
 	</div>
 	<div class="content-box">
 		<h2>Verification code</h2>
@@ -136,6 +141,9 @@ body {
 	<div class="verify-btn">
 		<button type="submit">Verifikasi</button>
 	</div>
+    </form>
+    <form action="send_otp.php" method="POST">
+        <button type="submit" class="new" name="email" value="<?= $_SESSION['email']?>">Kode OTP Baru</button>
     </form>
 </div>
 </body>
