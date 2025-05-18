@@ -34,7 +34,7 @@ node_modules/
 dist/
 
 # File & Folder yang tidak perlu di-track
-*.txt
+.txt
 .prettierrc
 .vscode/
 test.php
