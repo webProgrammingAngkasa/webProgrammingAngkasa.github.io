@@ -1,0 +1,92 @@
+•gmail
+•sandi
+
+ramadanzaka27@gmail.com
+1450zaka1450
+
+ramazaka550@gmail.com
+rama100rama100
+
+zakaramadan57@gmail.com
+1450zaka
+
+demotmodet@gmail.com
+modetmodet
+
+ML = [2]
+myGithub = [0]
+
+
+!---------------------------------------------------------------------------------------------!
+sql join(no_kamar, type, fasilitas)
+
+db : sewa_hotel
+
+SELECT list_no_kamar.no_kamar, 
+		mv_type.type_kamar, 
+          GROUP_CONCAT(mv_fasilitas.fasilitas_kamar) AS fasilitas 
+            FROM list_no_kamar 
+            INNER JOIN mv_type
+            ON mv_type.id_type = list_no_kamar.fk_type
+            INNER JOIN gb_kamar_fasilitas 
+                ON gb_kamar_fasilitas.id_kamar = list_no_kamar.id
+            INNER JOIN mv_fasilitas 
+                ON mv_fasilitas.id_fasilitas = gb_kamar_fasilitas.id_fasilitas
+            WHERE mv_type.type_kamar = 'standard' 
+            GROUP BY mv_fasilitas.fasilitas_kamar;
+!-----------------------------------------------------------------------------!
+UPDATE list_no_kamar lk
+INNER JOIN tb_pemesanan tp
+ON tp.no_kamar = lk.id
+SET lk.status = 'Available'
+WHERE tp.check_out <= NOW() AND tp.check_out = (
+    SELECT MAX(tp.check_out) FROM tb_pemesanan tp
+    );
+!------------------------------------------------------------------------------!
+db : zakaria_ramadan_risnandar_putra
+
+SELECT student.student_id, student.student_name, class.class,
+guardian.guardian_name, guardian.guardian_number,
+GROUP_CONCAT(subject.subject SEPARATOR', ') AS subject
+FROM learnings
+INNER JOIN student
+ON student.student_id = learnings.student_id
+INNER JOIN class
+ON class.class_id = student.class_id
+INNER JOIN guardian
+ON guardian.guardian_id = learnings.guardian_id
+LEFT JOIN subject
+ON subject.subject_id = learnings.subject_id
+GROUP BY student.student_id;
+!--------------------------------------------!
+// delete
+SELECT student.student_name 
+FROM student
+INNER JOIN subject
+ON subject.student_id = student.student_id
+WHERE subject.subject = "sience";
+!--------------------------------------------!
+// select
+SELECT student.student_name, student.class, subject.subject
+FROM student
+INNER JOIN subject
+ON subject.student_id = student.student_id
+WHERE subject.subject = "English";
+
+!-----------------------------------------------------------------------------!
+Price Room
+
+SELECT ty.type_kamar, li.no_kamar, ty.harga * 2 AS price_room
+FROM list_no_kamar li
+INNER JOIN mv_type ty
+ON li.fk_type = ty.id_type;
+!-----------------------------------------------------------------------------!
+
+Rude, Ride, The nights, Dead bed, Tie me down, One more night
+
+!-----------------------------------------------------------------------------!
+email : ramadanzaka27@gmail.com
+phone number : 0815-7380-0931
+
+--reapply-cherry-picks
+
