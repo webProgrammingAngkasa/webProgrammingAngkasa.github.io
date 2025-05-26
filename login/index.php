@@ -691,11 +691,15 @@ body{
       width: 68%;
       padding: 10px;
       color: white;
-      background: #1e3a8a;
+      background: rgb(78, 105, 180);
       border: none;
       border-radius: 20px;
       cursor: pointer;
       margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      background: rgb(33, 66, 155);
     }
 
     a {
@@ -748,30 +752,22 @@ body{
         <h3 class="title">Masukan Email</h3>
         <div class="text-input">
           <i class="ri-user-fill"></i>
-          <input type="email" name="email" placeholder="Email">
+          <input type="email" name="email" placeholder="Email" required>
         </div>
-        <button class="login-btn" type="submit">Verifikasi</button>
+        <button class="login-btn" type="submit" onclick="oneClick()">Verifikasi</button>
       </form>
     </div>
   </div>
-  <div class="container">
-    <div class="design">
-      <div class="pill-1 rotate-45"></div>
-      <div class="pill-2 rotate-45"></div>
-      <div class="pill-3 rotate-45"></div>
-      <div class="pill-4 rotate-45"></div>
-    </div>
-    <div class="login">
-      <form method="POST" action="send_otp.php">
-        <h3 class="title">Masukan Email</h3>
-        <div class="text-input">
-          <i class="ri-user-fill"></i>
-          <input type="email" name="email" placeholder="Email">
-        </div>
-        <button class="login-btn" type="submit">Verifikasi</button>
-      </form>
-    </div>
-  </div>
+  <script>
+    function oneClick() {
+      const buttonSend = document.querySelector(".login-btn")
+      setTimeout(() => {
+        buttonSend.style.cursor = "no-drop"
+        buttonSend.disabled = true
+      }, 0.1)
+
+    }
+  </script>
 </body>
 
 </html>

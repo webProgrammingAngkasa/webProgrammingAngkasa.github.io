@@ -33,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'ramadanzaka27@gmail.com';
-            $mail->Password = 'symwqddalhoiztgx';
+            $mail->Username = 'zakaria.ramadan78@smk.belajar.id';
+            $mail->Password = 'mezrmftpnfarutdb';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
@@ -56,12 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<br>";
             echo "<i style='letter-spacing: 1px;'> kemungkinan email atau password salah! </i>";
         }
-
-        echo "
-            <script>
-            alert('Kode OTP telah dikirim ke email Anda.'); 
-            document.location.href = 'verify_otp.php';
-            </script>";
     } else {
         $stmt = $dbConnect->prepare("INSERT INTO users (email, otp, otp_expiry) VALUES (?, ?, ?) 
             ON DUPLICATE KEY UPDATE otp = ?, otp_expiry = ?");
@@ -72,8 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'ramadanzaka27@gmail.com';
-            $mail->Password = 'symwqddalhoiztgx';
+            $mail->Username = 'zakaria.ramadan78@smk.belajar.id';
+            $mail->Password = 'mezrmftpnfarutdb';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
@@ -95,13 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<br>";
             echo "<i style='letter-spacing: 1px;'> kemungkinan email atau password salah! </i>";
         }
-        echo "
-            <script>
-            alert('Kode OTP telah dikirim ke email Anda.'); 
-            document.location.href = 'verify_otp.php';
-            </script>";
     }
-    $dbConnect->close();
 } else {
     echo "Metode request tidak diperbolehkan.";
 }

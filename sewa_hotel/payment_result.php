@@ -157,7 +157,7 @@ $date = json_encode($dateArray['date']);
             Dicetak pada:<br><?= $now->format('d-m-Y H:i:s') ?><br>
             Terima kasih telah memesan!
         </div>
-        <a href="form_pesanan.php" class="button">Buat Pemesanan Baru</a>
+        <a href="form_pesanan.php" target="_self" class="button">Buat Pemesanan Baru</a>
     </div>
 
     <script>

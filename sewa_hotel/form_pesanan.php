@@ -46,7 +46,7 @@ originalStatusRoom();
   <title>Document</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
   <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
     * {
       margin: 0;
@@ -80,7 +80,7 @@ originalStatusRoom();
     .container {
       max-width: 30%;
       width: 100%;
-      background:rgb(255, 255, 255);
+      background: rgb(255, 255, 255);
       padding: 2.5%;
       border-radius: 15px;
       box-shadow: 0 0 17px 10px rgb(0 0 0 / 30%);
@@ -89,7 +89,7 @@ originalStatusRoom();
     h3 {
       font-size: x-large;
       line-height: 2rem;
-      color:rgb(0, 0, 0);
+      color: rgb(0, 0, 0);
       text-align: center;
       text-transform: capitalize;
       margin-block: 8px;
@@ -112,7 +112,7 @@ originalStatusRoom();
       display: block;
       font-size: 15px;
       margin-bottom: 6px;
-      color:rgb(0, 0, 0);
+      color: rgb(0, 0, 0);
       font-weight: bold;
       letter-spacing: .5px;
       animation: label 2s forwards;
@@ -137,7 +137,7 @@ originalStatusRoom();
       border-radius: 8px;
       font-size: 14px;
       background-color: #e6e6e6;
-      color:rgb(0, 0, 0);
+      color: rgb(0, 0, 0);
       border: none;
       animation: input 2s forwards;
     }
@@ -608,22 +608,22 @@ originalStatusRoom();
             <div class="input-user">
               <h3>Isi Data Diri Anda</h3>
               <label for="nama">Nama:</label>
-    <div class="input-icon">
-      <i class="fa fa-user"></i>
-      <input type="text" name="nama" id="nama" placeholder="Masukkan nama" required>
-    </div>
+              <div class="input-icon">
+                <i class="fa fa-user"></i>
+                <input type="text" name="nama" id="nama" placeholder="Masukkan nama" required>
+              </div>
 
-    <label for="alamat">Alamat:</label>
-    <div class="input-icon">
-      <i class="fa fa-map-marker-alt"></i>
-      <input type="text" name="alamat" id="alamat" placeholder="Masukkan alamat" required>
-    </div>
+              <label for="alamat">Alamat:</label>
+              <div class="input-icon">
+                <i class="fa fa-map-marker-alt"></i>
+                <input type="text" name="alamat" id="alamat" placeholder="Masukkan alamat" required>
+              </div>
 
-    <label for="no_tlp">No Telepon:</label>
-    <div class="input-icon">
-      <i class="fa fa-phone"></i>
-      <input type="tel" name="no_tlp" id="no_tlp" placeholder="Masukkan no telepon" required>
-    </div>
+              <label for="no_tlp">No Telepon:</label>
+              <div class="input-icon">
+                <i class="fa fa-phone"></i>
+                <input type="tel" name="no_tlp" id="no_tlp" placeholder="Masukkan no telepon" required>
+              </div>
             </div>
 
             <hr class="boundary-line">
@@ -692,8 +692,7 @@ originalStatusRoom();
       const xhr = new XMLHttpRequest()
       xhr.open("POST", "", true)
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-      console.log(xhr);
-      
+
       xhr.onreadystatechange = function() {
         if (this.status === 200 && this.readyState === 4) {
           const getData = this.responseText
@@ -717,21 +716,21 @@ originalStatusRoom();
       xhr.send("type=" + choice)
 
       document.querySelector(".title-modal").textContent = `description ${choice} room`
-      let modals = document.querySelector(".container-modal").style.display = "flex";
+      let modals = document.querySelector(".container-modal").style.display = "flex"
 
-      document.querySelector("#descriptionModal").style.display = "flex";
+      document.querySelector("#descriptionModal").style.display = "flex"
       document.querySelector("#descriptionModal").style.animation = "showModal 1.5s ease forwards"
-      document.querySelector("#overlay").style.animation = "showOverlay .6s ease-in-out forwards";
+      document.querySelector("#overlay").style.animation = "showOverlay .6s ease-in-out forwards"
       setTimeout(() => document.querySelector("#overlay").style.display = "block", 350)
       setTimeout(() => document.getElementById("numberRoom").style.display = "flex", 700)
 
       if (modals === "flex") {
         document.querySelector(".input-room").addEventListener("click", (e) => {
           if (e.target.tagName === "BUTTON") {
-            let rect = e.target.getBoundingClientRect();
+            let rect = e.target.getBoundingClientRect()
             let y = rect.top.toFixed()
 
-            const style = document.styleSheets[0];
+            const style = document.styleSheets[1]
             style.insertRule(`
             @keyframes showModal {
               0% {

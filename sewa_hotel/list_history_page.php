@@ -49,6 +49,7 @@ $qry = $dbConnect->query("SELECT id_history, list_no_kamar.no_kamar, mv_type.typ
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -149,6 +150,7 @@ $qry = $dbConnect->query("SELECT id_history, list_no_kamar.no_kamar, mv_type.typ
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Riwayat Pemesanan</h1>
@@ -161,7 +163,7 @@ $qry = $dbConnect->query("SELECT id_history, list_no_kamar.no_kamar, mv_type.typ
                         <p><span>Check-in:</span> <?= $row['check_in'] ?></p>
                         <p><span>Check-out:</span> <?= $row['check_out'] ?></p>
                     </div>
-                    <a class="btn-detail" href="payment_result.php?idOrder=<?= $row['id_history']; ?>" target="_blank" rel="noopener noreferrer">
+                    <a class="btn-detail" href="payment_result.php?idOrder=<?= $row['id_history']; ?>" target="_self" rel="noopener noreferrer">
                         Lihat Detail
                     </a>
                 </div>
@@ -171,4 +173,5 @@ $qry = $dbConnect->query("SELECT id_history, list_no_kamar.no_kamar, mv_type.typ
         <?php endif; ?>
     </div>
 </body>
+
 </html>
