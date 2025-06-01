@@ -38,6 +38,7 @@ dist/
 .prettierrc
 .vscode/
 test.php
+*.html
 
 # File yang sementara tidak perlu di-track
 sewa_hotel/app.js 
