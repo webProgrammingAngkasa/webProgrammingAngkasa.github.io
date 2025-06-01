@@ -801,12 +801,6 @@ originalStatusRoom();
         modal.style.display = "none"
         overlay.style.display = "none"
       }, 800)
-
-      set
-      arrowClick[0].style.display = "none"
-      mainModals.forEach(e => e.removeAttribute("style"));
-      console.log(mainModal);
-
     }
 
     document.addEventListener("DOMContentLoaded", () => {
