@@ -59,6 +59,7 @@
     }
 
     :root {
+      interpolate-size: allow-keywords;
       --main-color: #ffffff;
       --second-color: #ffffff;
       --third-color: #1e3a8a;
@@ -97,20 +98,74 @@
       transition: 0.2s;
     }
 
+    /* ! NAV UTAMA */
     .navigation-tools {
       position: absolute;
       background: powderblue;
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      border: none;
       color: black;
-      width: 70px;
-      height: 70px;
+      padding: 0rem;
       display: none;
       margin-left: 3vw;
-      display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      border-radius: 50%;
+      gap: 1rem;
+      /* box-shadow: 0 0 5px #eaeaea; */
       animation: navigationTools .5s forwards;
-      box-shadow: 0 0 10px 5px #eaeaea;
+      white-space: nowrap;
+      overflow: visible;
+    }
+
+    .navigation-tools:hover {
+      cursor: pointer;
+    }
+
+    /* NAV ICON */
+    .navigation-tools .navIcon {
+      position: relative;
+      font-weight: 600;
+      display: flex;
+      line-height: 50px;
+      font-size: 20px;
+      gap: 1px;
+    }
+
+    /* NAV ISI */
+
+    .navigation-tools .box {
+      width: 100%;
+
+      span {
+        font-size: 20px;
+      }
+
+      a {
+        overflow-x: clip;
+        color: black;
+        width: 100%;
+        display: grid;
+        align-items: center;
+        grid-template-columns: 3.5rem auto;
+        padding-inline: .6rem;
+        padding-block: .5rem;
+        transition: width .5s ease-out;
+        border-radius: 10px;
+        background-color: powderblue;
+
+        &:hover {
+          width: max-content;
+          background-color: powderblue;
+        }
+      }
+    }
+
+    .navigation-tools .box ul {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
 
     @keyframes navigationTools {
@@ -135,11 +190,15 @@
       }
     }
 
-    .navigation-tools.close {
-      animation: closeNavigation 1s forwards;
+    .navigation-tools.closeNavigationEmptyToggle {
+      animation: closeNavigationEmptyToggle .3s forwards;
     }
 
-    @keyframes closeNavigation {
+    .navigation-tools.closeNavigationIsToggle {
+      animation: closeNavigationIsToggle .1s forwards;
+    }
+
+    @keyframes closeNavigationEmptyToggle {
       0% {
         opacity: 1;
       }
@@ -150,6 +209,28 @@
       }
     }
 
+    @keyframes closeNavigationIsToggle {
+      0% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        display: none;
+      }
+    }
+
+    .navigation-tools .box li {
+      position: absolute;
+      width: 100%;
+      overflow-y: clip;
+      display: none;
+    }
+
+    .navigation-tools .box li.show {
+      position: relative;
+      display: flex;
+    }
 
     .logo {
       display: flex;
@@ -169,9 +250,6 @@
     }
 
     .navbar a {
-      /* display: flex;
-      align-items: center;
-      justify-content: center; */
       font-size: 1rem;
       padding: 10px 15px;
       color: #1e3a8a;
@@ -590,27 +668,22 @@
       border-bottom-right-radius: 2.5rem;
       width: 250px;
       height: 450px;
-      opacity: 0;
+      opacity: 1;
     }
 
     .box.show {
-      animation: scrollDriven .8s forwards;
-      opacity: 0;
-      transform: translateX(-150px);
+      animation: scrollDriven 1s forwards;
+      opacity: 1;
       background-color: cyan;
     }
 
     @keyframes scrollDriven {
       50% {
         opacity: .5;
-        transform: translateX(20px);
       }
 
       100% {
-        background-color: var(--third-color);
         opacity: 1;
-        transform: translateX(0);
-        scale: 100%;
       }
     }
 
@@ -965,9 +1038,55 @@
       </ul>
     </header>
 
-    <div class="navigation-tools">
-      <span>|</span><span>-</span><span>|</span>
-    </div>
+    <button class="navigation-tools" onclick="navClick()">
+      <div class="navIcon">
+        <span>-</span><span>-</span><span>-</span>
+      </div>
+      <div class="box">
+        <ul>
+          <li>
+            <a href="#home">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                <path d="M320-280 80-520l240-240 57 56-184 184 184 184-57 56Zm480 80v-160q0-50-35-85t-85-35H433l144 144-57 56-240-240 240-240 57 56-144 144h247q83 0 141.5 58.5T880-360v160h-80Z" />
+              </svg>
+              <span class="navText">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="sewa_hotel/form_pesanan.php">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                <path d="M320-280 80-520l240-240 57 56-184 184 184 184-57 56Zm480 80v-160q0-50-35-85t-85-35H433l144 144-57 56-240-240 240-240 57 56-144 144h247q83 0 141.5 58.5T880-360v160h-80Z" />
+              </svg>
+              <span class="navText">Pesan Kamar</span>
+            </a>
+          </li>
+          <li>
+            <a href="sewa_hotel/list_history_page.php">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                <path d="M320-280 80-520l240-240 57 56-184 184 184 184-57 56Zm480 80v-160q0-50-35-85t-85-35H433l144 144-57 56-240-240 240-240 57 56-144 144h247q83 0 141.5 58.5T880-360v160h-80Z" />
+              </svg>
+              <span class="navText">History Pesanan</span>
+            </a>
+          </li>
+          <li>
+            <a href="#info">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                <path d="M320-280 80-520l240-240 57 56-184 184 184 184-57 56Zm480 80v-160q0-50-35-85t-85-35H433l144 144-57 56-240-240 240-240 57 56-144 144h247q83 0 141.5 58.5T880-360v160h-80Z" />
+              </svg>
+              <span class="navText">Informasi Hotel</span>
+            </a>
+          </li>
+          <li>
+            <a href="#trending">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                <path d="M320-280 80-520l240-240 57 56-184 184 184 184-57 56Zm480 80v-160q0-50-35-85t-85-35H433l144 144-57 56-240-240 240-240 57 56-144 144h247q83 0 141.5 58.5T880-360v160h-80Z" />
+              </svg>
+              <span class="navText">Kamar Populer</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </button>
 
     <!-- Home -->
     <section class="home" id="home">
@@ -1128,22 +1247,32 @@
     const observers = {
       heading: document.getElementById("heading"),
       navigation: document.querySelector(".navigation-tools"),
+      navToggle: document.querySelectorAll(".navigation-tools .box li"),
       containerObjects: document.querySelector("#shop-container"),
       objects: document.querySelectorAll("#shop-container .box")
     }
 
     const observer = new IntersectionObserver((entriesObjects) => {
       entriesObjects.forEach(entry => {
-        console.log(entry);
 
         if (entry.target.id === 'heading') {
           if (!entry.isIntersecting) {
-            observers.navigation.classList.remove("close")
+
+            observers.navigation.classList.remove("closeNavigationEmptyToggle")
+            observers.navigation.classList.remove("closeNavigationIsToggle")
+
             observers.navigation.style.marginTop = `${entry.boundingClientRect.height / 2}px`
             observers.navigation.style.display = "flex"
             observers.navigation.style.position = "fixed"
+            observers.navigation.style.zIndex = "150"
           } else {
-            observers.navigation.classList.add("close")
+            observers.navToggle.forEach(e => {
+              if (e.classList.value === '') {
+                observers.navigation.classList.add("closeNavigationEmptyToggle")
+              } else {
+                observers.navigation.classList.add("closeNavigationIsToggle");
+              }
+            })
           }
         }
 
@@ -1159,6 +1288,16 @@
     })
     observer.observe(observers.containerObjects)
     observer.observe(observers.heading)
+
+    function navClick(e) {
+      
+      observers.navToggle.forEach((nav, i) => {
+        setTimeout(() => {
+          nav.classList.add("show")
+        }, 100 * i);
+      })
+
+    }
   </script>
 
   <script
