@@ -787,9 +787,9 @@ originalStatusRoom();
 
     function closeOverlay() {
       let modals = document.querySelector(".container-modal"),
-        modal = document.querySelector("#descriptionModal"),
-        overlay = document.querySelector("#overlay")
-      mainModals = document.querySelectorAll(".box-modal > div")
+      modal = document.querySelector("#descriptionModal"),
+      overlay = document.querySelector("#overlay"),
+      mainModals = document.querySelectorAll(".box-modal > div"),
       arrowClick = document.querySelectorAll(".slide-arrow > button")
 
       overlay.style.animation = "hideOverlay .4s ease forwards"

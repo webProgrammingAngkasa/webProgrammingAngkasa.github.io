@@ -25,11 +25,13 @@
           buttonLog.style.display = "flex"
           buttonOut.style.display = "none"
           userIcon.style.display = "none"
+          observers.navToggle[2].style.display = "none"
           historyOrder.forEach(history => history.style.display = "none");
         } else {
           buttonLog.style.display = "none"
           buttonOut.style.display = "flex"
           userIcon.style.display = "flex"
+          observers.navToggle[2].style.display = "flex"
           historyOrder.forEach(history => history.style.opacity = "1");
         }
       }
@@ -119,18 +121,20 @@
       overflow: visible;
     }
 
-    .navigation-tools:hover {
-      cursor: pointer;
-    }
-
     /* NAV ICON */
     .navigation-tools .navIcon {
       position: relative;
+      width: 100%;
       font-weight: 600;
       display: flex;
       line-height: 50px;
+      justify-content: center;
       font-size: 20px;
       gap: 1px;
+    }
+
+    .navigation-tools .navIcon {
+      cursor: pointer;
     }
 
     /* NAV ISI */
@@ -143,13 +147,15 @@
       }
 
       a {
+        font-size: 50px;
         overflow-x: clip;
         color: black;
         width: 100%;
         display: grid;
         align-items: center;
-        grid-template-columns: 3.5rem auto;
-        padding-inline: .6rem;
+        justify-content:left;
+        grid-template-columns: 2.7rem auto;
+        padding-inline-end: .8rem;
         padding-block: .5rem;
         transition: width .5s ease-out;
         border-radius: 10px;
@@ -195,7 +201,7 @@
     }
 
     .navigation-tools.closeNavigationIsToggle {
-      animation: closeNavigationIsToggle .1s forwards;
+      animation: closeNavigationIsToggle 1s forwards;
     }
 
     @keyframes closeNavigationEmptyToggle {
@@ -221,15 +227,16 @@
     }
 
     .navigation-tools .box li {
-      position: absolute;
+      transition: opacity .5s ease;
+      opacity: 0;
       width: 100%;
-      overflow-y: clip;
-      display: none;
+      z-index: -1;
     }
 
     .navigation-tools .box li.show {
-      position: relative;
-      display: flex;
+      transition: opacity .5s ease;
+      opacity: 1;
+      z-index: 100;
     }
 
     .logo {
@@ -816,7 +823,8 @@
       justify-content: center;
       align-items: center;
       margin-top: 20px;
-      max-width: 90%;
+      max-width: 80%;
+      width: 100%;
       row-gap: 10px;
     }
 
@@ -824,6 +832,8 @@
 
     .trending-rooms .piramid-image .first-box-image {
       position: relative;
+      width: 100%;
+      height: 150px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -831,16 +841,16 @@
     }
 
     .trending-rooms .piramid-image .first-box-image img {
-      width: 45vw;
-      height: 300px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       border-radius: 10px;
     }
 
     .trending-rooms .piramid-image .first-box-image .img-content {
       position: relative;
-      width: 45vw;
-      height: 300px;
+      width: 100%;
+      height: 100%;
     }
 
     .trending-rooms .piramid-image .first-box-image .img-content div {
@@ -868,22 +878,24 @@
 
     .trending-rooms .piramid-image .middle-box-image {
       display: flex;
+      width: 100%;
+      height: 180px;
       justify-content: center;
       align-items: center;
       gap: 10px;
     }
 
     .trending-rooms .piramid-image .middle-box-image img {
-      width: 29.8vw;
-      height: 300px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       border-radius: 10px;
     }
 
     .trending-rooms .piramid-image .middle-box-image .img-content {
       position: relative;
-      width: 29.8vw;
-      height: 300px;
+      width: 100%;
+      height: 100%;
     }
 
     .trending-rooms .piramid-image .middle-box-image .img-content div {
@@ -911,14 +923,16 @@
 
     .trending-rooms .piramid-image .last-box-image {
       display: flex;
+      width: 100%;
+      height: 200px;
       justify-content: center;
       align-items: center;
       gap: 10px;
     }
 
     .trending-rooms .piramid-image .last-box-image img {
-      width: 22.2vw;
-      height: 200px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
@@ -926,8 +940,8 @@
 
     .trending-rooms .piramid-image .last-box-image .img-content {
       position: relative;
-      width: 22.2vw;
-      height: 200px;
+      width: 100%;
+      height: 100%;
     }
 
     .trending-rooms .piramid-image .last-box-image .img-content div {
@@ -1038,49 +1052,39 @@
       </ul>
     </header>
 
-    <button class="navigation-tools" onclick="navClick()">
-      <div class="navIcon">
+    <button class="navigation-tools">
+      <div class="navIcon" onclick="navClick()">
         <span>-</span><span>-</span><span>-</span>
       </div>
       <div class="box">
         <ul>
           <li>
             <a href="#home">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                <path d="M320-280 80-520l240-240 57 56-184 184 184 184-57 56Zm480 80v-160q0-50-35-85t-85-35H433l144 144-57 56-240-240 240-240 57 56-144 144h247q83 0 141.5 58.5T880-360v160h-80Z" />
-              </svg>
+              <i class="fa-solid fa-house"></i>
               <span class="navText">Home</span>
             </a>
           </li>
           <li>
             <a href="sewa_hotel/form_pesanan.php">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                <path d="M320-280 80-520l240-240 57 56-184 184 184 184-57 56Zm480 80v-160q0-50-35-85t-85-35H433l144 144-57 56-240-240 240-240 57 56-144 144h247q83 0 141.5 58.5T880-360v160h-80Z" />
-              </svg>
+              <i class="fa-solid fa-bed"></i>
               <span class="navText">Pesan Kamar</span>
             </a>
           </li>
           <li>
             <a href="sewa_hotel/list_history_page.php">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                <path d="M320-280 80-520l240-240 57 56-184 184 184 184-57 56Zm480 80v-160q0-50-35-85t-85-35H433l144 144-57 56-240-240 240-240 57 56-144 144h247q83 0 141.5 58.5T880-360v160h-80Z" />
-              </svg>
+              <i class="fa-solid fa-list-ul"></i>
               <span class="navText">History Pesanan</span>
             </a>
           </li>
           <li>
             <a href="#info">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                <path d="M320-280 80-520l240-240 57 56-184 184 184 184-57 56Zm480 80v-160q0-50-35-85t-85-35H433l144 144-57 56-240-240 240-240 57 56-144 144h247q83 0 141.5 58.5T880-360v160h-80Z" />
-              </svg>
+              <i class="fa-solid fa-newspaper"></i>
               <span class="navText">Informasi Hotel</span>
             </a>
           </li>
           <li>
             <a href="#trending">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                <path d="M320-280 80-520l240-240 57 56-184 184 184 184-57 56Zm480 80v-160q0-50-35-85t-85-35H433l144 144-57 56-240-240 240-240 57 56-144 144h247q83 0 141.5 58.5T880-360v160h-80Z" />
-              </svg>
+              <i class="fa-solid fa-fire-flame-curved"></i>
               <span class="navText">Kamar Populer</span>
             </a>
           </li>
@@ -1283,20 +1287,30 @@
             observers.objects.forEach(obj => obj.classList.remove("show"))
           }
         }
-
       })
     })
     observer.observe(observers.containerObjects)
     observer.observe(observers.heading)
 
+    console.log(observers.navToggle[2]);
+    
+    
+    let iClick = 0
     function navClick(e) {
-      
+      iClick++
       observers.navToggle.forEach((nav, i) => {
-        setTimeout(() => {
-          nav.classList.add("show")
-        }, 100 * i);
+        let iObjNav = observers.navToggle.length
+        if (iClick % 2 != 0) {
+          setTimeout(() => {
+            nav.classList.toggle("show")
+          }, 100 * i);
+          
+        } else {
+          setTimeout(() => {
+            nav.classList.toggle("show")
+          }, 100 * (iObjNav - 1 - i));
+        }
       })
-
     }
   </script>
 
