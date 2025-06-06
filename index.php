@@ -101,77 +101,37 @@
     }
 
     /* ! NAV UTAMA */
+
+    .navigation-container {
+      position: fixed;
+      width: 10%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+
     .navigation-tools {
-      position: absolute;
+      position: relative;
       background: powderblue;
       width: 50px;
       height: 50px;
-      border-radius: 10px;
+      border-radius: 50%;
       border: none;
       color: black;
       padding: 0rem;
       display: none;
-      margin-left: 3vw;
       flex-direction: column;
       align-items: center;
       gap: 1rem;
-      /* box-shadow: 0 0 5px #eaeaea; */
       animation: navigationTools .5s forwards;
+      transition: box-shadow .2s ease;
       white-space: nowrap;
       overflow: visible;
-    }
 
-    /* NAV ICON */
-    .navigation-tools .navIcon {
-      position: relative;
-      width: 100%;
-      font-weight: 600;
-      display: flex;
-      line-height: 50px;
-      justify-content: center;
-      font-size: 20px;
-      gap: 1px;
-    }
-
-    .navigation-tools .navIcon {
-      cursor: pointer;
-    }
-
-    /* NAV ISI */
-
-    .navigation-tools .box {
-      width: 100%;
-
-      span {
-        font-size: 20px;
+      &:hover {
+        box-shadow: 0px 0px 10px 5px rgb(100, 125, 192, .5);
       }
-
-      a {
-        font-size: 50px;
-        overflow-x: clip;
-        color: black;
-        width: 100%;
-        display: grid;
-        align-items: center;
-        justify-content:left;
-        grid-template-columns: 2.7rem auto;
-        padding-inline-end: .8rem;
-        padding-block: .5rem;
-        transition: width .5s ease-out;
-        border-radius: 10px;
-        background-color: powderblue;
-
-        &:hover {
-          width: max-content;
-          background-color: powderblue;
-        }
-      }
-    }
-
-    .navigation-tools .box ul {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
     }
 
     @keyframes navigationTools {
@@ -194,6 +154,128 @@
         transform: translateY(0);
         scale: 100%;
       }
+    }
+
+
+    /* NAV ICON */
+    .navigation-tools .navIcon {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      font-weight: 600;
+      display: flex;
+      line-height: 50px;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      gap: 1px;
+      cursor: pointer;
+    }
+
+    .navigation-tools .navIcon .dash {
+      position: relative;
+      width: 55%;
+      height: 55%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      transition: transform 1s linear;
+
+      div {
+        position: absolute;
+        border-radius: 10px;
+        transition: all .2s linear;
+      }
+    }
+
+    .navigation-tools .navIcon .dash div:nth-child(1) {
+      width: 50%;
+      height: 2px;
+      background: black;
+      top: 0;
+      left: 0;
+      transform-origin: top left;
+    }
+
+    .navigation-tools .navIcon .dash div:nth-child(2) {
+      width: 100%;
+      height: 1px;
+      background: rgb(0, 0, 0, .5);
+      transform-origin: center
+    }
+
+    .navigation-tools .navIcon .dash div:nth-child(3) {
+      width: 50%;
+      height: 2px;
+      background: black;
+      bottom: 0;
+      right: 0;
+      transform-origin: bottom right;
+    }
+
+    .navigation-tools .navIcon.animateDashNav {
+      .dash div {
+        background-color: black;
+        height: 2px;
+        transition: transform .2s forwards;
+      }
+
+      .dash div:nth-child(1) {
+        transform: rotate(45deg) translate(50%, -50%);
+      }
+
+      .dash div:nth-child(2) {
+        transform: rotate(-45deg);
+        width: 90%;
+      }
+
+      .dash div:nth-child(3) {
+        transform: rotate(45deg) translate(-50%, 50%);
+      }
+    }
+
+    /* NAV ISI */
+
+    .navigation-tools .box {
+      width: 100%;
+      margin-top: 150%;
+
+      span:last-child {
+        font-size: 20px;
+      }
+
+      span:first-child {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      a {
+        overflow-x: clip;
+        color: black;
+        width: 100%;
+        display: grid;
+        align-items: center;
+        justify-content: left;
+        grid-template-columns: 2.7rem auto;
+        padding-inline-end: .8rem;
+        padding-block: .5rem;
+        transition: width .5s ease-out;
+        border-radius: 10px;
+        background-color: powderblue;
+
+        &:hover {
+          width: max-content;
+          background-color: powderblue;
+        }
+      }
+    }
+
+    .navigation-tools .box ul {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
 
     .navigation-tools.closeNavigationEmptyToggle {
@@ -230,7 +312,6 @@
       transition: opacity .5s ease;
       opacity: 0;
       width: 100%;
-      z-index: -1;
     }
 
     .navigation-tools .box li.show {
@@ -656,9 +737,8 @@
       position: relative;
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      gap: 1rem;
       margin-top: 25px;
     }
 
@@ -671,8 +751,7 @@
       align-items: center;
       margin-top: 80px;
       padding-inline: 20px;
-      border-bottom-left-radius: 2.5rem;
-      border-bottom-right-radius: 2.5rem;
+      border-radius: 10px;
       width: 250px;
       height: 450px;
       opacity: 1;
@@ -1052,45 +1131,61 @@
       </ul>
     </header>
 
-    <button class="navigation-tools">
-      <div class="navIcon" onclick="navClick()">
-        <span>-</span><span>-</span><span>-</span>
+    <div class="navigation-container">
+      <div class="navigation-tools">
+        <div class="navIcon" onclick="navClick()" onmouseover="mouseOver()" onmouseout="mouseOut()">
+          <div class="dash">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div class="box">
+          <ul>
+            <li>
+              <a href="#home">
+                <span>
+                  <i class="fa-solid fa-house"></i>
+                </span>
+                <span class="navText">Home</span>
+              </a>
+            </li>
+            <li>
+              <a href="sewa_hotel/form_pesanan.php">
+                <span>
+                  <i class="fa-solid fa-bed"></i>
+                </span>
+                <span class="navText">Pesan Kamar</span>
+              </a>
+            </li>
+            <li>
+              <a href="sewa_hotel/list_history_page.php">
+                <span>
+                  <i class="fa-solid fa-list-ul"></i>
+                </span>
+                <span class="navText">History Pesanan</span>
+              </a>
+            </li>
+            <li>
+              <a href="#info">
+                <span>
+                  <i class="fa-solid fa-newspaper"></i>
+                </span>
+                <span class="navText">Informasi Hotel</span>
+              </a>
+            </li>
+            <li>
+              <a href="#trending">
+                <span>
+                  <i class="fa-solid fa-fire-flame-curved"></i>
+                </span>
+                <span class="navText">Kamar Populer</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="box">
-        <ul>
-          <li>
-            <a href="#home">
-              <i class="fa-solid fa-house"></i>
-              <span class="navText">Home</span>
-            </a>
-          </li>
-          <li>
-            <a href="sewa_hotel/form_pesanan.php">
-              <i class="fa-solid fa-bed"></i>
-              <span class="navText">Pesan Kamar</span>
-            </a>
-          </li>
-          <li>
-            <a href="sewa_hotel/list_history_page.php">
-              <i class="fa-solid fa-list-ul"></i>
-              <span class="navText">History Pesanan</span>
-            </a>
-          </li>
-          <li>
-            <a href="#info">
-              <i class="fa-solid fa-newspaper"></i>
-              <span class="navText">Informasi Hotel</span>
-            </a>
-          </li>
-          <li>
-            <a href="#trending">
-              <i class="fa-solid fa-fire-flame-curved"></i>
-              <span class="navText">Kamar Populer</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </button>
+    </div>
 
     <!-- Home -->
     <section class="home" id="home">
@@ -1251,6 +1346,7 @@
     const observers = {
       heading: document.getElementById("heading"),
       navigation: document.querySelector(".navigation-tools"),
+      headingNav: document.querySelector(".navigation-tools .navIcon"),
       navToggle: document.querySelectorAll(".navigation-tools .box li"),
       containerObjects: document.querySelector("#shop-container"),
       objects: document.querySelectorAll("#shop-container .box")
@@ -1258,10 +1354,8 @@
 
     const observer = new IntersectionObserver((entriesObjects) => {
       entriesObjects.forEach(entry => {
-
         if (entry.target.id === 'heading') {
           if (!entry.isIntersecting) {
-
             observers.navigation.classList.remove("closeNavigationEmptyToggle")
             observers.navigation.classList.remove("closeNavigationIsToggle")
 
@@ -1292,20 +1386,18 @@
     observer.observe(observers.containerObjects)
     observer.observe(observers.heading)
 
-    console.log(observers.navToggle[2]);
-    
-    
     let iClick = 0
-    function navClick(e) {
+    const navClick = () => {
       iClick++
       observers.navToggle.forEach((nav, i) => {
         let iObjNav = observers.navToggle.length
         if (iClick % 2 != 0) {
+          observers.headingNav.classList.toggle("animateDashNav")
           setTimeout(() => {
             nav.classList.toggle("show")
           }, 100 * i);
-          
         } else {
+          observers.headingNav.classList.toggle("animateDashNav")
           setTimeout(() => {
             nav.classList.toggle("show")
           }, 100 * (iObjNav - 1 - i));
