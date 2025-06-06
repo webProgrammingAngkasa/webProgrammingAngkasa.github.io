@@ -25,11 +25,13 @@
           buttonLog.style.display = "flex"
           buttonOut.style.display = "none"
           userIcon.style.display = "none"
+          observers.navToggle[2].style.display = "none"
           historyOrder.forEach(history => history.style.display = "none");
         } else {
           buttonLog.style.display = "none"
           buttonOut.style.display = "flex"
           userIcon.style.display = "flex"
+          observers.navToggle[2].style.display = "flex"
           historyOrder.forEach(history => history.style.opacity = "1");
         }
       }
@@ -59,6 +61,7 @@
     }
 
     :root {
+      interpolate-size: allow-keywords;
       --main-color: #ffffff;
       --second-color: #ffffff;
       --third-color: #1e3a8a;
@@ -97,20 +100,38 @@
       transition: 0.2s;
     }
 
-    .navigation-tools {
-      position: absolute;
-      background: powderblue;
-      color: black;
-      width: 70px;
-      height: 70px;
-      display: none;
-      margin-left: 3vw;
+    /* ! NAV UTAMA */
+
+    .navigation-container {
+      position: fixed;
+      width: 10%;
+      height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: center;
+      z-index: 100;
+    }
+
+    .navigation-tools {
+      position: relative;
+      background: powderblue;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
+      border: none;
+      color: black;
+      padding: 0rem;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
       animation: navigationTools .5s forwards;
-      box-shadow: 0 0 10px 5px #eaeaea;
+      transition: box-shadow .2s ease;
+      white-space: nowrap;
+      overflow: visible;
+
+      &:hover {
+        box-shadow: 0px 0px 10px 5px rgb(100, 125, 192, .5);
+      }
     }
 
     @keyframes navigationTools {
@@ -135,11 +156,137 @@
       }
     }
 
-    .navigation-tools.close {
-      animation: closeNavigation 1s forwards;
+
+    /* NAV ICON */
+    .navigation-tools .navIcon {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      font-weight: 600;
+      display: flex;
+      line-height: 50px;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      gap: 1px;
+      cursor: pointer;
     }
 
-    @keyframes closeNavigation {
+    .navigation-tools .navIcon .dash {
+      position: relative;
+      width: 55%;
+      height: 55%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      transition: transform 1s linear;
+
+      div {
+        position: absolute;
+        border-radius: 10px;
+        transition: all .2s linear;
+      }
+    }
+
+    .navigation-tools .navIcon .dash div:nth-child(1) {
+      width: 50%;
+      height: 2px;
+      background: black;
+      top: 0;
+      left: 0;
+      transform-origin: top left;
+    }
+
+    .navigation-tools .navIcon .dash div:nth-child(2) {
+      width: 100%;
+      height: 1px;
+      background: rgb(0, 0, 0, .5);
+      transform-origin: center
+    }
+
+    .navigation-tools .navIcon .dash div:nth-child(3) {
+      width: 50%;
+      height: 2px;
+      background: black;
+      bottom: 0;
+      right: 0;
+      transform-origin: bottom right;
+    }
+
+    .navigation-tools .navIcon.animateDashNav {
+      .dash div {
+        background-color: black;
+        height: 2px;
+        transition: transform .2s forwards;
+      }
+
+      .dash div:nth-child(1) {
+        transform: rotate(45deg) translate(50%, -50%);
+      }
+
+      .dash div:nth-child(2) {
+        transform: rotate(-45deg);
+        width: 90%;
+      }
+
+      .dash div:nth-child(3) {
+        transform: rotate(45deg) translate(-50%, 50%);
+      }
+    }
+
+    /* NAV ISI */
+
+    .navigation-tools .box {
+      width: 100%;
+      margin-top: 150%;
+
+      span:last-child {
+        font-size: 20px;
+      }
+
+      span:first-child {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      a {
+        overflow-x: clip;
+        color: black;
+        width: 100%;
+        display: grid;
+        align-items: center;
+        justify-content: left;
+        grid-template-columns: 2.7rem auto;
+        padding-inline-end: .8rem;
+        padding-block: .5rem;
+        transition: width .5s ease-out;
+        border-radius: 10px;
+        background-color: powderblue;
+
+        &:hover {
+          width: max-content;
+          background-color: powderblue;
+        }
+      }
+    }
+
+    .navigation-tools .box ul {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .navigation-tools.closeNavigationEmptyToggle {
+      animation: closeNavigationEmptyToggle .3s forwards;
+    }
+
+    .navigation-tools.closeNavigationIsToggle {
+      animation: closeNavigationIsToggle 1s forwards;
+    }
+
+    @keyframes closeNavigationEmptyToggle {
       0% {
         opacity: 1;
       }
@@ -150,6 +297,28 @@
       }
     }
 
+    @keyframes closeNavigationIsToggle {
+      0% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        display: none;
+      }
+    }
+
+    .navigation-tools .box li {
+      transition: opacity .5s ease;
+      opacity: 0;
+      width: 100%;
+    }
+
+    .navigation-tools .box li.show {
+      transition: opacity .5s ease;
+      opacity: 1;
+      z-index: 100;
+    }
 
     .logo {
       display: flex;
@@ -169,9 +338,6 @@
     }
 
     .navbar a {
-      /* display: flex;
-      align-items: center;
-      justify-content: center; */
       font-size: 1rem;
       padding: 10px 15px;
       color: #1e3a8a;
@@ -571,9 +737,8 @@
       position: relative;
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      gap: 1rem;
       margin-top: 25px;
     }
 
@@ -586,31 +751,25 @@
       align-items: center;
       margin-top: 80px;
       padding-inline: 20px;
-      border-bottom-left-radius: 2.5rem;
-      border-bottom-right-radius: 2.5rem;
+      border-radius: 10px;
       width: 250px;
       height: 450px;
-      opacity: 0;
+      opacity: 1;
     }
 
     .box.show {
-      animation: scrollDriven .8s forwards;
-      opacity: 0;
-      transform: translateX(-150px);
+      animation: scrollDriven 1s forwards;
+      opacity: 1;
       background-color: cyan;
     }
 
     @keyframes scrollDriven {
       50% {
         opacity: .5;
-        transform: translateX(20px);
       }
 
       100% {
-        background-color: var(--third-color);
         opacity: 1;
-        transform: translateX(0);
-        scale: 100%;
       }
     }
 
@@ -743,7 +902,8 @@
       justify-content: center;
       align-items: center;
       margin-top: 20px;
-      max-width: 90%;
+      max-width: 80%;
+      width: 100%;
       row-gap: 10px;
     }
 
@@ -751,6 +911,8 @@
 
     .trending-rooms .piramid-image .first-box-image {
       position: relative;
+      width: 100%;
+      height: 150px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -758,16 +920,16 @@
     }
 
     .trending-rooms .piramid-image .first-box-image img {
-      width: 45vw;
-      height: 300px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       border-radius: 10px;
     }
 
     .trending-rooms .piramid-image .first-box-image .img-content {
       position: relative;
-      width: 45vw;
-      height: 300px;
+      width: 100%;
+      height: 100%;
     }
 
     .trending-rooms .piramid-image .first-box-image .img-content div {
@@ -795,22 +957,24 @@
 
     .trending-rooms .piramid-image .middle-box-image {
       display: flex;
+      width: 100%;
+      height: 180px;
       justify-content: center;
       align-items: center;
       gap: 10px;
     }
 
     .trending-rooms .piramid-image .middle-box-image img {
-      width: 29.8vw;
-      height: 300px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       border-radius: 10px;
     }
 
     .trending-rooms .piramid-image .middle-box-image .img-content {
       position: relative;
-      width: 29.8vw;
-      height: 300px;
+      width: 100%;
+      height: 100%;
     }
 
     .trending-rooms .piramid-image .middle-box-image .img-content div {
@@ -838,14 +1002,16 @@
 
     .trending-rooms .piramid-image .last-box-image {
       display: flex;
+      width: 100%;
+      height: 200px;
       justify-content: center;
       align-items: center;
       gap: 10px;
     }
 
     .trending-rooms .piramid-image .last-box-image img {
-      width: 22.2vw;
-      height: 200px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
@@ -853,8 +1019,8 @@
 
     .trending-rooms .piramid-image .last-box-image .img-content {
       position: relative;
-      width: 22.2vw;
-      height: 200px;
+      width: 100%;
+      height: 100%;
     }
 
     .trending-rooms .piramid-image .last-box-image .img-content div {
@@ -965,8 +1131,60 @@
       </ul>
     </header>
 
-    <div class="navigation-tools">
-      <span>|</span><span>-</span><span>|</span>
+    <div class="navigation-container">
+      <div class="navigation-tools">
+        <div class="navIcon" onclick="navClick()" onmouseover="mouseOver()" onmouseout="mouseOut()">
+          <div class="dash">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div class="box">
+          <ul>
+            <li>
+              <a href="#home">
+                <span>
+                  <i class="fa-solid fa-house"></i>
+                </span>
+                <span class="navText">Home</span>
+              </a>
+            </li>
+            <li>
+              <a href="sewa_hotel/form_pesanan.php">
+                <span>
+                  <i class="fa-solid fa-bed"></i>
+                </span>
+                <span class="navText">Pesan Kamar</span>
+              </a>
+            </li>
+            <li>
+              <a href="sewa_hotel/list_history_page.php">
+                <span>
+                  <i class="fa-solid fa-list-ul"></i>
+                </span>
+                <span class="navText">History Pesanan</span>
+              </a>
+            </li>
+            <li>
+              <a href="#info">
+                <span>
+                  <i class="fa-solid fa-newspaper"></i>
+                </span>
+                <span class="navText">Informasi Hotel</span>
+              </a>
+            </li>
+            <li>
+              <a href="#trending">
+                <span>
+                  <i class="fa-solid fa-fire-flame-curved"></i>
+                </span>
+                <span class="navText">Kamar Populer</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <!-- Home -->
@@ -1128,22 +1346,31 @@
     const observers = {
       heading: document.getElementById("heading"),
       navigation: document.querySelector(".navigation-tools"),
+      headingNav: document.querySelector(".navigation-tools .navIcon"),
+      navToggle: document.querySelectorAll(".navigation-tools .box li"),
       containerObjects: document.querySelector("#shop-container"),
       objects: document.querySelectorAll("#shop-container .box")
     }
 
     const observer = new IntersectionObserver((entriesObjects) => {
       entriesObjects.forEach(entry => {
-        console.log(entry);
-
         if (entry.target.id === 'heading') {
           if (!entry.isIntersecting) {
-            observers.navigation.classList.remove("close")
+            observers.navigation.classList.remove("closeNavigationEmptyToggle")
+            observers.navigation.classList.remove("closeNavigationIsToggle")
+
             observers.navigation.style.marginTop = `${entry.boundingClientRect.height / 2}px`
             observers.navigation.style.display = "flex"
             observers.navigation.style.position = "fixed"
+            observers.navigation.style.zIndex = "150"
           } else {
-            observers.navigation.classList.add("close")
+            observers.navToggle.forEach(e => {
+              if (e.classList.value === '') {
+                observers.navigation.classList.add("closeNavigationEmptyToggle")
+              } else {
+                observers.navigation.classList.add("closeNavigationIsToggle");
+              }
+            })
           }
         }
 
@@ -1154,11 +1381,29 @@
             observers.objects.forEach(obj => obj.classList.remove("show"))
           }
         }
-
       })
     })
     observer.observe(observers.containerObjects)
     observer.observe(observers.heading)
+
+    let iClick = 0
+    const navClick = () => {
+      iClick++
+      observers.navToggle.forEach((nav, i) => {
+        let iObjNav = observers.navToggle.length
+        if (iClick % 2 != 0) {
+          observers.headingNav.classList.toggle("animateDashNav")
+          setTimeout(() => {
+            nav.classList.toggle("show")
+          }, 100 * i);
+        } else {
+          observers.headingNav.classList.toggle("animateDashNav")
+          setTimeout(() => {
+            nav.classList.toggle("show")
+          }, 100 * (iObjNav - 1 - i));
+        }
+      })
+    }
   </script>
 
   <script
