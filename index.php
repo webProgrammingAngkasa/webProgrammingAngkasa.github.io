@@ -25,13 +25,13 @@
           buttonLog.style.display = "flex"
           buttonOut.style.display = "none"
           userIcon.style.display = "none"
-          observers.navToggle[2].style.display = "none"
+          observers.viewPort1.sideNavBar.navToggle[2].style.display = "flex"
           historyOrder.forEach(history => history.style.display = "none");
         } else {
           buttonLog.style.display = "none"
           buttonOut.style.display = "flex"
           userIcon.style.display = "flex"
-          observers.navToggle[2].style.display = "flex"
+          observers.viewPort1.sideNavBar.navToggle[2].style.display = "flex"
           historyOrder.forEach(history => history.style.opacity = "1");
         }
       }
@@ -327,6 +327,7 @@
 
     .logo img {
       width: 65px;
+      transform: translateX(-110px);
     }
 
     .navbar {
@@ -419,19 +420,6 @@
       box-shadow: none;
       z-index: 51;
     }
-
-    .home {
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      background: var(--third-color);
-      gap: 1rem;
-      overflow: hidden;
-      z-index: 53;
-    }
-
 
     .bubles {
       position: absolute;
@@ -627,17 +615,28 @@
       animation-delay: 0.9s;
     }
 
-    .home-text {
-      flex: 1 1 17rem;
-      letter-spacing: .5px;
+    .home {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--third-color);
+      overflow: hidden;
+      z-index: 53;
     }
 
-    .home-img {
-      flex: 1 1 17rem;
+    .home .main-home {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
     }
+
 
     .home-img img {
-      animation: animate 3s linear infinite;
+      scale: 90%;
+      opacity: 0;
     }
 
     @keyframes animate {
@@ -667,25 +666,30 @@
       }
     }
 
-    .home-text span {
-      font-size: 1rem;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--second-color);
+    .home-text {
+      overflow: hidden;
     }
 
-    .home-text h1 {
-      font-size: 3.2rem;
-      color: var(--main-color);
-      font-weight: bolder;
+    .home-text .thread-text {
+      width: 100%;
+      overflow: clip;
+      display: grid;
+      align-items: center;
     }
 
-    .home-text h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
+    .home-text .thread-text h1 {
+      font-size: 3.5rem;
       color: var(--second-color);
       text-transform: uppercase;
-      margin: 0.5rem 0 1.4rem;
+      transform: translateY(100px);
+      opacity: .5;
+      filter: blur(10px);
+
+      &.showText {
+        transform: translateY(0px);
+        filter: blur(0);
+        opacity: 1;
+      }
     }
 
     .tombol {
@@ -695,7 +699,6 @@
       background-color: transparent;
       color: #1e3a8a;
       font-weight: 500;
-      transition: 100ms;
     }
 
     .tombol:hover {
@@ -703,17 +706,29 @@
       background: var(--second-color);
     }
 
+    .btn-trending {
+      margin-top: 10%;
+      width: 100px;
+      height: 50px;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+    }
+
     .btn {
       padding: 7px 16px;
-      border: 2px solid var(--second-color);
       border-radius: 40px;
+      background-color: transparent;
       color: var(--second-color);
       font-weight: 500;
-      transition: 100ms;
+      opacity: 0;
+      transform: translateX(10px);
+      filter: blur(10px);
+      scale: 100%;
     }
 
     .btn:hover {
-      color: #362e2e;
+      color: var(--second-color);
       background: var(--second-color);
     }
 
@@ -818,12 +833,16 @@
 
     #shop-container .box span {
       color: #fff;
-      font-size: 0.7rem;
+      font-size: .7rem;
       font-weight: 500;
       margin: 0.2rem 0 0.5rem;
       letter-spacing: .5px;
       text-align: justify;
       text-justify: inter-word;
+
+      span {
+        opacity: .5;
+      }
     }
 
     #shop-container .box .tombol {
@@ -1133,7 +1152,7 @@
 
     <div class="navigation-container">
       <div class="navigation-tools">
-        <div class="navIcon" onclick="navClick()" onmouseover="mouseOver()" onmouseout="mouseOut()">
+        <div class="navIcon" onclick="navClick()">
           <div class="dash">
             <div></div>
             <div></div>
@@ -1189,14 +1208,32 @@
 
     <!-- Home -->
     <section class="home" id="home">
-      <div class="home-text" style="z-index: 3;">
-        <span>Welcome <sup style="font-size: 16px;">To</sup> The World <sub style="font-size: 16px;">Of</sub></span>
-        <h1>Hotel Angkasa</h1>
-        <h2>Hotel nyaman dan elegan!</h2>
-        <a href="#trending" class="btn">Populer</a>
-      </div>
-      <div class="home-img" style="z-index: 3;">
-        <img src="img/hotel.png" alt="home-img" />
+      <div class="main-home">
+        <div class="home-text" style="z-index: 3;">
+          <div class="thread-text">
+            <h1>
+              <span>Welcome To The World Of</span>
+            </h1>
+          </div>
+          <div class="thread-text">
+            <h1>
+              Hotel Angkasa
+            </h1>
+          </div>
+          <div class="thread-text">
+            <h1>
+              nyaman dan elegan!
+            </h1>
+          </div>
+          <div class="btn-trending">
+            <a href="#trending" class="btn">
+              <span>Populer</span>
+            </a>
+          </div>
+        </div>
+        <div class="home-img" style="z-index: 3;">
+          <img src="img/newHotel.png" alt="home-img" />
+        </div>
       </div>
       <div class="bubles">
         <span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span><span class="buble"></span>
@@ -1217,7 +1254,9 @@
 
           <!-- detail room -->
           <h2>Tipe A<br /></h2>
-          <span>Nikmati kenyamanan tidur yang luar biasa di kamar kami dengan kasur queen size yang luas. Dirancang untuk memberikan pengalaman menginap yang relaks dan menyegarkan, kamar ini menawarkan ruang yang cukup untuk dua orang. Dilengkapi dengan fasilitas modern dan suasana yang hangat, kamar ini cocok untuk pasangan atau tamu yang menginginkan kenyamanan ekstra selama menginap.</span>
+          <span>
+            <!-- TEXT CONTENT SPAN -->
+          </span>
           <form action="sewa_hotel/type_kamar/main_description.php" method="get">
             <button type="submit" name="typeA" class="tombol">Lihat Detail</button>
           </form>
@@ -1227,7 +1266,9 @@
             <img src="img/tipeb.jpg" alt="shop1" />
           </div>
           <h2>Tipe B</h2>
-          <span>Kamar ini menawarkan dua tempat tidur single yang dapat menjadi pilihan ideal bagi teman perjalanan atau keluarga yang ingin tidur terpisah namun tetap dekat. Dengan ruang yang luas dan desain yang nyaman, kamar ini dilengkapi dengan berbagai fasilitas untuk memastikan kenyamanan Anda selama menginap. Solusi sempurna untuk pengalaman menginap yang praktis dan nyaman.</span>
+          <span>
+            <!-- TEXT CONTENT SPAN -->
+          </span>
           <form action="sewa_hotel/type_kamar/main_description.php" method="get">
             <button type="submit" name="typeB" class="tombol">Lihat Detail</button>
           </form>
@@ -1237,7 +1278,9 @@
             <img src="img/tipec.jpg" alt="shop1" />
           </div>
           <h2>Tipe C</h2>
-          <span>Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Dilengkapi dengan tempat tidur single yang nyaman, kamar ini menawarkan ruang yang efisien dan tenang untuk beristirahat. Ideal untuk perjalanan solo atau tamu yang membutuhkan akomodasi yang sederhana namun nyaman, dengan fasilitas lengkap untuk memenuhi kebutuhan Anda.</span>
+          <span>
+            <!-- TEXT CONTENT SPAN -->
+          </span>
           <form action="sewa_hotel/type_kamar/main_description.php" method="get">
             <button type="submit" name="typeC" class="tombol">Lihat Detail</button>
           </form>
@@ -1247,7 +1290,9 @@
             <img src="img/tipec.jpg" alt="shop1" />
           </div>
           <h2>Tipe D</h2>
-          <span>Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Dilengkapi dengan tempat tidur single yang nyaman, kamar ini menawarkan ruang yang efisien dan tenang untuk beristirahat. Ideal untuk perjalanan solo atau tamu yang membutuhkan akomodasi yang sederhana namun nyaman, dengan fasilitas lengkap untuk memenuhi kebutuhan Anda.</span>
+          <span>
+            <!-- TEXT CONTENT SPAN -->
+          </span>
           <form action="sewa_hotel/type_kamar/main_description.php" method="get">
             <button type="submit" name="typeD" class="tombol">Lihat Detail</button>
           </form>
@@ -1344,60 +1389,175 @@
 
   <script>
     const observers = {
-      heading: document.getElementById("heading"),
-      navigation: document.querySelector(".navigation-tools"),
-      headingNav: document.querySelector(".navigation-tools .navIcon"),
-      navToggle: document.querySelectorAll(".navigation-tools .box li"),
-      containerObjects: document.querySelector("#shop-container"),
-      objects: document.querySelectorAll("#shop-container .box")
+      viewPort1: {
+        sideNavBar: {
+          heading: document.getElementById("heading"),
+          logoHead: document.querySelector(".logo"),
+          navigation: document.querySelector(".navigation-tools"),
+          headingNav: document.querySelector(".navigation-tools .navIcon"),
+          navToggle: document.querySelectorAll(".navigation-tools .box li"),
+        },
+        main: {
+          homeImg: document.querySelector(".home-img img"),
+          homeText: document.querySelectorAll(".home-text .thread-text"),
+          textHome: document.querySelectorAll(".thread-text h1")
+        }
+      },
+      viewPort2: {
+        containerObjects: document.querySelector("#shop-container"),
+        objects: document.querySelectorAll("#shop-container .box"),
+        textContent: document.querySelectorAll("#shop-container .box span")
+      }
     }
 
+
+    document.addEventListener("DOMContentLoaded", () => {
+      let arrTextDesc = [
+        'Nikmati kenyamanan tidur yang luar biasa di kamar kami dengan kasur queen size yang luas. Dirancang untuk memberikan pengalaman menginap yang relaks dan menyegarkan, kamar ini menawarkan ruang yang cukup untuk dua orang. Dilengkapi dengan fasilitas modern dan suasana yang hangat, kamar ini cocok untuk pasangan atau tamu yang menginginkan kenyamanan ekstra selama menginap.',
+        'Kamar ini menawarkan dua tempat tidur single yang dapat menjadi pilihan ideal bagi teman perjalanan atau keluarga yang ingin tidur terpisah namun tetap dekat. Dengan ruang yang luas dan desain yang nyaman, kamar ini dilengkapi dengan berbagai fasilitas untuk memastikan kenyamanan Anda selama menginap. Solusi sempurna untuk pengalaman menginap yang praktis dan nyaman.',
+        'Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Dilengkapi dengan tempat tidur single yang nyaman, kamar ini menawarkan ruang yang efisien dan tenang untuk beristirahat. Ideal untuk perjalanan solo atau tamu yang membutuhkan akomodasi yang sederhana namun nyaman, dengan fasilitas lengkap untuk memenuhi kebutuhan Anda.',
+        'Kamar ini dirancang untuk satu tamu yang menginginkan kenyamanan dan fungsionalitas. Dilengkapi dengan tempat tidur single yang nyaman, kamar ini menawarkan ruang yang efisien dan tenang untuk beristirahat. Ideal untuk perjalanan solo atau tamu yang membutuhkan akomodasi yang sederhana namun nyaman, dengan fasilitas lengkap untuk memenuhi kebutuhan Anda.',
+      ]
+      let textContentArr = arrTextDesc.map(t => t.split(' '))
+      observers.viewPort2.textContent.forEach((elSpan, i) => {
+        textContentArr[i].map((text, i) => {
+          let span = document.createElement("span")
+          elSpan.appendChild(span)
+          span.textContent = text + ' '
+          span.className = 't'
+        })
+      })
+
+      window.addEventListener("scroll", () => {
+        const scrollTop = window.scrollY;
+        console.log(scrollTop);
+        
+
+        observers.viewPort2.textContent.forEach((elSpan, i) => {
+          const spans = elSpan.querySelectorAll('.t');
+
+          spans.forEach((span, index) => {
+            const triggerPoint = 400 + (index * 5);
+
+            let opacity = (scrollTop - triggerPoint) / 50;
+            opacity = Math.min(Math.max(opacity, 0.1), 1);
+
+            span.style.opacity = opacity;
+            // console.log(span.textContent + '=>' + index);
+            
+          });
+        });
+      });
+
+    })
+
     const observer = new IntersectionObserver((entriesObjects) => {
-      entriesObjects.forEach(entry => {
+      entriesObjects.forEach((entry, index) => {
+        if (entry.target.tagName === "IMG") {
+          if (entry.isIntersecting) {
+            if (entry.intersectionRatio >= .5) {
+              setTimeout(() => {
+                Object.assign(observers.viewPort1.main.homeImg.style, {
+                  scale: "110%",
+                  transition: "all .6s 100ms ease-out",
+                  opacity: 1
+                })
+                observers.viewPort1.main.homeImg.addEventListener("transitionend", (e) => {
+                  if (e.propertyName === "scale") {
+                    observers.viewPort1.main.homeImg.style.animation = "animate 3s infinite linear"
+                    observer.unobserve(observers.viewPort1.main.homeImg)
+                  }
+                })
+              }, 500);
+            }
+          }
+        }
+
+        if (entry.target.classList.contains("thread-text")) {
+          if (entry.isIntersecting && entry.intersectionRatio >= .5) {
+            entry.target.children[0].classList.add("showText")
+            entry.target.children[0].style.transition = "all 1s 100ms ease-in-out"
+          } else {
+            entry.target.children[0].classList.remove("showText")
+            entry.target.children[0].style.transition = "none"
+          }
+        }
+
         if (entry.target.id === 'heading') {
           if (!entry.isIntersecting) {
-            observers.navigation.classList.remove("closeNavigationEmptyToggle")
-            observers.navigation.classList.remove("closeNavigationIsToggle")
+            observers.viewPort1.sideNavBar.navigation.classList.remove("closeNavigationEmptyToggle")
+            observers.viewPort1.sideNavBar.navigation.classList.remove("closeNavigationIsToggle")
 
-            observers.navigation.style.marginTop = `${entry.boundingClientRect.height / 2}px`
-            observers.navigation.style.display = "flex"
-            observers.navigation.style.position = "fixed"
-            observers.navigation.style.zIndex = "150"
+            observers.viewPort1.sideNavBar.navigation.style.marginTop = `${entry.boundingClientRect.height / 2}px`
+            observers.viewPort1.sideNavBar.navigation.style.display = "flex"
+            observers.viewPort1.sideNavBar.navigation.style.position = "fixed"
+            observers.viewPort1.sideNavBar.navigation.style.zIndex = "150"
           } else {
-            observers.navToggle.forEach(e => {
+            observers.viewPort1.sideNavBar.navToggle.forEach(e => {
               if (e.classList.value === '') {
-                observers.navigation.classList.add("closeNavigationEmptyToggle")
+                observers.viewPort1.sideNavBar.navigation.classList.add("closeNavigationEmptyToggle")
               } else {
-                observers.navigation.classList.add("closeNavigationIsToggle");
+                observers.viewPort1.sideNavBar.navigation.classList.add("closeNavigationIsToggle");
               }
             })
           }
         }
 
+        if (entry.target.classList.contains("logo")) {
+          if (entry.intersectionRatio >= .5) {
+            Object.assign(entry.target.children[0].style, {
+              transform: "translateX(0)",
+              transition: "transform 1s 100ms ease-out"
+            })
+          }
+        }
+
+        if (entry.target.classList.contains("btn-trending")) {
+          if (entry.intersectionRatio >= .5) {
+            Object.assign(entry.target.children[0].style, {
+              transition: "all 1s 100ms ease-out",
+              opacity: "1",
+              scale: "110%",
+              opacity: "1",
+              filter: 'blur(0)',
+              background: 'rgb(29, 50, 109)'
+            })
+          } else {
+            entry.target.children[0].removeAttribute("style")
+          }
+        }
+
         if (entry.target.id === 'shop-container') {
           if (entry.isIntersecting) {
-            observers.objects.forEach(obj => obj.classList.add("show"))
+            observers.viewPort2.objects.forEach(obj => obj.classList.add("show"))
           } else {
-            observers.objects.forEach(obj => obj.classList.remove("show"))
+            observers.viewPort2.objects.forEach(obj => obj.classList.remove("show"))
           }
         }
       })
+    }, {
+      threshold: [0, 0.25, 0.5]
     })
-    observer.observe(observers.containerObjects)
-    observer.observe(observers.heading)
+    observer.observe(observers.viewPort1.sideNavBar.heading)
+    observer.observe(document.querySelector(".logo"))
+    observer.observe(document.querySelector(".btn-trending"))
+    observer.observe(observers.viewPort2.containerObjects)
+    observer.observe(observers.viewPort1.main.homeImg)
+    observers.viewPort1.main.homeText.forEach(e => observer.observe(e))
 
     let iClick = 0
-    const navClick = () => {
+
+    function navClick() {
       iClick++
-      observers.navToggle.forEach((nav, i) => {
-        let iObjNav = observers.navToggle.length
+      observers.viewPort1.sideNavBar.navToggle.forEach((nav, i) => {
+        let iObjNav = observers.viewPort1.sideNavBar.navToggle.length
         if (iClick % 2 != 0) {
-          observers.headingNav.classList.toggle("animateDashNav")
+          observers.viewPort1.sideNavBar.headingNav.classList.toggle("animateDashNav")
           setTimeout(() => {
             nav.classList.toggle("show")
           }, 100 * i);
         } else {
-          observers.headingNav.classList.toggle("animateDashNav")
+          observers.viewPort1.sideNavBar.headingNav.classList.toggle("animateDashNav")
           setTimeout(() => {
             nav.classList.toggle("show")
           }, 100 * (iObjNav - 1 - i));
