@@ -713,7 +713,7 @@ originalStatusRoom();
           })
         }
       }
-      xhr.send("type=" + choice)
+      xhr.send(`type=${choice}`)
 
       document.querySelector(".title-modal").textContent = `description ${choice} room`
       let modals = document.querySelector(".container-modal").style.display = "flex"

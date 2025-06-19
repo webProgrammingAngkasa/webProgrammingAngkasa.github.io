@@ -68,6 +68,7 @@
       --span-color: rgb(79, 103, 158);
     }
 
+    /* VIEWPORT 1 */
     .global-container-page {
       max-width: 100%;
       width: 100%;
@@ -97,7 +98,12 @@
       box-shadow: 0 4px 41px rgba(14, 55, 54, 0.15);
       padding: 15px 3%;
       height: 80px;
-      transition: 0.2s;
+      transform: translateY(-100px);
+      transition: all 1s 100ms ease-out;
+
+      &.active {
+        transform: translateY(0px);
+      }
     }
 
     /* ! NAV UTAMA */
@@ -623,7 +629,6 @@
       justify-content: center;
       background: var(--third-color);
       overflow: hidden;
-      z-index: 53;
     }
 
     .home .main-home {
@@ -631,6 +636,7 @@
       display: flex;
       justify-content: space-between;
       gap: 1rem;
+      z-index: 53;
     }
 
 
@@ -666,8 +672,24 @@
       }
     }
 
+    .thread-text h1 sup {
+      display: inline-block;
+      scale: 90%;
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: all .5s ease-out;
+    }
+
+    .thread-text h1 sub {
+      display: inline-block;
+      scale: 90%;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all .5s ease-out;
+    }
+
     .home-text {
-      overflow: hidden;
+      margin-top: 5%;
     }
 
     .home-text .thread-text {
@@ -675,10 +697,20 @@
       overflow: clip;
       display: grid;
       align-items: center;
+      margin-top: 10px;
+
+      &:nth-child(1) h1 {
+        font-size: 1.5rem;
+        overflow-y: visible;
+      }
+
+      &:nth-child(2) h1,
+      &:nth-child(3) h1 {
+        font-size: 3.5rem;
+      }
     }
 
     .home-text .thread-text h1 {
-      font-size: 3.5rem;
       color: var(--second-color);
       text-transform: uppercase;
       transform: translateY(100px);
@@ -690,20 +722,6 @@
         filter: blur(0);
         opacity: 1;
       }
-    }
-
-    .tombol {
-      padding: 7px 16px;
-      border: 2px solid var(--second-color);
-      border-radius: 40px;
-      background-color: transparent;
-      color: #1e3a8a;
-      font-weight: 500;
-    }
-
-    .tombol:hover {
-      color: #362e2e;
-      background: var(--second-color);
     }
 
     .btn-trending {
@@ -725,13 +743,16 @@
       transform: translateX(10px);
       filter: blur(10px);
       scale: 100%;
-    }
 
-    .btn:hover {
-      color: var(--second-color);
-      background: var(--second-color);
+      &:hover {
+        color: var(--second-color);
+        background: var(--second-color);
+      }
     }
+    /* ^VIEWPORT 1 */
+    
 
+    /* VIEWPORT 2 */
     .heading-info {
       text-align: center;
     }
@@ -835,10 +856,8 @@
       color: #fff;
       font-size: .7rem;
       font-weight: 500;
-      margin: 0.2rem 0 0.5rem;
       letter-spacing: .5px;
       text-align: justify;
-      text-justify: inter-word;
 
       span {
         opacity: .5;
@@ -847,9 +866,22 @@
 
     #shop-container .box .tombol {
       position: absolute;
-      border: 2px solid whitesmoke;
-      color: #ffffff;
+      padding: 7px 16px;
+      border: 2px solid var(--second-color);
+      border-radius: 40px;
+      background-color: transparent;
+      color: var(--second-color);
+      font-weight: 500;
       bottom: 7.5%;
+      text-transform: capitalize;
+      transition: all .2s ease-out;
+
+      &:hover {
+        background-color: var(--main-color);
+        color: var(--third-color);
+        scale: 110%;
+        border: 2px solid var(--third-color);
+      }
     }
 
     #shop-container .box form {
@@ -858,11 +890,6 @@
       align-items: center;
     }
 
-    .box .tombol:hover {
-      background: #637dc5;
-      color: #fff;
-      scale: 110%;
-    }
 
     .box .btn {
       border: 2px solid whitesmoke;
@@ -874,7 +901,9 @@
       color: #fff;
       scale: 110%;
     }
+    /* ^VIEWPORT 2 */
 
+    /* VIEWPORT 3 */
     /* todo TRENDING ROOMS */
 
     .trending-rooms {
@@ -1062,6 +1091,7 @@
       z-index: 1;
       letter-spacing: .2px;
     }
+    /* ^VIEWPORT 3 */
 
     /** FOOTER */
 
@@ -1212,7 +1242,7 @@
         <div class="home-text" style="z-index: 3;">
           <div class="thread-text">
             <h1>
-              <span>Welcome To The World Of</span>
+              Welcome <sup>To</sup> The World <sub>of</sub>
             </h1>
           </div>
           <div class="thread-text">
@@ -1257,9 +1287,7 @@
           <span>
             <!-- TEXT CONTENT SPAN -->
           </span>
-          <form action="sewa_hotel/type_kamar/main_description.php" method="get">
-            <button type="submit" name="typeA" class="tombol">Lihat Detail</button>
-          </form>
+          <a href="sewa_hotel/type_kamar/typeA.php" class="tombol">lihat detail</a>
         </div>
         <div class="box">
           <div class="box-img">
@@ -1269,9 +1297,7 @@
           <span>
             <!-- TEXT CONTENT SPAN -->
           </span>
-          <form action="sewa_hotel/type_kamar/main_description.php" method="get">
-            <button type="submit" name="typeB" class="tombol">Lihat Detail</button>
-          </form>
+          <a href="sewa_hotel/type_kamar/typeB.php" class="tombol">lihat detail</a>
         </div>
         <div class="box">
           <div class="box-img">
@@ -1281,9 +1307,7 @@
           <span>
             <!-- TEXT CONTENT SPAN -->
           </span>
-          <form action="sewa_hotel/type_kamar/main_description.php" method="get">
-            <button type="submit" name="typeC" class="tombol">Lihat Detail</button>
-          </form>
+          <a href="sewa_hotel/type_kamar/typeC.php" class="tombol">lihat detail</a>
         </div>
         <div class="box">
           <div class="box-img">
@@ -1293,9 +1317,7 @@
           <span>
             <!-- TEXT CONTENT SPAN -->
           </span>
-          <form action="sewa_hotel/type_kamar/main_description.php" method="get">
-            <button type="submit" name="typeD" class="tombol">Lihat Detail</button>
-          </form>
+          <a href="sewa_hotel/type_kamar/typeD.php" class="tombol">lihat detail</a>
         </div>
     </section>
 
@@ -1410,8 +1432,16 @@
       }
     }
 
-
     document.addEventListener("DOMContentLoaded", () => {
+      document.addEventListener("scroll", () => {
+        if (window.scrollY <= 60) {
+          observers.viewPort1.sideNavBar.heading.classList.add("active")
+        }
+      })
+      if (window.scrollY <= 60) {
+        observers.viewPort1.sideNavBar.heading.classList.add("active")
+      }
+
       let arrTextDesc = [
         'Nikmati kenyamanan tidur yang luar biasa di kamar kami dengan kasur queen size yang luas. Dirancang untuk memberikan pengalaman menginap yang relaks dan menyegarkan, kamar ini menawarkan ruang yang cukup untuk dua orang. Dilengkapi dengan fasilitas modern dan suasana yang hangat, kamar ini cocok untuk pasangan atau tamu yang menginginkan kenyamanan ekstra selama menginap.',
         'Kamar ini menawarkan dua tempat tidur single yang dapat menjadi pilihan ideal bagi teman perjalanan atau keluarga yang ingin tidur terpisah namun tetap dekat. Dengan ruang yang luas dan desain yang nyaman, kamar ini dilengkapi dengan berbagai fasilitas untuk memastikan kenyamanan Anda selama menginap. Solusi sempurna untuk pengalaman menginap yang praktis dan nyaman.',
@@ -1430,8 +1460,6 @@
 
       window.addEventListener("scroll", () => {
         const scrollTop = window.scrollY;
-        console.log(scrollTop);
-        
 
         observers.viewPort2.textContent.forEach((elSpan, i) => {
           const spans = elSpan.querySelectorAll('.t');
@@ -1443,12 +1471,9 @@
             opacity = Math.min(Math.max(opacity, 0.1), 1);
 
             span.style.opacity = opacity;
-            // console.log(span.textContent + '=>' + index);
-            
           });
         });
       });
-
     })
 
     const observer = new IntersectionObserver((entriesObjects) => {
@@ -1459,7 +1484,7 @@
               setTimeout(() => {
                 Object.assign(observers.viewPort1.main.homeImg.style, {
                   scale: "110%",
-                  transition: "all .6s 100ms ease-out",
+                  transition: "all .6s 200ms ease-out",
                   opacity: 1
                 })
                 observers.viewPort1.main.homeImg.addEventListener("transitionend", (e) => {
@@ -1474,10 +1499,27 @@
         }
 
         if (entry.target.classList.contains("thread-text")) {
-          if (entry.isIntersecting && entry.intersectionRatio >= .5) {
-            entry.target.children[0].classList.add("showText")
-            entry.target.children[0].style.transition = "all 1s 100ms ease-in-out"
+          let sup = document.querySelector(".thread-text h1 sup"),
+            sub = document.querySelector(".thread-text h1 sub"),
+            i = observers.viewPort1.main.homeText.length
+          if (entry.isIntersecting) {
+            if (entry.intersectionRatio >= .5) {
+              entry.target.children[0].classList.add("showText")
+              entry.target.children[0].style.transition = "all 1s 200ms ease-in-out"
+              setTimeout(() => {
+                if (entry.target.children[0].children.length != 0) {
+                  sup.style.transform = "translateY(0)"
+                  sup.style.scale = "100%"
+                  sup.style.opacity = 1
+                  sub.style.scale = "100%"
+                  sub.style.transform = "translateY(0)"
+                  sub.style.opacity = 1
+                }
+              }, 800)
+            }
           } else {
+            sup.removeAttribute("style")
+            sub.removeAttribute("style")
             entry.target.children[0].classList.remove("showText")
             entry.target.children[0].style.transition = "none"
           }
@@ -1513,15 +1555,17 @@
         }
 
         if (entry.target.classList.contains("btn-trending")) {
-          if (entry.intersectionRatio >= .5) {
-            Object.assign(entry.target.children[0].style, {
-              transition: "all 1s 100ms ease-out",
-              opacity: "1",
-              scale: "110%",
-              opacity: "1",
-              filter: 'blur(0)',
-              background: 'rgb(29, 50, 109)'
-            })
+          if (entry.isIntersecting) {
+            if (entry.intersectionRatio >= .5) {
+              Object.assign(entry.target.children[0].style, {
+                transition: "all 1s 100ms ease-out",
+                opacity: "1",
+                scale: "110%",
+                opacity: "1",
+                filter: 'blur(0)',
+                background: 'rgb(29, 50, 109)'
+              })
+            }
           } else {
             entry.target.children[0].removeAttribute("style")
           }
@@ -1538,7 +1582,12 @@
     }, {
       threshold: [0, 0.25, 0.5]
     })
-    observer.observe(observers.viewPort1.sideNavBar.heading)
+    if (window.scrollY > 80) {
+      observer.observe(observers.viewPort1.sideNavBar.heading)
+    }
+    observers.viewPort1.sideNavBar.heading.addEventListener("transitionend", () => {
+      observer.observe(observers.viewPort1.sideNavBar.heading)
+    })
     observer.observe(document.querySelector(".logo"))
     observer.observe(document.querySelector(".btn-trending"))
     observer.observe(observers.viewPort2.containerObjects)
