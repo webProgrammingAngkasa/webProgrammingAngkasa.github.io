@@ -25,7 +25,7 @@
           buttonLog.style.display = "flex"
           buttonOut.style.display = "none"
           userIcon.style.display = "none"
-          observers.viewPort1.sideNavBar.navToggle[2].style.display = "flex"
+          observers.viewPort1.sideNavBar.navToggle[2].style.display = "none"
           historyOrder.forEach(history => history.style.display = "none");
         } else {
           buttonLog.style.display = "none"
@@ -749,8 +749,9 @@
         background: var(--second-color);
       }
     }
+
     /* ^VIEWPORT 1 */
-    
+
 
     /* VIEWPORT 2 */
     .heading-info {
@@ -901,6 +902,7 @@
       color: #fff;
       scale: 110%;
     }
+
     /* ^VIEWPORT 2 */
 
     /* VIEWPORT 3 */
@@ -1046,6 +1048,90 @@
       letter-spacing: .2px;
     }
 
+    /* !DETAILS TRANDING */
+
+    .details-content {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 25vw;
+
+      .shrink-content {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        white-space: normal;
+
+        details {
+          background-size: cover;
+          background-repeat: no-repeat;
+          border-radius: 10px;
+          display: flex;
+          overflow-x: clip;
+
+          summary {
+            padding: 1rem;
+          }
+
+          .text-content-details {
+            width: min(20vw, 250px);
+          }
+
+          &:nth-child(1),
+          &:nth-child(2) {
+            background-image: url(img/tipea.jpg);
+          }
+
+          &:nth-child(3),
+          &:nth-child(4) {
+            background-image: url(img/tipea.jpg);
+          }
+        }
+
+        .text-content-details {
+          span {
+            display: block;
+            transform: translateY(30px);
+            opacity: 0;
+
+            &.active {
+              transition: all .3s linear;
+              display: block;
+              transform: translateY(0px);
+              opacity: 1;
+            }
+          }
+        }
+
+        [open]>summary {
+          user-select: none;
+          pointer-events: none;
+        }
+      }
+
+      .slide-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+
+        img {
+          border-radius: 20px;
+          width: 70%; 
+          height: 100%;
+        }
+      }
+    }
+
+    ::details-content {
+      transition: all 200ms linear;
+      width: 0;
+    }
+
+    [open]::details-content {
+      width: min(20vw, 300px);
+    }
+
     /* !LAST ROWS */
 
     .trending-rooms .piramid-image .last-box-image {
@@ -1091,6 +1177,7 @@
       z-index: 1;
       letter-spacing: .2px;
     }
+
     /* ^VIEWPORT 3 */
 
     /** FOOTER */
@@ -1381,6 +1468,41 @@
             <div></div>
           </div>
         </div>
+        <div class="details-content">
+          <div class="shrink-content">
+            <details name="tranding" open>
+              <summary><i class="fa-solid fa-house"></i></summary>
+              <div class="text-content-details">
+                <h4>type a</h4>
+                <span class="active">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum magnam.</span>
+              </div>
+            </details>
+            <details name="tranding">
+              <summary><i class="fa-solid fa-house"></i></summary>
+              <div class="text-content-details">
+                <h4>type b</h4>
+                <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum magnam.</span>
+              </div>
+            </details>
+            <details name="tranding">
+              <summary><i class="fa-solid fa-house"></i></summary>
+              <div class="text-content-details">
+                <h4>type c</h4>
+                <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum magnam.</span>
+              </div>
+            </details>
+            <details name="tranding">
+              <summary><i class="fa-solid fa-house"></i></summary>
+              <div class="text-content-details">
+                <h4>type d</h4>
+                <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum magnam.</span>
+              </div>
+            </details>
+          </div>
+          <div class="slide-content">
+            <img src="img/tipea.jpg" alt="">
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1397,7 +1519,7 @@
           <a href=""><i class="fa-brands fa-facebook"></i></a>
         </li>
         <li>
-          <a href=""><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://www.youtube.com/playlist?list=LL"><i class="fa-brands fa-youtube"></i></a>
         </li>
         <li>
           <a href=""><i class="fa-brands fa-tiktok"></i></a>
@@ -1473,6 +1595,23 @@
             span.style.opacity = opacity;
           });
         });
+      });
+    });
+
+    document.querySelectorAll(".shrink-content details").forEach(e => {
+      e.addEventListener("click", (e) => {
+        setTimeout(() => {
+          document.querySelectorAll(".text-content-details span").forEach(e => {
+            e.classList.remove("active")
+          })
+          e.target.nextElementSibling.children[1].classList.add("active");
+        }, 300)
+      })
+      document.querySelectorAll("summary").forEach(a => {
+        a.setAttribute('tabindex', '-1')
+        a.addEventListener("keydown", (k) => {
+          if (k.code == "Space") k.preventDefault()
+        })
       });
     })
 
