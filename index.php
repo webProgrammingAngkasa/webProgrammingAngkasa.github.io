@@ -1605,7 +1605,7 @@
             e.classList.remove("active")
           })
           e.target.nextElementSibling.children[1].classList.add("active");
-        }, 300)
+        }, 250)
       })
       document.querySelectorAll("summary").forEach(a => {
         a.setAttribute('tabindex', '-1')
