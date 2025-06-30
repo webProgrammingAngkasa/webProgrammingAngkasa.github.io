@@ -1111,14 +1111,36 @@
 
       .slide-content {
         width: 100%;
-        height: 100%;
+        position: relative;
         display: flex;
         justify-content: center;
+        align-items: center;
 
         img {
-          border-radius: 20px;
-          width: 70%; 
-          height: 100%;
+          width: 80%;
+          display: none;
+        }
+
+        img.active {
+          display: block;
+        }
+
+        .controls {
+          position: absolute;
+          width: 100%;
+          top: 45%;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        button {
+          background: rgba(0, 0, 0, 0.5);
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          cursor: pointer;
+          font-size: 18px;
+          border-radius: 4px;
         }
       }
     }
@@ -1500,7 +1522,15 @@
             </details>
           </div>
           <div class="slide-content">
-            <img src="img/tipea.jpg" alt="">
+            <img src="https://picsum.photos/id/1016/400/250" class="active" alt="Image 1">
+            <img src="https://picsum.photos/id/1025/400/250" alt="Image 2">
+            <img src="https://picsum.photos/id/1035/400/250" alt="Image 3">
+            <img src="https://picsum.photos/id/1048/400/250" alt="Image 4">
+            <img src="https://picsum.photos/id/1057/400/250" alt="Image 5">
+            <div class="controls">
+              <button onclick="prevSlide()">&#8592;</button>
+              <button onclick="nextSlide()">&#8594;</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1614,6 +1644,25 @@
         })
       });
     })
+
+    const images = document.querySelectorAll('.slide-content img');
+    let current = 0;
+
+    function showSlide(index) {
+      images.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
+    }
+
+    function prevSlide() {
+      current = (current - 1 + images.length) % images.length;
+      showSlide(current);
+    }
+
+    function nextSlide() {
+      current = (current + 1) % images.length;
+      showSlide(current);
+    }
 
     const observer = new IntersectionObserver((entriesObjects) => {
       entriesObjects.forEach((entry, index) => {
