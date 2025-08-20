@@ -92,6 +92,7 @@ $date = json_encode($dateArray['date']);
             text-align: center;
             font-size: 1.5em;
             margin-bottom: 10px;
+            font-weight: 800;
         }
 
         .receipt hr {

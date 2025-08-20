@@ -33,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'zakaria.ramadan78@smk.belajar.id';
-            $mail->Password = 'mezrmftpnfarutdb';
+            $mail->Username = 'modetdemot@gmail.com';
+            $mail->Password = 'atnqkfcruaiwfwuy';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
@@ -66,8 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'zakaria.ramadan78@smk.belajar.id';
-            $mail->Password = 'mezrmftpnfarutdb';
+            $mail->Username = 'modetdemot@gmail.com';
+            $mail->Password = 'atnqkfcruaiwfwuy';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
