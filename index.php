@@ -1077,14 +1077,40 @@
             width: min(20vw, 250px);
           }
 
-          &:nth-child(1),
-          &:nth-child(2) {
+          &:nth-child(1) {
             background-image: url(img/tipea.jpg);
+            object-fit: cover;
+            background-size: cover;
           }
 
-          &:nth-child(3),
+          &:nth-child(2) {
+            background-image: url(img/superrior.jpg);
+            object-fit: cover;
+            background-size: cover;
+          }
+
+          &:nth-child(3) {
+            background-image: url(img/tipeb.jpg);
+            object-fit: cover;
+            background-size: cover;
+          }
+
           &:nth-child(4) {
-            background-image: url(img/tipea.jpg);
+            background-image: url(img/duluxe.jpg);
+            object-fit: cover;
+            background-size: cover;
+          }
+
+          &:nth-child(5) {
+            background-image: url(img/tipec.jpg);
+            object-fit: cover;
+            background-size: cover;
+          }
+
+          &:nth-child(6) {
+            background-image: url(img/suite.jpg);
+            object-fit: cover;
+            background-size: cover;
           }
         }
 
@@ -1109,39 +1135,42 @@
         }
       }
 
-      .slide-content {
+    }
+    .slide-content {
+      width: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 500px;
+        height: 400px;
+        object-fit: cover;
+        display: none;
+        border-radius: 10px;
+      }
+
+      img.active {
+        display: block;
+      }
+
+      .controls {
+        position: absolute;
         width: 100%;
-        position: relative;
+        top: 45%;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: space-between;
+      }
 
-        img {
-          width: 80%;
-          display: none;
-        }
-
-        img.active {
-          display: block;
-        }
-
-        .controls {
-          position: absolute;
-          width: 100%;
-          top: 45%;
-          display: flex;
-          justify-content: space-between;
-        }
-
-        button {
-          background: rgba(0, 0, 0, 0.5);
-          color: white;
-          border: none;
-          padding: 8px 16px;
-          cursor: pointer;
-          font-size: 18px;
-          border-radius: 4px;
-        }
+      button {
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        font-size: 18px;
+        border-radius: 4px;
       }
     }
 
@@ -1392,7 +1421,7 @@
           </div>
 
           <!-- detail room -->
-          <h2>Tipe A<br /></h2>
+          <h2>Strandard<br /></h2>
           <span>
             <!-- TEXT CONTENT SPAN -->
           </span>
@@ -1402,7 +1431,7 @@
           <div class="box-img">
             <img src="img/tipeb.jpg" alt="shop1" />
           </div>
-          <h2>Tipe B</h2>
+          <h2>Duluxe</h2>
           <span>
             <!-- TEXT CONTENT SPAN -->
           </span>
@@ -1412,7 +1441,7 @@
           <div class="box-img">
             <img src="img/tipec.jpg" alt="shop1" />
           </div>
-          <h2>Tipe C</h2>
+          <h2>Superrior</h2>
           <span>
             <!-- TEXT CONTENT SPAN -->
           </span>
@@ -1422,7 +1451,7 @@
           <div class="box-img">
             <img src="img/tipec.jpg" alt="shop1" />
           </div>
-          <h2>Tipe D</h2>
+          <h2>Suite</h2>
           <span>
             <!-- TEXT CONTENT SPAN -->
           </span>
@@ -1490,49 +1519,65 @@
             <div></div>
           </div>
         </div>
+
+        <!-- <div class="heading-info">
+          <h1>Jelajahi Ruangan</h1>
+        </div>
         <div class="details-content">
           <div class="shrink-content">
             <details name="tranding" open>
               <summary><i class="fa-solid fa-house"></i></summary>
               <div class="text-content-details">
-                <h4>type a</h4>
+                <h4>Standard</h4>
                 <span class="active">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum magnam.</span>
               </div>
             </details>
             <details name="tranding">
               <summary><i class="fa-solid fa-house"></i></summary>
               <div class="text-content-details">
-                <h4>type b</h4>
+                <h4>Duluxe</h4>
                 <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum magnam.</span>
               </div>
             </details>
             <details name="tranding">
               <summary><i class="fa-solid fa-house"></i></summary>
               <div class="text-content-details">
-                <h4>type c</h4>
+                <h4>Superrior</h4>
+              </div>
+            </details>
+            <details name="tranding">
+              <summary><i class="fa-solid fa-house"></i></summary>
+              <div class="text-content-details">
+                <h4>Suite</h4>
                 <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum magnam.</span>
               </div>
             </details>
             <details name="tranding">
               <summary><i class="fa-solid fa-house"></i></summary>
               <div class="text-content-details">
-                <h4>type d</h4>
+                <h4>Suite</h4>
+                <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum magnam.</span>
+              </div>
+            </details>
+            <details name="tranding">
+              <summary><i class="fa-solid fa-house"></i></summary>
+              <div class="text-content-details">
+                <h4>Suite</h4>
                 <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum magnam.</span>
               </div>
             </details>
           </div>
-          <div class="slide-content">
-            <img src="https://picsum.photos/id/1016/400/250" class="active" alt="Image 1">
-            <img src="https://picsum.photos/id/1025/400/250" alt="Image 2">
-            <img src="https://picsum.photos/id/1035/400/250" alt="Image 3">
-            <img src="https://picsum.photos/id/1048/400/250" alt="Image 4">
-            <img src="https://picsum.photos/id/1057/400/250" alt="Image 5">
-            <div class="controls">
-              <button onclick="prevSlide()">&#8592;</button>
-              <button onclick="nextSlide()">&#8594;</button>
-            </div>
+        </div> -->
+        <!-- <div class="slide-content">
+          <img src="img/suite.jpg" class="active" alt="Image 1">
+          <img src="img/tipec.jpg" alt="Image 2">
+          <img src="img/standard.jpg" alt="Image 3">
+          <img src="img/suite.jpg" alt="Image 4">
+          <div class="controls">
+            <button onclick="prevSlide()">&#8592;</button>
+            <button onclick="nextSlide()">&#8594;</button>
           </div>
-        </div>
+        </div> -->
       </div>
     </section>
 

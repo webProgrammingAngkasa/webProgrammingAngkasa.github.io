@@ -78,7 +78,7 @@ originalStatusRoom();
     }
 
     .container {
-      max-width: 30%;
+      max-width: 50%;
       width: 100%;
       background: rgb(255, 255, 255);
       padding: 2.5%;
